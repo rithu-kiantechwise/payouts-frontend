@@ -1,6 +1,8 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom';
 
 const Pricing = () => {
+    const navigate = useNavigate();
     return (
         <div className='mt-10'>
             <div className='grid grid-cols-1 text-center m-auto mb-10'>
@@ -20,14 +22,14 @@ const Pricing = () => {
                                 <h6 className='text-sm text-gray-200'>Billed Annually</h6>
                             </div>
                             <div>
-                                <button className="px-7 py-3 text-black font-bold bg-white rounded mb-20">
+                                <button onClick={()=> navigate('/register')} className="px-7 py-3 text-black font-bold bg-white rounded mb-20">
                                     GET KIAN PAYOUTS
                                 </button>
                             </div>
                             <div className="text-gray-200 text-sm">Minimum 20 Employees</div>
                         </div>
                     </div>
-                    <div className='grid col-span-1 col-start-3 items-center m-auto min-h-[100%] px-10 py-4 align-middle border-t-4 border-t-violet-500 min-w-[100%] shadow-[5px_1px_22px_0px_rgba(0,0,0,0.3)]'>
+                    <div className='grid col-span-1 col-start-3 items-center m-auto min-h-[100%] px-8 py-4 align-middle border-t-4 border-t-violet-500 min-w-[100%] shadow-xl'>
                         <div className='flex flex-col justify-center leading-[3rem] min-h-[100%]'>
                             <h4>&#10003;&nbsp; Automatic payroll calculation</h4>
                             <h4>&#10003;&nbsp; Direct deposit of salaries</h4>

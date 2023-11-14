@@ -59,7 +59,7 @@ const QuestionAndAnswer = [
     },
     {
         question: 'Have more questions?',
-        answer: `Reach out to us at support@zohopayroll.com and we'll get back to you at the earliest.`,
+        answer: `Reach out to us at info@kianpayouts.com and we'll get back to you at the earliest.`,
     },
 ]
 

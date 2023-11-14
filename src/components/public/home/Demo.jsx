@@ -1,6 +1,14 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom';
+import { openModal } from '../../../redux/modalSlice';
+import { useDispatch } from 'react-redux';
 
 const Demo = () => {
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+    const triggerModal = () => {
+        dispatch(openModal());
+    }
     return (
         <div className='max-w-[80%] bg-violet-100 m-auto mb-14 mt-20'>
             <div className='grid grid-cols-4 items-center mb-6 pt-12'>
@@ -8,8 +16,8 @@ const Demo = () => {
             </div>
             <div className="m-auto w-[50%] pb-12">
                 <div className='grid grid-cols-2 gap-3'>
-                    <button className=' lg:col-span-1 col-span-2 uppercase px-8 py-4 rounded text-white font-bold bg-violet-500 '>Access kian payouts</button>
-                    <button className=' lg:col-span-1 col-span-2 uppercase px-8 py-4 rounded border border-black '>Start a free trial</button>
+                    <button onClick={() => navigate('/register')} className='lg:col-span-1 col-span-2 uppercase px-8 py-4 rounded text-white font-bold bg-violet-500 '>Access kian payouts</button>
+                    <button onClick={() => triggerModal()} className='lg:col-span-1 col-span-2 uppercase px-8 py-4 rounded border border-black '>Start a free trial</button>
                 </div>
             </div>
         </div>

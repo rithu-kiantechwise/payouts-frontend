@@ -10,17 +10,18 @@ import Footer from '../components/public/home/Footer';
 import Banner from '../components/public/home/Banner';
 
 const Home = () => {
+
     return (
         <>
             <Header />
             <Navbar />
+            <Hero />
+            <Customer />
+            <Experience />
             <Banner />
-            <Hero/>
-            <Customer/>
-            <Experience/>
-            <Pricing/>
-            <Demo/>
-            <Footer/>
+            <Pricing />
+            <Demo />
+            <Footer />
         </>
     )
 }

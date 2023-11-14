@@ -1,7 +1,6 @@
 import React from 'react'
 
-const CardComponent = (props) => {
-    const { data } = props;
+const FeatureCardComponent = ({ data }) => {
     return (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4 max-w-[80%] m-auto">
             {data.map((feature, index) => (
@@ -19,4 +18,4 @@ const CardComponent = (props) => {
     )
 }
 
-export default CardComponent;
+export default FeatureCardComponent;

@@ -12,7 +12,7 @@ const Experience = () => {
             <div className="text-center">
                 <h2 className="text-4xl font-semibold mb-5">Payroll experience redefined to be stress free</h2>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 max-w-[80%] m-auto">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 max-w-[80%] m-auto cursor-pointer">
                 {features.map((feature, index) => (
                     <div key={index} className="px-12 py-6">
                         <img src={feature.imageSrc} alt={feature.imageAlt} className="h-20 mb-4" />

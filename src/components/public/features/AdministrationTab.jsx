@@ -1,4 +1,7 @@
 import React from 'react'
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { openModal } from '../../../redux/modalSlice';
 import AdminDashboardImage from '../../../assets/adminDashImg.png'
 import Calculation from '../../../assets/calculation.png'
 import Hierarchy from '../../../assets/hierarchy.png'
@@ -6,41 +9,36 @@ import Complaint from '../../../assets/compliant.png'
 import Portal from '../../../assets/portal.png'
 import Salary from '../../../assets/salary.png'
 import Administrator from '../../../assets/administrator.png'
-import CardComponent from './CardComponent'
+import FeatureCardComponent from './FeatureCardComponent'
+import FeatureBannerComponent from './FeatureBannerComponent'
 
 const AdministrationTab = () => {
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+    const triggerModal = () => {
+        dispatch(openModal());
+    }
+
     return (
         <div className='mt-16'>
-            <section className='grid grid-cols-2'>
-                <div className='px-20 py-16'>
-                    <h1 className='text-3xl font-bold leading-[2.5rem]'>Streamline your administration tasks and manage payroll like a pro</h1>
-                    <h4 className='text-xl leading-[2rem] mt-4'>Zoho Payroll is everything you need to administer payroll for your organization. You can grant user roles and permissions, delegate responsibilities, oversee approvals, and build your organization your way.</h4>
-                    <div className='grid grid-cols-2 gap-3 mt-14'>
-                        <button className=' lg:col-span-1 col-span-2 uppercase px-8 py-4 rounded text-white font-bold bg-violet-500 '>Access kian payouts</button>
-                        <button className=' lg:col-span-1 col-span-2 uppercase px-8 py-4 rounded border border-black '>Start a free trial</button>
-                    </div>
-                </div>
-                <div className='shadow-lg'>
-                    <img src={AdminDashboardImage} alt="AdminDashboardImage" />
-                </div>
-            </section>
+            <FeatureBannerComponent data={featureBanner} />
             <section className="mt-20">
                 <div className="text-center">
                     <h2 className="text-2xl font-bold mb-10">Everything you need to run your payroll</h2>
                 </div>
-                <CardComponent data={Everything} />
+                <FeatureCardComponent data={Everything} />
             </section>
             <section className="mt-20">
                 <div className="text-center">
                     <h2 className="text-2xl font-bold mb-10">Empower your staff to collaborate without losing your control</h2>
                 </div>
-                <CardComponent data={Empower} />
+                <FeatureCardComponent data={Empower} />
             </section>
             <section className="mt-20">
                 <div className="text-center">
                     <h2 className="text-2xl font-bold mb-10">Templates make your work easy</h2>
                 </div>
-                <CardComponent data={Template} />
+                <FeatureCardComponent data={Template} />
             </section>
             <section className='max-w-[75%] bg-violet-100 m-auto mb-14 mt-20'>
                 <div className='grid grid-cols-4 items-center mb-6 pt-8 max-w-[80%] m-auto'>
@@ -48,8 +46,8 @@ const AdministrationTab = () => {
                 </div>
                 <div className="m-auto w-[50%] pb-8">
                     <div className='grid grid-cols-2 gap-3'>
-                        <button className=' lg:col-span-1 col-span-2 uppercase px-8 py-4 rounded text-white font-bold bg-violet-500 '>Access kian payouts</button>
-                        <button className=' lg:col-span-1 col-span-2 uppercase px-8 py-4 rounded border border-black '>Start a free trial</button>
+                        <button onClick={() => navigate('/register')} className=' lg:col-span-1 col-span-2 uppercase px-8 py-4 rounded text-white font-bold bg-violet-500 '>Access kian payouts</button>
+                        <button onClick={() => triggerModal()} className=' lg:col-span-1 col-span-2 uppercase px-8 py-4 rounded border border-black '>Start a free trial</button>
                     </div>
                 </div>
             </section>
@@ -57,6 +55,14 @@ const AdministrationTab = () => {
     )
 }
 
+const featureBanner = [
+    {
+        imageSrc: AdminDashboardImage,
+        imageAlt: 'AdminDashboardImage',
+        bannerHeading: 'Streamline your administration tasks and manage payroll like a pro',
+        bannerDescription: 'Zoho Payroll is everything you need to administer payroll for your organization. You can grant user roles and permissions, delegate responsibilities, oversee approvals, and build your organization your way.',
+    },
+];
 const Everything = [
     {
         imageSrc: Calculation,
