@@ -1,16 +1,16 @@
 import React from 'react'
-import BannerImage from '../../../assets/homeBannerImg.jpeg'
+import BannerImage from '../../../assets/homeBannerImg.jpg'
 import { useNavigate } from 'react-router-dom'
 
 const Banner = () => {
     const navigate = useNavigate();
     return (
-        <div className='container m-auto mt-10'>
+        <div className='max-w-[80%] m-auto mt-10'>
             <div className='outline outline-violet-500'>
-                <div className='max-w-[90%] m-auto p-8'>
-                    <h1 className='text-5xl font-semibold text-center'>The company that leaders trust to help them grow and thrive</h1>
+                <div className='max-w-[90%] m-auto p-10 pt-[4.5rem]'>
+                    <h1 className='text-4xl font-semibold text-center'>The company that leaders trust to help them grow and thrive</h1>
                 </div>
-                <div className='grid grid-cols-1 lg:grid-cols-5 p-8 gap-4'>
+                <div className='grid grid-cols-1 lg:grid-cols-5 p-10 gap-4'>
                     <div className='lg:col-span-2 p-10'>
                         <div className='max-w-[80%] m-auto p-2 border-l-4 border-l-black'>
                             <h4 className='font-extrabold'>Who are we</h4>

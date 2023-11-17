@@ -7,7 +7,7 @@ const Navbar = () => {
   const [toggle, setToggle] = useState(false);
 
   return (
-    <nav className="bg-white border-gray-200 dark:bg-gray-900 bg-gradient-to-b from-violet-100 sticky top-0 shadow-md py-3 md:py-8">
+    <nav className="bg-white border-gray-200 dark:bg-gray-900 bg-gradient-to-b from-violet-100 sticky top-0 shadow-md py-1 md:py-2">
       <div className="max-w-screen-lg flex flex-wrap items-center justify-between mx-auto p-4">
         <button onClick={() => navigate('/')} className="flex items-center">
           <img src={PayoutsLogo} className="h-10 mr-3" alt="PayoutsLogo" />
@@ -32,7 +32,7 @@ const Navbar = () => {
         {toggle && <div className="md:hidden w-full md:w-auto">
           <ul className="font-medium flex flex-col gap-2 p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
             <li>
-              <button onClick={() => navigate('/features')} className="block py-2 pl-3 pr-4 rounded md:bg-transparent md:text-violet-700 md:p-0 dark:text-white md:dark:text-violet-500" aria-current="page">Features</button>
+              <button onClick={() => navigate('/features')} className="block py-2 pl-3 pr-4 rounded md:bg-transparent md:hover:text-violet-700 md:p-0 dark:text-white md:dark:text-violet-500">Features</button>
             </li>
             <li>
               <button onClick={() => navigate('/pricing')} className="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-violet-700 md:p-0 dark:text-white md:dark:hover:text-violet-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Pricing</button>
@@ -49,7 +49,7 @@ const Navbar = () => {
         <div className="hidden w-full md:block md:w-auto">
           <ul className="font-medium flex flex-col gap-2 p-4 md:p-0 mt-4 border border-gray-100 rounded-lg md:flex-row md:space-x-8 md:mt-0 md:border-0">
             <li>
-              <button onClick={() => navigate('/features')} className="block py-2 pl-3 pr-4 text-white bg-violet-700 rounded md:bg-transparent md:text-violet-700 md:p-0 dark:text-white md:dark:text-violet-500" aria-current="page">Features</button>
+              <button onClick={() => navigate('/features')} className="block py-2 pl-3 pr-4 rounded md:bg-transparent md:hover:text-violet-700 md:p-0 dark:text-white md:dark:text-violet-500">Features</button>
             </li>
             <li>
               <button onClick={() => navigate('/pricing')} className="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-violet-700 md:p-0 dark:text-white md:dark:hover:text-violet-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Pricing</button>
