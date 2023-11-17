@@ -3,12 +3,13 @@ import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { openModal } from '../../../redux/modalSlice';
 import benefitsDashImage from '../../../assets/benefitsDashImg.png'
-import Calculation from '../../../assets/calculation.png'
-import Hierarchy from '../../../assets/hierarchy.png'
-import Complaint from '../../../assets/compliant.png'
-import Portal from '../../../assets/portal.png'
-import Salary from '../../../assets/salary.png'
-import Administrator from '../../../assets/administrator.png'
+import pretaxdeduction from '../../../assets/pretaxdeduction.png'
+import salaryadvances from '../../../assets/salaryadvances.png'
+import multipleloan from '../../../assets/multipleloan.png'
+import fuelexpenses from '../../../assets/fuelexpenses.png'
+import trophy from '../../../assets/trophy.png'
+import employeeprocess from '../../../assets/employeeprocess.png'
+import automaticaccounting from '../../../assets/automaticaccounting.png'
 import FeatureCardComponent from './FeatureCardComponent'
 import FeatureBannerComponent from './FeatureBannerComponent'
 
@@ -27,16 +28,14 @@ const BenefitsTab = () => {
                 </div>
                 <FeatureCardComponent data={Boost} />
             </section>
-            <section className='max-w-[75%] bg-violet-100 m-auto mb-14 mt-20'>
-                <div className='grid grid-cols-4 items-center mb-6 pt-8 max-w-[80%] m-auto'>
-                    <h1 className='text-center text-4xl font-bold col-span-4 mb-4'>Payroll software that makes benefits administration simple and effortless.</h1>
+            <section className='md:max-w-[75%] bg-violet-100 m-auto p-8 mt-10 lg:mt-20'>
+                <div className='grid grid-cols-4 items-center'>
+                    <h1 className='text-center text-4xl font-semibold col-span-4'>Payouts software that makes benefits administration simple and effortless.</h1>
                 </div>
-                <div className="m-auto w-[50%] pb-8">
-                    <div className='grid grid-cols-2 gap-3'>
-                        <button onClick={() => navigate('/register')} className=' lg:col-span-1 col-span-2 uppercase px-8 py-4 rounded text-white font-bold bg-violet-500 '>Access kian payouts</button>
-                        <button onClick={() => triggerModal()} className=' lg:col-span-1 col-span-2 uppercase px-8 py-4 rounded border border-black '>Start a free trial</button>
+                    <div className='grid grid-cols-2 max-w-[60%] mt-10 m-auto gap-4'>
+                        <button onClick={() => navigate('/register')} className=' lg:col-span-1 col-span-2 uppercase p-4 rounded text-white font-bold bg-violet-500 '>Access kian payouts</button>
+                        <button onClick={() => triggerModal()} className=' lg:col-span-1 col-span-2 uppercase p-4 rounded border border-black '>Start a free trial</button>
                     </div>
-                </div>
             </section>
         </div>
     )
@@ -52,44 +51,44 @@ const featureBanner = [
 ];
 const Boost = [
     {
-        imageSrc: Calculation,
-        imageAlt: 'automaticCalculation',
+        imageSrc: pretaxdeduction,
+        imageAlt: 'pretaxdeduction',
         title: 'Manage employee insurances',
-        description: 'Bring all your existing data into Zoho Payroll with minimum effort. Follow our pre-defined template to import salary or previous employment details, and eliminate duplicates and reduce manual work.',
+        description: 'Bring all your existing data into Kian payouts with minimum effort. Follow our pre-defined template to import salary or previous employment details, and eliminate duplicates and reduce manual work.',
     },
     {
-        imageSrc: Hierarchy,
-        imageAlt: 'compensations',
+        imageSrc: salaryadvances,
+        imageAlt: 'salaryadvances',
         title: 'Salary advances',
         description: 'Attract and retain the right talent with the right rewards. Revise the CTC, and pick the date from which the hike in pay will be reflected on the payslips.',
     },
     {
-        imageSrc: Salary,
-        imageAlt: 'Salary',
+        imageSrc: multipleloan,
+        imageAlt: 'multipleloan',
         title: 'Multiple loan types',
         description: `Follow your employee's career progress by tracking their salary revision history and designation changes. Automatic updates in the self-service portal keeps employees informed too.`,
     },
     {
-        imageSrc: Complaint,
-        imageAlt: 'compliant',
+        imageSrc: fuelexpenses,
+        imageAlt: 'fuelexpenses',
         title: 'Personalized employee benefits',
-        description: 'Reduce your payroll costs and data entry efforts by delegating routine document tasks to your employees. Employees can do things on their own from the client portal.',
+        description: 'Reduce your payouts costs and data entry efforts by delegating routine document tasks to your employees. Employees can do things on their own from the client portal.',
     },
     {
-        imageSrc: Portal,
-        imageAlt: 'portal',
+        imageSrc: trophy,
+        imageAlt: 'trophy',
         title: 'Reward work with the right benefits',
         description: `Enter your departing employee's last working day along with the full and final settlement date to process the pay automatically. You can encash unused leaves, send their final payslips, and Form-16 to an email address of their choice.`,
     },
     {
-        imageSrc: Administrator,
-        imageAlt: 'administration',
+        imageSrc: employeeprocess,
+        imageAlt: 'employeeprocess',
         title: 'Keep tabs on reimbursements',
         description: 'Acknowledge efforts of your long-serving staff. With automated gratuity calculation, let your parting employees reap their rewards immediately.',
     },
     {
-        imageSrc: Administrator,
-        imageAlt: 'administration',
+        imageSrc: automaticaccounting,
+        imageAlt: 'automaticaccounting',
         title: 'Automatic accounting',
         description: 'Acknowledge efforts of your long-serving staff. With automated gratuity calculation, let your parting employees reap their rewards immediately.',
     },

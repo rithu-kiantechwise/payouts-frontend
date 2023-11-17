@@ -3,20 +3,18 @@ import BankIcon from '../../../assets/payoutsLogo.png'
 
 const TrustedBanking = () => {
     return (
-        <div>
-            <div className='mt-10'>
-                <h2 className='text-3xl font-bold text-center mt-10'>Trusted partnerships for your payroll banking needs</h2>
-                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4 max-w-[80%] mt-16 m-auto">
-                    {features.map((feature, index) => (
-                        <div key={index} className=" flex flex-col justify-around p-6 border rounded-md">
-                            <div className='min-w-[18%]'>
-                                <img src={feature.imageSrc} alt={feature.imageAlt} className="h-10 mb-4" />
-                            </div>
-                            <p className='leading-8 mt-3'>{feature.description}</p>
-                            <button className='text-blue-500 font-bold mt-20'>{feature.button} &rarr;</button>
+        <div className='mt-10'>
+            <h2 className='text-3xl font-bold text-center mt-10'>Trusted partnerships for your payouts banking needs</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 max-w-[80%] mt-10 md:mt-16 m-auto">
+                {features.map((feature, index) => (
+                    <div key={index} className=" flex flex-col justify-around p-6 border rounded-md">
+                        <div className='min-w-[18%]'>
+                            <img src={feature.imageSrc} alt={feature.imageAlt} className="h-10 mb-4" />
                         </div>
-                    ))}
-                </div>
+                        <p className='leading-8 mt-3'>{feature.description}</p>
+                        <button className='text-blue-500 font-bold mt-20'>{feature.button} &rarr;</button>
+                    </div>
+                ))}
             </div>
         </div>
     )
@@ -27,7 +25,7 @@ const features = [
         imageSrc: BankIcon,
         imageAlt: 'automaticCalculation',
         title: 'Effortless data migration',
-        description: 'Bring all your existing data into Zoho Payroll with minimum effort. Follow our pre-defined template to import salary or previous employment details, and eliminate duplicates and reduce manual work.',
+        description: 'Bring all your existing data into kian payouts with minimum effort. Follow our pre-defined template to import salary or previous employment details, and eliminate duplicates and reduce manual work.',
         button: 'Automate Salary Payments'
     },
     {

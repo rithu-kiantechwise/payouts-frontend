@@ -5,13 +5,13 @@ import { useNavigate } from 'react-router-dom'
 const Banner = () => {
     const navigate = useNavigate();
     return (
-        <div className='mt-10 p-10'>
-            <div className='outline outline-violet-500 p-12'>
-                <div className='max-w-[70%] m-auto'>
-                    <h1 className='text-5xl font-bold text-center'>The company that leaders trust to help them grow and thrive</h1>
+        <div className='container m-auto mt-10'>
+            <div className='outline outline-violet-500'>
+                <div className='max-w-[90%] m-auto p-8'>
+                    <h1 className='text-5xl font-semibold text-center'>The company that leaders trust to help them grow and thrive</h1>
                 </div>
-                <div className='grid grid-cols-5 mt-16'>
-                    <div className='col-span-2 p-10'>
+                <div className='grid grid-cols-1 lg:grid-cols-5 p-8 gap-4'>
+                    <div className='lg:col-span-2 p-10'>
                         <div className='max-w-[80%] m-auto p-2 border-l-4 border-l-black'>
                             <h4 className='font-extrabold'>Who are we</h4>
                         </div>
@@ -21,7 +21,7 @@ const Banner = () => {
                             <button onClick={() => navigate('/register')} className='px-5 py-3 mt-6 rounded-md text-white font-bold text-lg bg-violet-500'>Get Started with Kian payouts</button>
                         </div>
                     </div>
-                    <div className='col-span-3'>
+                    <div className='lg:col-span-3 h-fit'>
                         <img src={BannerImage} alt="BannerImage" />
                     </div>
                 </div>

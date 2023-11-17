@@ -10,11 +10,11 @@ const Experience = () => {
     return (
         <section className="mt-20">
             <div className="text-center">
-                <h2 className="text-4xl font-semibold mb-5">Payroll experience redefined to be stress free</h2>
+                <h2 className="text-4xl font-semibold mb-5">Payouts experience redefined to be stress free</h2>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 max-w-[80%] m-auto cursor-pointer">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 max-w-[90%] lg:max-w-[80%] m-auto cursor-pointer">
                 {features.map((feature, index) => (
-                    <div key={index} className="px-12 py-6">
+                    <div key={index} className="p-10">
                         <img src={feature.imageSrc} alt={feature.imageAlt} className="h-20 mb-4" />
                         <h3 className="font-bold text-2xl">{feature.title}</h3>
                         <p className='leading-8'>{feature.description}</p>
@@ -31,8 +31,8 @@ const features = [
     {
         imageSrc: Calculation,
         imageAlt: 'automaticCalculation',
-        title: 'Automatic payroll calculation',
-        description: 'Run payroll in a few clicks and automatically generate payslips online with a thorough breakdown of taxes, allowances, and deductions.',
+        title: 'Automatic payouts calculation',
+        description: 'Run payouts in a few clicks and automatically generate payslips online with a thorough breakdown of taxes, allowances, and deductions.',
     },
     {
         imageSrc: Hierarchy,
@@ -56,13 +56,13 @@ const features = [
         imageSrc: Portal,
         imageAlt: 'portal',
         title: 'Encourage employee self service',
-        description: 'Enable seamless collaboration between employees and your payroll staff and reduce the burden of employee requests.',
+        description: 'Enable seamless collaboration between employees and your payouts staff and reduce the burden of employee requests.',
     },
     {
         imageSrc: Administrator,
         imageAlt: 'administration',
         title: 'Fine tune admin privileges',
-        description: 'Invite your qualified staff to process payroll but maintain control with user roles and role-based access.',
+        description: 'Invite your qualified staff to process payouts but maintain control with user roles and role-based access.',
     },
 ];
 

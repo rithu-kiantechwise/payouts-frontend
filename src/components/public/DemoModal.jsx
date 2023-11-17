@@ -11,15 +11,14 @@ const DemoModal = () => {
     return (
         <div className="fixed inset-0 z-50 flex items-center justify-center">
             <div className="absolute inset-0 bg-black opacity-50"></div>
-            <div className="z-50 w-1/2 bg-white rounded-lg shadow-lg max-w-fit p-10 min-w-[30%]">
+            <div className="z-50 w-1/2 bg-white rounded-lg shadow-lg max-w-fit p-4 sm:p-10 min-w-[90%] sm:min-w-[60%]  lg:min-w-[40%]">
                 <div className=''>
                     <div className='grid grid-cols-1'>
                         <div className='text-right'>
                             <button className='text-md font-medium border rounded px-2 py-1' onClick={() => triggerModal(false)}>X</button>
                         </div>
                         <h1 className='text-center text-xl font-medium'>Start a Free Trial</h1>
-                        <form action="" className='m-auto text-center min-w-[100%]'>
-                            <div>
+                        <form action="" className='m-auto text-center max-w-[100%] overflow-hidden min-w-[100%]'>
                                 <div className='my-1 p-2'>
                                     <label htmlFor=""></label>
                                     <input className='border-gray-200 rounded min-w-[100%]' type="text" placeholder='Your Full Name' />
@@ -27,22 +26,22 @@ const DemoModal = () => {
                                 <div className='my-1 p-2'>
                                     <label htmlFor=""></label>
                                     <input className='border-gray-200 rounded min-w-[100%]' type="text" placeholder='Your Email' />
-                                    <button className='mt-2 font-medium'>Send OTP</button>
-                                </div>
-                                <div className='my-1 p-2'>
-                                    <label htmlFor=""></label>
-                                    <input className='border-gray-200 rounded min-w-[100%]' type="text" placeholder='Your Phone Number' />
-                                    <button className='mt-2 font-medium'>Send OTP</button>
+                                    {/* <button className='mt-2 font-medium'>Send OTP</button> */}
                                 </div>
                                 <div className='my-1 p-2 flex gap-4'>
                                     <label htmlFor=""></label>
                                     <input className='border-gray-200 rounded' type="text" placeholder='Enter Email OTP' />
-                                    <button className='font-medium hover:text-violet-800'>Verify</button>
+                                    <button className='font-medium hover:text-violet-800'>Send OTP</button>
+                                </div>
+                                <div className='my-1 p-2'>
+                                    <label htmlFor=""></label>
+                                    <input className='border-gray-200 rounded min-w-[100%]' type="text" placeholder='Your Phone Number' />
+                                    {/* <button className='mt-2 font-medium'>Send OTP</button> */}
                                 </div>
                                 <div className='my-1 p-2 flex gap-4'>
                                     <label htmlFor=""></label>
                                     <input className='border-gray-200 rounded' type="text" placeholder='Enter Mobile OTP' />
-                                    <button className='font-medium hover:text-violet-800'>Verify</button>
+                                    <button className='font-medium hover:text-violet-800'>Send OTP</button>
                                 </div>
                                 <div className='my-1 p-2'>
                                     <label htmlFor=""></label>
@@ -57,7 +56,6 @@ const DemoModal = () => {
                                     <input className='border-gray-200 rounded min-w-[100%]' type="text" placeholder='Enter the Captcha' />
                                 </div>
                                 <button className='bg-violet-500 font-medium text-white px-10 py-3 rounded mt-2'>Start Now</button>
-                            </div>
                         </form>
                     </div>
                 </div>

@@ -3,12 +3,12 @@ import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { openModal } from '../../../redux/modalSlice';
 import EmployeeDashboardImage from '../../../assets/employeeDashImg.png'
-import Calculation from '../../../assets/calculation.png'
-import Hierarchy from '../../../assets/hierarchy.png'
-import Complaint from '../../../assets/compliant.png'
-import Portal from '../../../assets/portal.png'
-import Salary from '../../../assets/salary.png'
-import Administrator from '../../../assets/administrator.png'
+import migration from '../../../assets/migration.png'
+import trophy from '../../../assets/trophy.png'
+import salaryreimbursement from '../../../assets/salaryreimbursement.png'
+import employeemanagement from '../../../assets/employeemanagement.png'
+import employee from '../../../assets/employee.png'
+import automated from '../../../assets/automated.png'
 import FeatureCardComponent from './FeatureCardComponent'
 import FeatureBannerComponent from './FeatureBannerComponent'
 
@@ -28,15 +28,13 @@ const EmployeeTab = () => {
                 </div>
                 <FeatureCardComponent data={features} />
             </section>
-            <section className='max-w-[75%] bg-violet-100 m-auto mb-14 mt-20'>
-                <div className='grid grid-cols-4 items-center mb-6 pt-8'>
-                    <h1 className='text-center text-4xl font-bold col-span-4 mb-4'>Payroll system with seamless employee onboarding</h1>
+            <section className='md:max-w-[75%] bg-violet-100 m-auto p-8 mt-10 lg:mt-20'>
+                <div className='grid grid-cols-4 items-center'>
+                    <h1 className='text-center text-4xl font-semibold col-span-4'>Payouts system with seamless employee onboarding</h1>
                 </div>
-                <div className="m-auto w-[50%] pb-8">
-                    <div className='grid grid-cols-2 gap-3'>
-                        <button onClick={() => navigate('/register')} className=' lg:col-span-1 col-span-2 uppercase px-8 py-4 rounded text-white font-bold bg-violet-500 '>Access kian payouts</button>
-                        <button onClick={() => triggerModal()} className=' lg:col-span-1 col-span-2 uppercase px-8 py-4 rounded border border-black '>Start a free trial</button>
-                    </div>
+                <div className='grid grid-cols-2 max-w-[60%] mt-10 m-auto gap-4'>
+                    <button onClick={() => navigate('/register')} className='lg:col-span-1 col-span-2 uppercase p-4 rounded text-white font-bold bg-violet-500'>Access kian payouts</button>
+                    <button onClick={() => triggerModal()} className='lg:col-span-1 col-span-2 uppercase p-4 rounded border border-black'>Start a free trial</button>
                 </div>
             </section>
         </div>
@@ -48,43 +46,43 @@ const featureBanner = [
         imageSrc: EmployeeDashboardImage,
         imageAlt: 'EmployeeDashboardImage',
         bannerHeading: 'Manage your employees and stay on top of your onboarding process',
-        bannerDescription: 'Chart the right course for your payroll operations from the day you hire your first employee.',
+        bannerDescription: 'Chart the right course for your payouts operations from the day you hire your first employee.',
     },
 ];
 const features = [
     {
-        imageSrc: Calculation,
-        imageAlt: 'automaticCalculation',
+        imageSrc: migration,
+        imageAlt: 'migration',
         title: 'Effortless data migration',
-        description: 'Bring all your existing data into Zoho Payroll with minimum effort. Follow our pre-defined template to import salary or previous employment details, and eliminate duplicates and reduce manual work.',
+        description: 'Bring all your existing data into Kian payouts with minimum effort. Follow our pre-defined template to import salary or previous employment details, and eliminate duplicates and reduce manual work.',
     },
     {
-        imageSrc: Hierarchy,
-        imageAlt: 'compensations',
+        imageSrc: trophy,
+        imageAlt: 'trophy',
         title: 'Employee hikes, increments, and appraisals',
         description: 'Attract and retain the right talent with the right rewards. Revise the CTC, and pick the date from which the hike in pay will be reflected on the payslips.',
     },
     {
-        imageSrc: Salary,
-        imageAlt: 'Salary',
+        imageSrc: salaryreimbursement,
+        imageAlt: 'salaryreimbursement',
         title: 'Salary history and designation',
         description: `Follow your employee's career progress by tracking their salary revision history and designation changes. Automatic updates in the self-service portal keeps employees informed too.`,
     },
     {
-        imageSrc: Complaint,
-        imageAlt: 'compliant',
+        imageSrc: employee,
+        imageAlt: 'employee',
         title: 'Streamlined employee self-service',
-        description: 'Reduce your payroll costs and data entry efforts by delegating routine document tasks to your employees. Employees can do things on their own from the client portal.',
+        description: 'Reduce your payouts costs and data entry efforts by delegating routine document tasks to your employees. Employees can do things on their own from the client portal.',
     },
     {
-        imageSrc: Portal,
-        imageAlt: 'portal',
+        imageSrc: employeemanagement,
+        imageAlt: 'employeemanagement',
         title: 'Systematic employee exit management',
         description: `Enter your departing employee's last working day along with the full and final settlement date to process the pay automatically. You can encash unused leaves, send their final payslips, and Form-16 to an email address of their choice.`,
     },
     {
-        imageSrc: Administrator,
-        imageAlt: 'administration',
+        imageSrc: automated,
+        imageAlt: 'automated',
         title: 'Automated gratuity settlement',
         description: 'Acknowledge efforts of your long-serving staff. With automated gratuity calculation, let your parting employees reap their rewards immediately.',
     },
