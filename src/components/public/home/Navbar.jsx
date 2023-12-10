@@ -64,25 +64,6 @@ const Navbar = () => {
         </div>
       </div>
     </nav>
-
-    // <div className='bg-gradient-to-b from-violet-100 sticky top-0 bg-white shadow-md'>
-    //   <div className='grid grid-cols-4 lg:grid-cols-3 xl:grid-cols-2 text-center max-w-[80%] m-auto py-10'>
-    //     <div className='col-span-1 xl:col-span-1'>
-    //       <div className='sm:max-w-[80%] lg:max-w-[40%] xl:max-w-[25%]'>
-    //         <img onClick={() => navigate('/')} className='max-w-[100%] h-auto cursor-pointer' src={PayoutsLogo} alt="PayoutsLogo" />
-    //       </div>
-    //     </div>
-    //     <div className='col-span-3 lg:col-span-2 xl:col-span-1'>
-    //       <div className='grid grid-cols-5 right-0'>
-    //         <button className='hover:text-violet-800 font-medium' onClick={() => navigate('/features')}>Features</button>
-    //         <button className='hover:text-violet-800 font-medium' onClick={() => navigate('/pricing')}>Pricing</button>
-    //         <button className='hover:text-violet-800 font-medium' onClick={() => navigate('/integrations')}>Integration</button>
-    //         <button className='hover:text-violet-800 font-medium' onClick={() => navigate('/help')}>Help</button>
-    //         <button className='border border-black rounded px-6 py-1 font-medium hover:bg-violet-500 hover:text-white hover:border-0' onClick={() => navigate('/login')}>Login</button>
-    //       </div>
-    //     </div>
-    //   </div>
-    // </div>
   )
 }
 

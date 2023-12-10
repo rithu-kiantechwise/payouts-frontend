@@ -6,10 +6,13 @@ const FAQ = () => {
             <h1 className='text-3xl md:text-5xl font-semibold lg:mt-10 text-center'>Frequently Asked Questions</h1>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 lg:max-w-[80%] m-auto mt-6">
                 {QuestionAndAnswer.map((feature, index) => (
-                    <div key={index} className="lg:p-8 p-4 border-b">
-                        <h3 className="font-semibold text-2xl">{feature.question}</h3>
+                    <details key={index} className="lg:p-8 p-4 border-b">
+                        <summary className='cursor-pointer list-outside'>
+                        <span className="font-semibold text-2xl">{feature.question}</span>
+                        </summary>
+                     
                         <p className='leading-8 mt-3'>{feature.answer}</p>
-                    </div>
+                    </details>
                 ))}
             </div>
         </div>

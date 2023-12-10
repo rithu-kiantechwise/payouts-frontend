@@ -1,28 +1,20 @@
 import React from 'react'
-import Registration from './pages/Registration';
+import { Toaster } from 'react-hot-toast';
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import Login from './pages/Login';
-import Home from './pages/Home';
-import Features from './pages/Features';
-import Pricing from './pages/Pricing';
-import Integrations from './pages/Integrations';
-import Help from './pages/Help';
-import DemoModal from './components/public/DemoModal';
-import { useSelector } from 'react-redux';
+import PublicRoute from './routes/PublicRoute';
+import EmployeeRoute from './routes/employeeRoute/EmployeeRoute';
+import AdminRoute from './routes/adminRoute/AdminRoute';
+import OrganizationRoute from './routes/organizationRoute/OrganizationRoute';
 
 const App = () => {
-  const { isOpen } = useSelector((state) => state.modal);
   return (
     <BrowserRouter>
-      {isOpen && <DemoModal />}
+      <Toaster position='top-center' />
       <Routes>
-        <Route path='/*' element={<Home />} />
-        <Route path='/features/*' element={<Features />} />
-        <Route path='/pricing/*' element={<Pricing />} />
-        <Route path='/integrations/*' element={<Integrations />} />
-        <Route path='/help/*' element={<Help />} />
-        <Route path='/register/*' element={<Registration />} />
-        <Route path='/login/*' element={<Login />} />
+        <Route path='/*' element={<PublicRoute />} />
+        <Route path='/employee/*' element={<EmployeeRoute />} />
+        <Route path='/admin/*' element={<AdminRoute />} />
+        <Route path='/organization/*' element={<OrganizationRoute />} />
       </Routes>
     </BrowserRouter>
   )

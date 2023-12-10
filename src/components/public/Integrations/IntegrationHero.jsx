@@ -16,7 +16,7 @@ const IntegrationHero = () => {
             </div>
             <div className="max-w-[90%] px-8 pb-8">
                 <div className='grid grid-cols-1 lg:grid-cols-3 gap-3'>
-                    <button onClick={() => triggerModal()} className='lg:col-span-2 p-3 uppercase rounded text-white font-bold bg-gradient-to-r from-blue-500 to-cyan-500'>Explore kian payouts for free trail</button>
+                    <button onClick={() => triggerModal()} className='lg:col-span-2 p-3 uppercase rounded text-black bg-white font-bold'>Explore kian payouts for free trail</button>
                     <button onClick={() => navigate('/register')} className='lg:col-span-1 p-3 uppercase rounded border text-white border-white '>Access Kian Payouts</button>
                 </div>
             </div>

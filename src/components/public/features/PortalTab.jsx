@@ -32,7 +32,7 @@ const PortalTab = () => {
                     <h1 className='text-center text-4xl font-semibold col-span-4'>The employee portal that gets your work done faster</h1>
                 </div>
                     <div className='grid grid-cols-2 max-w-[60%] mt-10 m-auto gap-4'>
-                        <button onClick={() => navigate('/register')} className='lg:col-span-1 col-span-2 uppercase p-4 rounded text-white font-bold bg-violet-500 '>Access kian payouts</button>
+                        <button onClick={() => navigate('/organization/register')} className='lg:col-span-1 col-span-2 uppercase p-4 rounded text-white font-bold bg-violet-500 '>Access kian payouts</button>
                         <button onClick={() => triggerModal()} className='lg:col-span-1 col-span-2 uppercase p-4 rounded border border-black '>Start a free trial</button>
                     </div>
             </section>

@@ -22,7 +22,7 @@ const Pricing = () => {
                                 <h6 className='text-sm text-gray-200'>Billed Annually</h6>
                             </div>
                             <div>
-                                <button onClick={()=> navigate('/register')} className="px-7 py-3 text-black font-bold bg-white rounded mb-20">
+                                <button onClick={()=> navigate('/organization/register')} className="px-7 py-3 text-black font-bold bg-white rounded mb-20">
                                     GET KIAN PAYOUTS
                                 </button>
                             </div>
