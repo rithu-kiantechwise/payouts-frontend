@@ -23,7 +23,7 @@ const Pricing = () => {
                             </div>
                             <div>
                                 <button onClick={()=> navigate('/organization/register')} className="px-7 py-3 text-black font-bold bg-white rounded mb-20">
-                                    GET KIAN PAYOUTS
+                                    GET PAYOUTS
                                 </button>
                             </div>
                             <div className="text-gray-200 text-sm">Minimum 20 Employees</div>

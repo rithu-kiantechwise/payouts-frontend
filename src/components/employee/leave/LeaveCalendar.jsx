@@ -10,9 +10,9 @@ const LeaveCalendar = ({ events, onSelectEvent }) => {
   const eventStyleGetter = (event, start, end, isSelected) => {
     let style = {};
 
-    if (event.status === 'approved') {
+    if (event.status === 'Approved') {
       style.backgroundColor = 'green';
-    } else if (event.status === 'rejected') {
+    } else if (event.status === 'Rejected') {
       style.backgroundColor = 'red';
     } else {
       style.backgroundColor = 'orange';

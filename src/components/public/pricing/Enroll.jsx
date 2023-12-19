@@ -16,7 +16,7 @@ const Enroll = () => {
             </div>
             <div className="px-8 pb-8">
                 <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3'>
-                    <button onClick={() => navigate('/register')} className='lg:col-span-1 uppercase p-3 rounded text-black font-bold bg-white '>Access kian payouts</button>
+                    <button onClick={() => navigate('/register')} className='lg:col-span-1 uppercase p-3 rounded text-black font-bold bg-white '>Access payouts</button>
                     <button onClick={() => triggerModal()} className='lg:col-span-1 uppercase p-3 rounded border text-white border-white '>Start a free trial</button>
                 </div>
             </div>

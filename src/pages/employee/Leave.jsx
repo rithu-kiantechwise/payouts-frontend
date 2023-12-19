@@ -27,16 +27,15 @@ const Leave = () => {
     };
 
     const handleLeaveSet = (newLeave) => {
-        // Update the leave events with the new leave
         setEvents([...events, newLeave]);
     };
-    console.log(events, 'eventsssssss');
     return (
         <div className='flex min-h-[100vh]'>
             <Sidebar />
             <div className='mx-auto min-w-[80%] p-8'>
                 <h1 className='text-2xl font-semibold'>Leave Application</h1>
                 <LeaveForm onLeaveSet={handleLeaveSet} />
+                <h1 className='text-2xl text-center font-semibold mt-6'>Leave Calendar</h1>
                 <LeaveCalendar events={events} onSelectEvent={handleEventClick} />
             </div>
         </div>

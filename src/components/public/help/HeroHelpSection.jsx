@@ -15,7 +15,7 @@ const HeroHelpSection = () => {
                     <img className='h-fit p-10' src={HeroHelpImage} alt="HelpHeroBanner" />
                 </div>
                 <div className='col-span-1 md:col-span-1 lg:col-span-2 lg:max-w-[80%] m-auto p-6 lg:p-10'>
-                    <h1 className='text-4xl text-white leading-[3rem]'>See Kian Payouts in Action!</h1>
+                    <h1 className='text-4xl text-white leading-[3rem]'>See Payouts in Action!</h1>
                     <button onClick={() => triggerModal()} className='px-5 py-3 mt-8 font-semibold bg-yellow-300 rounded'>Get the Trial Access</button>
                 </div>
             </div>

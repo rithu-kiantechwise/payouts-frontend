@@ -14,7 +14,6 @@ export const ProductDisplay = () => {
         const result = await stripe.redirectToCheckout({
             sessionId: session.id,
         });
-        console.log(result,'resultresultresultresult');
 
         if (result.error) {
             console.error(result.error.message);
@@ -26,19 +25,12 @@ export const ProductDisplay = () => {
             <div className="product flex">
                 <form onSubmit={handleSubmit}>
                     <button
-                        className='text-2xl font-semibold px-6 py-4 bg-violet-800 text-white rounded-md'
+                        className='text-lg bg-violet-500 text-white uppercase rounded-3xl lg:px-20 px-10 py-2 mt-10 mb-10'
                     >
-                        Checkout
+                        Proceed to pay
                     </button>
                 </form>
             </div>
         </section>
     )
 }
-
-
-export const Message = ({ message }) => (
-    <section>
-        <p>{message}</p>
-    </section>
-);

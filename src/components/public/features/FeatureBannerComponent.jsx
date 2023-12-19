@@ -17,7 +17,7 @@ const FeatureBannerComponent = ({ data }) => {
                         <h1 className='text-3xl font-bold leading-[2.5rem]'>{featureBanner.bannerHeading}</h1>
                         <h4 className='text-xl leading-[2rem] mt-4'>{featureBanner.bannerDescription}</h4>
                         <div className='grid grid-cols-2 gap-3 p-4 mt-14'>
-                            <button onClick={() => navigate('/organization/register')} className='lg:col-span-1 col-span-2 uppercase px-8 py-4 rounded text-white font-bold bg-violet-500 '>Access kian payouts</button>
+                            <button onClick={() => navigate('/organization/register')} className='lg:col-span-1 col-span-2 uppercase px-8 py-4 rounded text-white font-bold bg-violet-500 '>Access payouts</button>
                             <button onClick={() => triggerModal()} className='lg:col-span-1 col-span-2 uppercase px-8 py-4 rounded border border-black '>Start a free trial</button>
                         </div>
                     </div>

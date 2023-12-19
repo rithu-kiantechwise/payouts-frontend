@@ -33,12 +33,24 @@ export const orgFreeTrialRegister = async (credentials) => {
     }
 }
 
+export const activatePremiumSubscription = async (credentials) => {
+    try {
+        const response = await organizationApi.post('/premium-register', credentials, { withCredentials: true })
+
+        return response;
+    } catch (error) {
+        console.error('Error during organization register:', error);
+        return error.response
+    }
+}
+
 export const stripePayment = async (credentials) => {
     try {
         const response = await organizationApi.post(`/checkout-payment`, credentials, { withCredentials: true })
+
         return response;
     } catch (error) {
-        console.error('Error during employee deletion:', error);
+        console.error('Error during stripe payment:', error);
         return error.response
     }
 }
@@ -100,7 +112,10 @@ export const employeeRegister = async (credentials) => {
 
 export const getAllEmployees = async (credentials) => {
     try {
-        const response = await organizationApi.get('/all-employees', credentials, { withCredentials: true })
+        const response = await organizationApi.get('/all-employees', {
+            withCredentials: true,
+            params: credentials,
+        })
 
         return response;
     } catch (error) {
@@ -155,7 +170,10 @@ export const editOrgProfile = async (credentials) => {
 
 export const getReimbursement = async (credentials) => {
     try {
-        const response = await organizationApi.get(`/get-reimbursement`, credentials, { withCredentials: true })
+        const response = await organizationApi.get(`/get-reimbursement`, {
+            withCredentials: true,
+            params: credentials,
+        })
 
         return response;
     } catch (error) {
@@ -164,9 +182,56 @@ export const getReimbursement = async (credentials) => {
     }
 }
 
-export const updateReimbursement = async (credentials) => {
+export const updateReimbursementStatus = async (credentials) => {
     try {
         const response = await organizationApi.put(`/update-reimbursement`, credentials, { withCredentials: true })
+
+        return response;
+    } catch (error) {
+        console.error('Error during employee deletion:', error);
+        return error.response
+    }
+}
+
+export const getLeaveDetails = async (credentials) => {
+    try {
+        const response = await organizationApi.get(`/get-leaves`, {
+            withCredentials: true,
+            params: credentials,
+        })
+
+        return response;
+    } catch (error) {
+        console.error('Error during employee deletion:', error);
+        return error.response
+    }
+}
+
+export const updateLeaveStatus = async (credentials) => {
+    try {
+        const response = await organizationApi.put(`/update-leave`, credentials, { withCredentials: true })
+
+        return response;
+    } catch (error) {
+        console.error('Error during employee deletion:', error);
+        return error.response
+    }
+}
+
+export const updateSelectedEmployeesTaxes = async (credentials) => {
+    try {
+        const response = await organizationApi.post(`/update-selected-taxes`, credentials, { withCredentials: true })
+
+        return response;
+    } catch (error) {
+        console.error('Error during employee deletion:', error);
+        return error.response
+    }
+}
+
+export const updateAllEmployeesTaxes = async (credentials) => {
+    try {
+        const response = await organizationApi.post(`/update-all-taxes`, credentials, { withCredentials: true })
 
         return response;
     } catch (error) {

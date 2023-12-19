@@ -15,6 +15,8 @@ import EditEmployee from '../../pages/organization/EditEmployee';
 import OrgForgotPassword from '../../pages/organization/OrgForgotPassword';
 import OrgProfileEdit from '../../pages/organization/OrgProfileEdit';
 import SingleEmployeePage from '../../pages/organization/SingleEmployeePage';
+import Taxation from '../../pages/organization/Taxation';
+import EditTax from '../../pages/organization/EditTax';
 
 const OrganizationRoute = () => {
   const dispatch = useDispatch();
@@ -47,6 +49,8 @@ const OrganizationRoute = () => {
         <Route path='/new-employee/*' element={<AddEmployee />} />
         <Route path='/edit-employee/*' element={<EditEmployee />} />
         <Route path='/edit-profile/*' element={<OrgProfileEdit />} />
+        <Route path='/employee-tax/*' element={<Taxation />} />
+        <Route path='/edit-tax/*' element={<EditTax />} />
 
       </Route>
     </Routes>

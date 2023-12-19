@@ -32,7 +32,6 @@ const DemoModal = () => {
             console.error('Error in handleChange:', error);
         }
     };
-
     const handleSendOTP = async (e) => {
         e.preventDefault();
         try {
@@ -155,7 +154,7 @@ const DemoModal = () => {
                                 <input
                                     id='phoneNumber'
                                     name='phoneNumber'
-                                    type="text"
+                                    type="number"
                                     placeholder='Phone Number'
                                     value={signupData.phoneNumber}
                                     required
@@ -167,7 +166,7 @@ const DemoModal = () => {
                                 <input
                                     id="password"
                                     name="password"
-                                    type="text"
+                                    type="password"
                                     value={signupData.password}
                                     required
                                     onChange={handleChange}
@@ -194,17 +193,12 @@ const DemoModal = () => {
                                     <label htmlFor=""></label>
                                     <input className='border-gray-200 rounded min-w-[100%]' type="text" placeholder='Enter the Captcha' />
                                 </div> */}
-                            {isEmailVerified ?
-                                <button
-                                    className='bg-violet-500 font-medium text-white px-10 py-3 rounded mt-2'>
-                                    Start Now
-                                </button> :
-                                <button
-                                    disabled
-                                    className='bg-violet-500 font-medium text-white px-10 py-3 rounded mt-2'>
-                                    Start Now
-                                </button>
-                            }
+
+                            <button
+                                disabled={!isEmailVerified}
+                                className='bg-violet-500 font-medium text-white px-10 py-3 rounded mt-2'>
+                                Start Now
+                            </button>
                         </form>
                     </div>
                 </div>

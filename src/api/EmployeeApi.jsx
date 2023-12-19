@@ -113,7 +113,24 @@ export const editEmpProfile = async (credentials) => {
 
 export const getSalaryDetails = async (credentials) => {
     try {
-        const response = await employeeApi.post(`/salary-details`, credentials, { withCredentials: true })
+        const response = await employeeApi.get(`/salary-details`, {
+            withCredentials: true,
+            params: credentials,
+        })
+
+        return response;
+    } catch (error) {
+        console.error('Error during employee deletion:', error);
+        return error.response
+    }
+}
+
+export const getAttendanceDetails = async (credentials) => {
+    try {
+        const response = await employeeApi.get(`/attendance-details`, {
+            withCredentials: true,
+            params: credentials,
+        })
 
         return response;
     } catch (error) {

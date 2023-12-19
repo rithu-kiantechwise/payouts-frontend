@@ -101,7 +101,7 @@ const EmpForgotPassword = () => {
                             <div>
                                 {error && <p className='text-red-500'>{error}</p>}
                             </div>
-                            <div className=''>
+                            <div className='text-center'>
                                 <button className='text-md py-3 mt-5 bg-blue-500 rounded text-white min-w-[80%] mx-auto mb-3'>Send OTP</button>
                             </div>
                         </form>
@@ -123,7 +123,7 @@ const EmpForgotPassword = () => {
                             <div>
                                 {error && <p className='text-red-500'>{error}</p>}
                             </div>
-                            <div className=''>
+                            <div className='text-center'>
                                 <button className='text-md py-3 mt-5 bg-blue-500 rounded text-white min-w-[80%] mx-auto mb-3'>Verify OTP</button>
                             </div>
                         </form>
@@ -145,7 +145,7 @@ const EmpForgotPassword = () => {
                             <div>
                                 {error && <p className='text-red-500'>{error}</p>}
                             </div>
-                            <div className=''>
+                            <div className='text-center'>
                                 <button className='text-md py-3 mt-5 bg-blue-500 rounded text-white min-w-[80%] mx-auto mb-3'>Reset Password</button>
                             </div>
                         </form>

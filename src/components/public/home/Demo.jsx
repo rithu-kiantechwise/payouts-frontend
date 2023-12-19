@@ -16,7 +16,7 @@ const Demo = () => {
                     <h1 className='text-center text-4xl font-semibold col-span-4'>Cloud payroll system best suited for Indian businesses</h1>
                 </div>
                 <div className="grid grid-cols-1 lg:grid-cols-2 lg:max-w-[80%] mt-10 m-auto gap-4">
-                    <button onClick={() => navigate('/organization/register')} className='uppercase p-4 rounded text-white font-bold bg-violet-500'>Access kian payouts</button>
+                    <button onClick={() => navigate('/organization/register')} className='uppercase p-4 rounded text-white font-bold bg-violet-500'>Access payouts</button>
                     <button onClick={() => triggerModal()} className='uppercase p-4 rounded border border-black'>Start a free trial</button>
                 </div>
             </div>

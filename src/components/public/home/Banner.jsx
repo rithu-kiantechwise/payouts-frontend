@@ -18,7 +18,7 @@ const Banner = () => {
                         <div className='max-w-[80%] m-auto'>
                             <h1 className='text-4xl pt-10 font-bold bg-gradient-to-r from-violet-800 to-blue-400 bg-clip-text text-transparent'>Payroll solutions for every business</h1>
                             <h4 className='text-xl pt-6'>Proven and best in class: integrated, with silos down, productivity up, and potential unleashed.</h4>
-                            <button onClick={() => navigate('/organization/register')} className='px-5 py-3 mt-6 rounded-md text-white font-bold text-lg bg-violet-500'>Get Started with Kian payouts</button>
+                            <button onClick={() => navigate('/organization/register')} className='px-5 py-3 mt-6 rounded-md text-white font-bold text-lg bg-violet-500'>Get Started with payouts</button>
                         </div>
                     </div>
                     <div className='lg:col-span-3 h-fit'>

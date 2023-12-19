@@ -40,8 +40,8 @@ const Login = () => {
       } else {
         toast.error(response.data.message)
       }
-    } catch (err) {
-      console.error('Login failed:');
+    } catch (error) {
+      console.error('Login failed:',error);
       setError('Invalid email or password');
     }
   };

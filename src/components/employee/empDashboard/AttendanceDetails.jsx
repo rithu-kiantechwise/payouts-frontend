@@ -1,19 +1,23 @@
 import React, { useEffect, useState } from 'react'
-import { getSalaryDetails } from '../../../api/EmployeeApi';
+import { getAttendanceDetails } from '../../../api/EmployeeApi';
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/20/solid';
 
-const MonthlySalaryDetails = () => {
-    const [salaryDetails, setSalaryDetails] = useState(null);
+const calculateHoursWorked = (checkInTime, checkOutTime) => {
+    const diffInMilliseconds = new Date(checkOutTime) - new Date(checkInTime);
+    const hoursWorked = diffInMilliseconds / (1000 * 60 * 60);
+    return hoursWorked.toFixed(2);
+};
+
+const AttendanceDetails = () => {
+    const [attendanceDetails, setAttendanceDetails] = useState(null);
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPages, setTotalPages] = useState(1);
-
     useEffect(() => {
         const fetchSalaryDetails = async () => {
             try {
-                const response = await getSalaryDetails({ page: currentPage });
-                setSalaryDetails(response.data.salaryDetailsByMonth);
+                const response = await getAttendanceDetails({ page: currentPage });
+                setAttendanceDetails(response.data.attendanceDetails);
                 setTotalPages(response.data?.totalPages);
-
             } catch (error) {
                 console.error("Error fetching salary details:", error);
             }
@@ -27,50 +31,40 @@ const MonthlySalaryDetails = () => {
 
     return (
         <div className='p-2'>
-            <h2 className='text-2xl font-semibold p-5'>Monthly Salary Details</h2>
+            <h2 className='text-2xl font-semibold p-5'>Attendance Details</h2>
             <table className="min-w-full border-gray-300 text-center items-center border rounded-md mt-5">
                 <thead className='bg-slate-800 text-white'>
                     <tr className='text-center'>
                         <th className="py-2 px-4 border-b">Month</th>
-                        <th className="py-2 px-4 border-b">Reimbursements</th>
-                        <th className="py-2 px-4 border-b">Actual Salary</th>
-                        <th className="py-2 px-4 border-b">PF</th>
-                        <th className="py-2 px-4 border-b">ESI</th>
-                        <th className="py-2 px-4 border-b">Tax</th>
-                        <th className="py-2 px-4 border-b">Bonus</th>
-                        <th className="py-2 px-4 border-b">Total Salary</th>
+                        <th className="py-2 px-4 border-b">Attendance</th>
+                        <th className="py-2 px-4 border-b">Leaves</th>
+                        <th className="py-2 px-4 border-b">Total Leave Days</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {salaryDetails?.map((data) => (
+                    {attendanceDetails?.map((data) => (
                         <tr className='text-center' key={data.month}>
                             <td>{data.month}</td>
                             <td className="py-2 px-4 border-b">
                                 <ul>
-                                    {data.reimbursements.map((reimbursement) => (
-                                        <li key={reimbursement._id}>
-                                            ₹ {reimbursement.amount}
+                                    {data.attendance.map((entry) => (
+                                        <li key={entry._id}>
+                                            {new Date(entry.checkInTime).toLocaleDateString()} - {calculateHoursWorked(entry.checkInTime, entry.checkOutTime)} hours
                                         </li>
                                     ))}
                                 </ul>
                             </td>
                             <td className="py-2 px-4 border-b">
-                                ₹ {data.actualSalary}
+                                <ul>
+                                    {data.leaves.map((leave) => (
+                                        <li key={leave._id}>
+                                            {new Date(leave.startDate).toLocaleDateString()} to {new Date(leave.endDate).toLocaleDateString()}
+                                        </li>
+                                    ))}
+                                </ul>
                             </td>
                             <td className="py-2 px-4 border-b">
-                                ₹ {data.roundedPf}
-                            </td>
-                            <td className="py-2 px-4 border-b">
-                                ₹ {data.roundedEsi}
-                            </td>
-                            <td className="py-2 px-4 border-b">
-                                ₹ {data.roundedTax}
-                            </td>
-                            <td className="py-2 px-4 border-b">
-                                ₹ {data.roundedBonus}
-                            </td>
-                            <td className="py-2 px-4 border-b">
-                                ₹ {data.roundedNetSalary}
+                                {data.totalLeaveDays}
                             </td>
                         </tr>
                     ))}
@@ -116,4 +110,4 @@ const MonthlySalaryDetails = () => {
     )
 }
 
-export default MonthlySalaryDetails;
+export default AttendanceDetails;

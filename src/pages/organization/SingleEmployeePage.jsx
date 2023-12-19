@@ -1,47 +1,91 @@
 import React, { useEffect, useState } from 'react'
 import noProfile from '../../assets/noprofile.jpg'
 import Sidebar from '../../components/organization/orgDashboard/Sidebar';
-import { useLocation } from 'react-router-dom';
-import { getEmployeeById } from '../../api/OrganizationApi';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { deleteEmployee, getEmployeeById } from '../../api/OrganizationApi';
+import Swal from 'sweetalert2';
+import withReactContent from 'sweetalert2-react-content';
+const MySwal = withReactContent(Swal);
 
 const SingleEmployeePage = () => {
   const location = useLocation();
+  const navigate = useNavigate();
   const [employeeData, setEmployeeData] = useState({
-      employeeID: '',
-      firstName: '',
-      lastName: '',
-      email: '',
-      position: '',
-      phoneNumber: '',
-      dob: '',
-      salary: '',
+    employeeID: '',
+    firstName: '',
+    lastName: '',
+    email: '',
+    position: '',
+    phoneNumber: '',
+    dob: '',
+    salary: '',
   });
 
   useEffect(() => {
     const employeeID = location.state?.employeeID
     fetchEmployeeDetails(employeeID)
-}, [location.state?.employeeID]);
+  }, [location.state?.employeeID]);
 
-const fetchEmployeeDetails = async (employeeID) => {
+  const fetchEmployeeDetails = async (employeeID) => {
     try {
-        const response = await getEmployeeById(employeeID);
-        const formattedDob = new Date(response.data.dob).toLocaleDateString('en-CA', {
-            year: 'numeric',
-            month: '2-digit',
-            day: '2-digit',
-        });
-        setEmployeeData({
-            ...response.data,
-            dob: formattedDob,
-        })
+      const response = await getEmployeeById(employeeID);
+      const formattedDob = new Date(response.data.dob).toLocaleDateString('en-CA', {
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit',
+      });
+      setEmployeeData({
+        ...response.data,
+        dob: formattedDob,
+      })
     } catch (error) {
-        console.log('employee fetch error:', error);
+      console.log('employee fetch error:', error);
     }
-};
+  };
+
+  const handleDelete = async () => {
+    try {
+      MySwal.fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, delete it!",
+      }).then(async (result) => {
+        if (result.isConfirmed) {
+          MySwal.fire({
+            title: "Deleting...",
+            icon: "info",
+            allowOutsideClick: false,
+            showConfirmButton: false,
+          });
+          const response = await deleteEmployee(employeeData._id);
+          MySwal.fire({
+            title: "Deleted!",
+            text: response.data.message,
+            icon: "success",
+          });
+          navigate('/organization/employee-details');
+        }
+      });
+    } catch (error) {
+      console.error('Error deleting employee:', error);
+    }
+  };
+
+  const handleEdit = () => {
+    try {
+      navigate(`/organization/edit-employee`, { state: { employeeID: employeeData._id } });
+    } catch (error) {
+      console.error('Error navigating to edit employee page:', error);
+    }
+  };
   return (
     <div className='flex min-h-[100vh]'>
-    <Sidebar />
-    <div className='mx-auto p-8'>
+      <Sidebar />
+      <div className='mx-auto p-8'>
         <div className='flex flex-col items-center mt-6 mx-2'>
           <label htmlFor="profile">
             <input id='profile' type="file" hidden disabled />
@@ -56,7 +100,6 @@ const fetchEmployeeDetails = async (employeeID) => {
         </div>
         <div className="border-b border-gray-900/10 pb-10">
           <h2 className="text-base font-semibold leading-7 text-gray-900">Account</h2>
-
           <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
             <div className="sm:col-span-4">
               <label htmlFor="employeeID" className="block text-sm font-medium leading-6 text-gray-900">
@@ -135,7 +178,6 @@ const fetchEmployeeDetails = async (employeeID) => {
                   name="dob"
                   id="dob"
                   value={employeeData?.dob ?? ''}
-
                   required
                   disabled
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-200 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
@@ -195,18 +237,18 @@ const fetchEmployeeDetails = async (employeeID) => {
             </div>
           </div>
         </div>
-        {/* <div className="mt-6 flex items-center justify-end gap-x-6">
+        <div className="mt-6 flex items-center justify-end gap-x-6">
           <button
             onClick={handleEdit}
             className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
-            Edit
+            Edit user
           </button>
           <button
             onClick={handleDelete}
             className="rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600">
-            Delete
+            Delete user
           </button>
-        </div> */}
+        </div>
       </div>
     </div>
   )
