@@ -14,7 +14,7 @@ const Login = () => {
     email: '',
     password: '',
   });
-
+console.log(process.env.REACT_APP_API_URL,'1234567890');
   const handleChange = (e) => {
     try {
       const { name, value } = e.target;
