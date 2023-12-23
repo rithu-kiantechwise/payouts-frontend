@@ -6,10 +6,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import noProfile from '../../assets/noprofile.jpg'
 import Sidebar from '../../components/organization/orgDashboard/Sidebar';
 import { loginUser } from '../../redux/userSlice';
+import LoadingSpinner from '../../components/LoadingSpinner';
 
 const OrgProfileEdit = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
+    const [loading, setLoading] = useState(false);
+
     const user = useSelector((state) => state.user.user);
     const [organizationData, setOrganizationData] = useState({
         name: '',
@@ -21,6 +24,7 @@ const OrgProfileEdit = () => {
 
     useEffect(() => {
         if (user) {
+            setLoading(true)
             setOrganizationData({
                 name: user?.name,
                 email: user?.email,
@@ -28,6 +32,7 @@ const OrgProfileEdit = () => {
                 phoneNumber: user?.phoneNumber,
                 imageUrl: user?.imageUrl,
             });
+            setLoading(false)
         }
     }, [user])
 
@@ -69,8 +74,9 @@ const OrgProfileEdit = () => {
             formData.append('phoneNumber', organizationData.phoneNumber);
             formData.append('location', organizationData.location);
             formData.append('image', organizationData.selectedImageFile);
-
+            setLoading(true)
             const response = await editOrgProfile(formData)
+            setLoading(false)
             if (response.data.success) {
                 toast.success(response.data.message)
                 dispatch(loginUser(response.data.organizationDetail));
@@ -85,6 +91,8 @@ const OrgProfileEdit = () => {
     return (
         <div className='flex min-h-[100vh]'>
             <Sidebar />
+            {!loading
+                ?
             <div className='mx-auto p-8'>
                 <form onSubmit={handleSubmit}>
                     <div className='flex flex-col items-center mt-6 mx-2'>
@@ -187,6 +195,9 @@ const OrgProfileEdit = () => {
                     </div>
                 </form>
             </div>
+                 :
+                 <LoadingSpinner />
+             }
         </div>
     )
 }

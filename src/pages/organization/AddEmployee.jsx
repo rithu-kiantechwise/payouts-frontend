@@ -35,6 +35,26 @@ const AddEmployee = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
+            if (!employeeData.employeeID || !employeeData.firstName || !employeeData.lastName || !employeeData.email || !employeeData.password || !employeeData.position || !employeeData.phoneNumber || !employeeData.dob || !employeeData.salary) {
+                toast.error('All fields are required');
+                return;
+            }
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(employeeData.email)) {
+                toast.error('Invalid email format');
+                return;
+            }
+            const phoneRegex = /^\d{10}$/;
+            if (!phoneRegex.test(employeeData.phoneNumber)) {
+                toast.error('Invalid phone number format (10 digits only)');
+                return;
+            }
+            const salary = parseFloat(employeeData.salary);
+            if (isNaN(salary) || salary <= 0) {
+                toast.error('Invalid salary value. Please enter a positive number');
+                return;
+            }
+
             setLoading(true)
             const response = await employeeRegister(employeeData)
             setLoading(false)
@@ -61,8 +81,7 @@ const AddEmployee = () => {
 
     return (
         <div className='flex min-h-[100vh]'>
-        <Sidebar />
-        <>
+            <Sidebar />
             {!loading
                 ?
                 <div className='mx-auto p-8'>
@@ -244,8 +263,7 @@ const AddEmployee = () => {
                 :
                 <LoadingSpinner />
             }
-        </>
-</div>
+        </div>
     )
 }
 

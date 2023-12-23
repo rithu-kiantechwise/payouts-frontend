@@ -3,10 +3,12 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { getEmployeeById, updateSelectedEmployeesTaxes } from '../../api/OrganizationApi';
 import Sidebar from '../../components/organization/orgDashboard/Sidebar';
 import toast from 'react-hot-toast';
+import LoadingSpinner from '../../components/LoadingSpinner';
 
 const EditTax = () => {
     const navigate = useNavigate();
     const location = useLocation();
+    const [loading, setLoading] = useState(false);
     const [employeeData, setEmployeeData] = useState({
         employeeID: '',
         firstName: '',
@@ -25,7 +27,9 @@ const EditTax = () => {
 
     const fetchEmployeeDetails = async (employeeID) => {
         try {
+            setLoading(true);
             const response = await getEmployeeById(employeeID);
+            setLoading(false);
             setEmployeeData(response.data)
         } catch (error) {
             console.log('employee fetch error:', error);
@@ -47,7 +51,11 @@ const EditTax = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
+            setLoading(true);
+
             const response = await updateSelectedEmployeesTaxes(employeeData)
+            setLoading(false);
+
             if (response.data.success) {
                 toast.success(response.data.message)
                 navigate('/organization/employee-tax');
@@ -61,6 +69,8 @@ const EditTax = () => {
     return (
         <div className='flex min-h-[100vh]'>
             <Sidebar />
+            {!loading
+                ?
             <div className='mx-auto p-8'>
                 <form onSubmit={handleSubmit}>
                     <div className="border-b border-gray-900/10 pb-10">
@@ -219,6 +229,9 @@ const EditTax = () => {
                     </div>
                 </form>
             </div>
+               :
+               <LoadingSpinner />
+           }
         </div>
     )
 }

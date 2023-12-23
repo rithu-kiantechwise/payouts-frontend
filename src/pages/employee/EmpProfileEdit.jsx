@@ -6,10 +6,13 @@ import { editEmpProfile } from '../../api/EmployeeApi';
 import noProfile from '../../assets/noprofile.jpg'
 import Sidebar from '../../components/employee/empDashboard/Sidebar';
 import { loginUser } from '../../redux/userSlice';
+import LoadingSpinner from '../../components/LoadingSpinner';
 
 const EmpProfileEdit = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
+    const [loading, setLoading] = useState(false);
+
     const user = useSelector((state) => state.user.user);
     const [employeeData, setEmployeeData] = useState({
         employeeID: '',
@@ -86,8 +89,11 @@ const EmpProfileEdit = () => {
             formData.append('position', employeeData.position);
             formData.append('phoneNumber', employeeData.phoneNumber);
             formData.append('image', employeeData.selectedImageFile);
+            setLoading(true)
 
             const response = await editEmpProfile(formData)
+            setLoading(false)
+
             if (response.data.success) {
                 toast.success(response.data.message)
                 dispatch(loginUser(response.data.employeeDetail));
@@ -102,6 +108,8 @@ const EmpProfileEdit = () => {
     return (
         <div className='flex min-h-[100vh]'>
             <Sidebar />
+            {!loading
+                ?
             <div className='mx-auto p-8'>
                 <form onSubmit={handleSubmit}>
                     <div className='flex flex-col items-center mt-6 mx-2'>
@@ -275,6 +283,9 @@ const EmpProfileEdit = () => {
                     </div>
                 </form>
             </div>
+                :
+                <LoadingSpinner />
+            }
         </div>
     )
 }

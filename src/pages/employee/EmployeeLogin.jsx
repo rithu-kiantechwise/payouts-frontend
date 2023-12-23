@@ -5,11 +5,14 @@ import toast from 'react-hot-toast'
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { loginUser } from '../../redux/userSlice';
+import LoadingSpinner from '../../components/LoadingSpinner';
 
 const EmployeeLogin = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const [error, setError] = useState('');
+    const [loading, setLoading] = useState(false);
+
     const [loginData, setLoginData] = useState({
         email: '',
         password: '',
@@ -30,7 +33,28 @@ const EmployeeLogin = () => {
     const handleLogin = async (e) => {
         e.preventDefault();
         try {
+            if (!loginData.email || !loginData.password) {
+                setError('Email and password are required');
+                return;
+            }
+    
+            // Validation for a valid email format
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(loginData.email)) {
+                setError('Invalid email format');
+                return;
+            }
+    
+            // Validation for a minimum password length
+            if (loginData.password.length < 6) {
+                setError('Password must be at least 6 characters long');
+                return;
+            }
+            setLoading(true)
+
             const response = await employeeLogin(loginData)
+            setLoading(false)
+
             if (response.data.success) {
                 toast.success(response.data.message)
                 localStorage.setItem('employeeToken', response.data.accessToken)
@@ -48,6 +72,9 @@ const EmployeeLogin = () => {
     };
 
     return (
+        <>
+         {!loading
+                ?
         <div className='h-screen'>
             <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
                 <div className="sm:mx-auto sm:w-full sm:max-w-sm">
@@ -101,7 +128,7 @@ const EmployeeLogin = () => {
                             </div>
                         </div>
                         <div>
-                            {error && <p className='text-red-500'>{error}</p>}
+                            {error && <p className='text-red-500 text-sm'>{error}</p>}
                         </div>
 
                         <div>
@@ -130,6 +157,10 @@ const EmployeeLogin = () => {
                 </div>
             </div>
         </div>
+            :
+            <LoadingSpinner />
+        }
+        </>
     )
 }
 

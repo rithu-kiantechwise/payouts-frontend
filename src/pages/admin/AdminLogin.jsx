@@ -30,6 +30,24 @@ const AdminLogin = () => {
     const handleLogin = async (e) => {
         e.preventDefault();
         try {
+            if (!loginData.email || !loginData.password) {
+                setError("Please fill in all fields");
+                return;
+            }
+
+            // Email format validation
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(loginData.email)) {
+                setError("Please enter a valid email address");
+                return;
+            }
+
+            // Password length validation
+            if (loginData.password.length < 8) {
+                setError("Password must be at least 8 characters long");
+                return;
+            }
+
             const response = await adminLogin(loginData)
             console.log(response);
             if (response.data.success) {
@@ -47,8 +65,8 @@ const AdminLogin = () => {
             setError('Invalid email or password');
         }
     };
-  return (
-    <div className='h-screen'>
+    return (
+        <div className='h-screen'>
             <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
                 <div className="sm:mx-auto sm:w-full sm:max-w-sm">
                     <img
@@ -101,9 +119,8 @@ const AdminLogin = () => {
                             </div>
                         </div>
                         <div>
-                            {error && <p className='text-red-500'>{error}</p>}
+                            {error && <p className='text-red-500 text-sm'>{error}</p>}
                         </div>
-
                         <div>
                             <button
                                 type="submit"
@@ -114,23 +131,16 @@ const AdminLogin = () => {
                         </div>
                         <div className="text-sm text-center">
                             <button
-                                onClick={() => navigate('/employee/forgot-password')}
+                                onClick={() => navigate('/admin/forgot-password')}
                                 className="font-semibold text-indigo-600 hover:text-indigo-500">
                                 Forgot password?
                             </button>
                         </div>
                     </form>
-
-                    {/* <p className="mt-10 text-center text-sm text-gray-500">
-            Not a member?{' '}
-            <a href="#s" className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">
-              Start a 14 day free trial
-            </a>
-          </p> */}
                 </div>
             </div>
         </div>
-  )
+    )
 }
 
 export default AdminLogin;

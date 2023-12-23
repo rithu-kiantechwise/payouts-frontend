@@ -87,7 +87,6 @@ const LoadingSpinner = () => {
                 </svg>
             </div>
         </div>
-
     )
 };
 

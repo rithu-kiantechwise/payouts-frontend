@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { getAttendanceDetails } from '../../../api/EmployeeApi';
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/20/solid';
+import LoadingSpinner from '../../LoadingSpinner';
 
 const calculateHoursWorked = (checkInTime, checkOutTime) => {
     const diffInMilliseconds = new Date(checkOutTime) - new Date(checkInTime);
@@ -12,10 +13,16 @@ const AttendanceDetails = () => {
     const [attendanceDetails, setAttendanceDetails] = useState(null);
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPages, setTotalPages] = useState(1);
+    const [loading, setLoading] = useState(false);
+
     useEffect(() => {
         const fetchSalaryDetails = async () => {
             try {
+            setLoading(true)
+
                 const response = await getAttendanceDetails({ page: currentPage });
+            setLoading(false)
+
                 setAttendanceDetails(response.data.attendanceDetails);
                 setTotalPages(response.data?.totalPages);
             } catch (error) {
@@ -30,6 +37,9 @@ const AttendanceDetails = () => {
     };
 
     return (
+        <>
+         {!loading
+                ?
         <div className='p-2'>
             <h2 className='text-2xl font-semibold p-5'>Attendance Details</h2>
             <table className="min-w-full border-gray-300 text-center items-center border rounded-md mt-5">
@@ -107,6 +117,10 @@ const AttendanceDetails = () => {
                 </div>
             </div>
         </div>
+            :
+            <LoadingSpinner />
+        }
+        </>
     )
 }
 

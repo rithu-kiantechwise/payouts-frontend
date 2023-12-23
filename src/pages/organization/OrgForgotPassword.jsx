@@ -3,6 +3,7 @@ import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 import kianPayoutsLogo from '../../assets/payoutsLogo.png'
 import { orgForgotPassword, orgResetPassword } from '../../api/OrganizationApi';
+import LoadingSpinner from '../../components/LoadingSpinner';
 
 const OrgForgotPassword = () => {
     const navigate = useNavigate();
@@ -14,6 +15,8 @@ const OrgForgotPassword = () => {
     const [newOtp, setNewOtp] = useState('');
     const [step, setStep] = useState(1);
     const [error, setError] = useState('');
+    const [loading, setLoading] = useState(false);
+
 
     const handleChange = (e) => {
         try {
@@ -29,7 +32,10 @@ const OrgForgotPassword = () => {
     const handleForgotPassword = async (e) => {
         e.preventDefault();
         try {
+            setLoading(true)
             const response = await orgForgotPassword(data)
+            setLoading(false)
+
             if (response.data.success) {
                 console.log(response.data);
                 setNewOtp(response.data.otp)
@@ -65,7 +71,11 @@ const OrgForgotPassword = () => {
     const handleResetPassword = async (e) => {
         e.preventDefault();
         try {
+            setLoading(true)
+
             const response = await orgResetPassword(data)
+            setLoading(false)
+
             if (response.status === 200) {
                 toast.success(response.data.message)
                 navigate('/organization/login')
@@ -78,6 +88,9 @@ const OrgForgotPassword = () => {
         }
     }
     return (
+        <>
+        {!loading
+            ?
         <div className="mx-auto bg-gray-200">
             <div className='grid grid-cols-1 place-items-center h-screen'>
                 <div className='p-10 bg-white min-w-[30%] shadow-xl'>
@@ -153,6 +166,10 @@ const OrgForgotPassword = () => {
                 </div>
             </div>
         </div>
+        :
+        <LoadingSpinner />
+    }
+    </>
     )
 }
 

@@ -8,12 +8,14 @@ import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/20/solid';
 import { CSVLink } from 'react-csv';
 import { Document, Page, Text, View, StyleSheet } from '@react-pdf/renderer';
 import * as XLSX from 'xlsx';
+import LoadingSpinner from '../../components/LoadingSpinner';
 
 const Taxation = () => {
     const navigate = useNavigate();
     const [employeeData, setEmployeeData] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPages, setTotalPages] = useState(1);
+    const [loading, setLoading] = useState(false);
     const [formData, setFormData] = useState({
         pf: 0,
         esi: 0,
@@ -27,7 +29,9 @@ const Taxation = () => {
     }, [])
     const fetchEmployees = async () => {
         try {
+            setLoading(true)
             const response = await getAllEmployees({ page: currentPage });
+            setLoading(false)
             setEmployeeData(response.data?.employees);
             setTotalPages(response.data?.totalPages);   
         } catch (error) {
@@ -160,7 +164,9 @@ const Taxation = () => {
         }
 
         try {
+            setLoading(true)
             const response = await updateAllEmployeesTaxes(formData)
+            setLoading(false)
             if (response.data.success) {
                 toast.success(response.data.message)
                 setFormData({
@@ -182,6 +188,8 @@ const Taxation = () => {
     return (
         <div className='flex min-h-[100vh]'>
             <Sidebar />
+            {!loading
+                ?
             <div className='min-w-[80%] mx-auto p-8'>
                 <div>
                     <h2 className='text-2xl font-semibold'>Apply tax</h2>
@@ -347,6 +355,9 @@ const Taxation = () => {
                     </div>
                 </div>
             </div>
+                 :
+                 <LoadingSpinner />
+             }
         </div>
     )
 }

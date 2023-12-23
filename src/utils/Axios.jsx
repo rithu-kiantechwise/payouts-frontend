@@ -28,15 +28,21 @@ const createAxiosInstance = (baseURL, tokenKey) => {
                                 headers: { authorization: `Bearer ${refreshToken}` },
                             }
                         );
-
                         const newToken = response.data.newAccessToken;
                         localStorage.setItem(tokenKey, newToken);
 
                         originalRequest.headers.Authorization = 'Bearer ' + newToken;
                         return axios(originalRequest);
                     } catch (refreshError) {
-                        localStorage.clear()
-                        toast.error('Please signin again')
+                         if (refreshError.response && refreshError.response.status === 401) {
+                            // Unauthorized, clear authentication-related items
+                            localStorage.removeItem(tokenKey);
+                            localStorage.removeItem("refreshToken");
+                            toast.error('Session expired. Please signin again');
+                        } else {
+                            // Other refresh errors
+                            toast.error('Failed to refresh token. Please signin again');
+                        }
                     }
                 } else {
                     // window.location.href = '/login';
@@ -48,37 +54,6 @@ const createAxiosInstance = (baseURL, tokenKey) => {
     return api;
 };
 
-export const adminApi = createAxiosInstance("http://localhost:8000/admin", "adminToken");
-export const organizationApi = createAxiosInstance("http://localhost:8000/organization", "organizationToken");
-export const employeeApi = createAxiosInstance("http://localhost:8000/employee", "employeeToken");
-
-
-// export const adminApi = axios.create({
-//     baseURL: `http://localhost:8000/admin`,
-// });
-// adminApi.interceptors.request.use((req) => {
-//     if (localStorage.getItem("adminToken")) {
-//         req.headers.Authorization = "Bearer " + localStorage.getItem("adminToken");
-//     }
-//     return req;
-// });
-
-// export const organizationApi = axios.create({
-//     baseURL: `http://localhost:8000/organization`,
-// });
-// organizationApi.interceptors.request.use((req) => {
-//     if (localStorage.getItem("organizationToken")) {
-//         req.headers.Authorization = "Bearer " + localStorage.getItem("organizationToken");
-//     }
-//     return req;
-// });
-
-// export const employeeApi = axios.create({
-//     baseURL: `http://localhost:8000/employee`,
-// });
-// employeeApi.interceptors.request.use((req) => {
-//     if (localStorage.getItem("employeeToken")) {
-//         req.headers.Authorization = "Bearer " + localStorage.getItem("employeeToken");
-//     }
-//     return req;
-// });
+export const adminApi = createAxiosInstance(`${process.env.REACT_APP_API_URL}/admin`, "adminToken");
+export const organizationApi = createAxiosInstance(`${process.env.REACT_APP_API_URL}/organization`, "organizationToken");
+export const employeeApi = createAxiosInstance(`${process.env.REACT_APP_API_URL}/employee`, "employeeToken");

@@ -7,17 +7,21 @@ import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/20/solid';
 import { CSVLink } from 'react-csv';
 import { Document, Page, Text, View, StyleSheet } from '@react-pdf/renderer';
 import * as XLSX from 'xlsx';
+import LoadingSpinner from '../../LoadingSpinner';
 
 const ReimbursementTable = () => {
     const [reimbursements, setReimbursements] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPages, setTotalPages] = useState(1);
-
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
         const fetchReimbursement = async () => {
             try {
+                setLoading(true)
                 const response = await getReimbursement({ page: currentPage });
+                setLoading(false)
+
                 setReimbursements(response.data?.reimbursement);
                 setTotalPages(response.data?.totalPages);
 
@@ -37,7 +41,11 @@ const ReimbursementTable = () => {
                 toast.error('Cannot update status. Status is already Approved or Rejected.')
                 return;
             }
+            setLoading(true)
+
             await updateReimbursementStatus({ reimbursementId, newStatus });
+            setLoading(false)
+
             setReimbursements((prevReimbursements) =>
                 prevReimbursements.map((reimbursement) =>
                     reimbursement._id === reimbursementId
@@ -149,6 +157,9 @@ const ReimbursementTable = () => {
     };
 
     return (
+        <>
+        {!loading
+            ?
         <div className=''>
             <h1 className='text-2xl font-semibold mb-5'>Reimbursement Claims</h1>
             <div className='flex justify-end'>
@@ -233,6 +244,10 @@ const ReimbursementTable = () => {
                 </div>
             </div>
         </div>
+                :
+                <LoadingSpinner />
+            }
+        </>
     )
 };
 const getStatusColor = (status) => {

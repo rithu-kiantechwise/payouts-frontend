@@ -1,16 +1,21 @@
 import React, { useEffect, useState } from 'react'
 import { getSalaryDetails } from '../../../api/EmployeeApi';
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/20/solid';
+import LoadingSpinner from '../../LoadingSpinner';
 
 const MonthlySalaryDetails = () => {
     const [salaryDetails, setSalaryDetails] = useState(null);
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPages, setTotalPages] = useState(1);
+    const [loading, setLoading] = useState(false);
+
 
     useEffect(() => {
         const fetchSalaryDetails = async () => {
             try {
+                setLoading(true)
                 const response = await getSalaryDetails({ page: currentPage });
+                setLoading(false)
                 setSalaryDetails(response.data.salaryDetailsByMonth);
                 setTotalPages(response.data?.totalPages);
 
@@ -26,6 +31,9 @@ const MonthlySalaryDetails = () => {
     };
 
     return (
+        <>
+         {!loading
+                ?
         <div className='p-2'>
             <h2 className='text-2xl font-semibold p-5'>Monthly Salary Details</h2>
             <table className="min-w-full border-gray-300 text-center items-center border rounded-md mt-5">
@@ -113,6 +121,10 @@ const MonthlySalaryDetails = () => {
                 </div>
             </div>
         </div>
+            :
+            <LoadingSpinner />
+        }
+        </>
     )
 }
 

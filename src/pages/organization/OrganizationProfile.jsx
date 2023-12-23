@@ -10,7 +10,7 @@ const OrganizationProfile = () => {
 
   return (
     <div className='flex min-h-[100vh]'>
-    <Sidebar />
+      <Sidebar />
       <div className='mx-auto p-8'>
         <div className='flex flex-col items-center mt-6 mx-2'>
           <label htmlFor="profile">

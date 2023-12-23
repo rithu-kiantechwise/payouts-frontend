@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
 import { applyLeave } from '../../../api/EmployeeApi';
 import toast from 'react-hot-toast';
+import LoadingSpinner from '../../LoadingSpinner';
 
 const LeaveForm = ({ onLeaveSet }) => {
+    const [loading, setLoading] = useState(false);
+
     const [formData, setFormData] = useState({
         employeeId: '',
         startDate: '',
@@ -23,7 +26,11 @@ const LeaveForm = ({ onLeaveSet }) => {
         e.preventDefault();
 
         try {
-            const response = await applyLeave(formData);      
+            setLoading(true)
+
+            const response = await applyLeave(formData);   
+            setLoading(false)
+
             if (response.data?.success) {
                 const newLeave = response.data?.leave;
                 toast.success(response.data.message)
@@ -45,6 +52,9 @@ const LeaveForm = ({ onLeaveSet }) => {
     };
 
     return (
+        <>
+        {!loading
+            ?
         <form onSubmit={handleSubmit}>
             <div className="mt-5 max-w-[40%] grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
                 <div className="sm:col-span-6">
@@ -104,6 +114,10 @@ const LeaveForm = ({ onLeaveSet }) => {
                 </button>
             </div>
         </form>
+            :
+            <LoadingSpinner />
+        }
+        </>
     );
 };
 

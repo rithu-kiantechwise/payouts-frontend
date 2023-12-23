@@ -27,7 +27,7 @@ const Sidebar = () => {
                     <img className="w-auto h-6 sm:h-7" src={payoutsLogo} alt="" />
                 </a>
 
-                <Link to={'/admin/admin-profile'} className='flex flex-col items-center mt-6 -mx-2'>
+                <Link className='flex flex-col items-center mt-6 -mx-2'>
                     {
                         user?.imageUrl
                             ?

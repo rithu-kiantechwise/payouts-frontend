@@ -5,11 +5,14 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { deleteEmployee, getEmployeeById } from '../../api/OrganizationApi';
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
+import LoadingSpinner from '../../components/LoadingSpinner';
 const MySwal = withReactContent(Swal);
 
 const SingleEmployeePage = () => {
   const location = useLocation();
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
+
   const [employeeData, setEmployeeData] = useState({
     employeeID: '',
     firstName: '',
@@ -28,7 +31,9 @@ const SingleEmployeePage = () => {
 
   const fetchEmployeeDetails = async (employeeID) => {
     try {
+      setLoading(true)
       const response = await getEmployeeById(employeeID);
+      setLoading(false)
       const formattedDob = new Date(response.data.dob).toLocaleDateString('en-CA', {
         year: 'numeric',
         month: '2-digit',
@@ -61,7 +66,9 @@ const SingleEmployeePage = () => {
             allowOutsideClick: false,
             showConfirmButton: false,
           });
+          setLoading(true)
           const response = await deleteEmployee(employeeData._id);
+          setLoading(false)
           MySwal.fire({
             title: "Deleted!",
             text: response.data.message,
@@ -85,6 +92,8 @@ const SingleEmployeePage = () => {
   return (
     <div className='flex min-h-[100vh]'>
       <Sidebar />
+      {!loading
+                ?
       <div className='mx-auto p-8'>
         <div className='flex flex-col items-center mt-6 mx-2'>
           <label htmlFor="profile">
@@ -250,6 +259,9 @@ const SingleEmployeePage = () => {
           </button>
         </div>
       </div>
+           :
+           <LoadingSpinner />
+       }
     </div>
   )
 }

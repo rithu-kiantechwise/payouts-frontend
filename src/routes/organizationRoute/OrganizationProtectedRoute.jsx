@@ -1,42 +1,24 @@
 import React from 'react'
 import { useSelector } from 'react-redux';
-import { Navigate, Outlet, useNavigate } from 'react-router-dom';
-import Swal from 'sweetalert2';
-import withReactContent from 'sweetalert2-react-content';
-const MySwal = withReactContent(Swal);
+import { Navigate, Outlet } from 'react-router-dom';
 
 const OrganizationProtectedRoute = () => {
-    const navigate = useNavigate();
     const token = localStorage.getItem("organizationToken");
-    const user = useSelector((state) => state.user.user);
-    console.log(user, 'qwerty');
-    if (user?.freeTrail?.endDate > new Date()) {
-        MySwal.fire({
-            title: "Are you sure?",
-            text: "You won't be able to revert this!",
-            icon: "warning",
-            showCancelButton: true,
-            confirmButtonColor: "#3085d6",
-            cancelButtonColor: "#d33",
-            confirmButtonText: "Yes, delete it!",
-        }).then(async (result) => {
-            if (result.isConfirmed) {
-                MySwal.fire({
-                    title: "Deleting...",
-                    icon: "info",
-                    allowOutsideClick: false,
-                    showConfirmButton: false,
-                });
-                MySwal.fire({
-                    title: "Deleted!",
-                    // text: response.data.message,
-                    icon: "success",
-                });
-                navigate('/organization/login');
-            } else {
-                navigate('/organization/register')
-            }
-        });
+    const user = useSelector((state) => state.user?.user);
+
+    if (user) {
+        const premiumEndDate = user?.premium?.subscriptionEndDate
+        const premiumDateCheck = new Date(premiumEndDate) > new Date();
+
+        const freeTrialEndDate = user?.freeTrial?.endDate
+        const freeTrialDateCheck = new Date(freeTrialEndDate) > new Date();
+
+        if ((user.premium.isActive && premiumDateCheck) || (user.freeTrial.isActive && freeTrialDateCheck)) {
+            return <Outlet />;
+        }
+        else {
+            <Navigate to={"/organization/payment"} />
+        }
     }
 
     return token ? (
@@ -44,6 +26,7 @@ const OrganizationProtectedRoute = () => {
     ) : (
         <Navigate to={"/organization/login"} />
     );
+
 };
 
 export default OrganizationProtectedRoute;

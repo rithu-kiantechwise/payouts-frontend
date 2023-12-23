@@ -1,8 +1,9 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 import LoadingSpinner from '../../components/LoadingSpinner';
 import { useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
 import Sidebar from '../../components/admin/adminDashboard/Sidebar';
+import { organizationRegisterByAdmin } from '../../api/AdminApi';
 
 const AddOrganization = () => {
     const navigate = useNavigate();
@@ -13,8 +14,8 @@ const AddOrganization = () => {
         password: '',
         phoneNumber: '',
         location: '',
+        accountType: '',
     });
-
     const handleChange = (e) => {
         try {
             const { name, value } = e.target;
@@ -30,25 +31,22 @@ const AddOrganization = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            // setLoading(true)
-            // const response = await employeeRegister(organizationData)
-            // setLoading(false)
-            // if (response.data.success) {
-            //     toast.success(response.data.message)
-            // } else {
-            //     toast.error(response.data.message)
-            // }
-            // setOrganizationData({
-            //     employeeID: '',
-            //     firstName: '',
-            //     lastName: '',
-            //     email: '',
-            //     password: '',
-            //     phoneNumber: '',
-            //     dob: '',
-            //     salary: '',
-            //     position: '',
-            // });
+            setLoading(true)
+            const response = await organizationRegisterByAdmin(organizationData)
+            setLoading(false)
+            if (response.data.success) {
+                toast.success(response.data.message)
+            } else {
+                toast.error(response.data.message)
+            }
+            setOrganizationData({
+                name: '',
+                email: '',
+                password: '',
+                phoneNumber: '',
+                location: '',
+                accountType: '',
+            });
         } catch (error) {
             toast.error('Something went wrong please try again')
         }
@@ -66,49 +64,16 @@ const AddOrganization = () => {
                                 <h2 className="text-base font-semibold leading-7 text-gray-900">Add New Organization</h2>
                                 <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
                                     <div className="sm:col-span-4">
-                                        <label htmlFor="employeeID" className="block text-sm font-medium leading-6 text-gray-900">
-                                            Employee ID
+                                        <label htmlFor="name" className="block text-sm font-medium leading-6 text-gray-900">
+                                            Company Name
                                         </label>
                                         <div className="mt-2">
                                             <input
                                                 type="text"
-                                                name="employeeID"
-                                                id="employeeID"
+                                                name="name"
+                                                id="name"
                                                 required
-                                                value={organizationData.employeeID}
-                                                onChange={handleChange}
-                                                className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                                            />
-                                        </div>
-                                    </div>
-                                    <div className="sm:col-span-3">
-                                        <label htmlFor="firstName" className="block text-sm font-medium leading-6 text-gray-900">
-                                            First name
-                                        </label>
-                                        <div className="mt-2">
-                                            <input
-                                                type="text"
-                                                name="firstName"
-                                                id="firstName"
-                                                required
-                                                value={organizationData.firstName}
-                                                onChange={handleChange}
-                                                className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                                            />
-                                        </div>
-                                    </div>
-
-                                    <div className="sm:col-span-3">
-                                        <label htmlFor="lastName" className="block text-sm font-medium leading-6 text-gray-900">
-                                            Last name
-                                        </label>
-                                        <div className="mt-2">
-                                            <input
-                                                type="text"
-                                                name="lastName"
-                                                id="lastName"
-                                                required
-                                                value={organizationData.lastName}
+                                                value={organizationData.name}
                                                 onChange={handleChange}
                                                 className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                                             />
@@ -150,30 +115,13 @@ const AddOrganization = () => {
                                         </div>
                                     </div>
 
-                                    <div className="sm:col-span-4">
-                                        <label htmlFor="position" className="block text-sm font-medium leading-6 text-gray-900">
-                                            Position
-                                        </label>
-                                        <div className="mt-2">
-                                            <input
-                                                type="text"
-                                                id="position"
-                                                name="position"
-                                                required
-                                                value={organizationData.position}
-                                                onChange={handleChange}
-                                                className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                                            />
-                                        </div>
-                                    </div>
-
                                     <div className="sm:col-span-2 sm:col-start-1">
                                         <label htmlFor="phoneNumber" className="block text-sm font-medium leading-6 text-gray-900">
                                             Phone number
                                         </label>
                                         <div className="mt-2">
                                             <input
-                                                type="text"
+                                                type="number"
                                                 name="phoneNumber"
                                                 id="phoneNumber"
                                                 required
@@ -185,37 +133,38 @@ const AddOrganization = () => {
                                     </div>
 
                                     <div className="sm:col-span-2">
-                                        <label htmlFor="dob" className="block text-sm font-medium leading-6 text-gray-900">
-                                            DOB
+                                        <label htmlFor="location" className="block text-sm font-medium leading-6 text-gray-900">
+                                            Location
                                         </label>
                                         <div className="mt-2">
                                             <input
-                                                type="date"
-                                                name="dob"
-                                                id="dob"
+                                                type="text"
+                                                name="location"
+                                                id="location"
                                                 required
-                                                value={organizationData.dob}
+                                                value={organizationData.location}
                                                 onChange={handleChange}
-                                                max={new Date().toISOString().split('T')[0]}
                                                 className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                                             />
                                         </div>
                                     </div>
 
                                     <div className="sm:col-span-2">
-                                        <label htmlFor="salary" className="block text-sm font-medium leading-6 text-gray-900">
-                                            Salary
+                                        <label htmlFor="accountType" className="block text-sm font-medium leading-6 text-gray-900">
+                                            Account type
                                         </label>
                                         <div className="mt-2">
-                                            <input
-                                                type="text"
-                                                name="salary"
-                                                id="salary"
-                                                required
-                                                value={organizationData.salary}
+                                            <select
+                                                name="accountType"
+                                                id="accountType"
                                                 onChange={handleChange}
+                                                value={organizationData.accountType}
                                                 className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                                            />
+                                            >
+                                                <option disabled value=""></option>
+                                                <option value="freeTrial">Free Trial</option>
+                                                <option value="premium">Premium</option>
+                                            </select>
                                         </div>
                                     </div>
                                 </div>
@@ -223,7 +172,7 @@ const AddOrganization = () => {
                             <div className="mt-6 flex items-center justify-end gap-x-6">
                                 <button
                                     type="button"
-                                    onClick={() => navigate('/organization/employee-details')}
+                                    onClick={() => navigate('/admin/organization-details')}
                                     className="text-sm font-semibold leading-6 text-gray-900">
                                     Cancel
                                 </button>

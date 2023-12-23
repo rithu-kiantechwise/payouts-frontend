@@ -3,7 +3,7 @@ import { organizationApi } from "../utils/Axios";
 export const organizationLogin = async (credentials) => {
     try {
         const response = await organizationApi.post('/organization-login', credentials, { withCredentials: true })
-
+        
         return response;
     } catch (error) {
         console.error('Error during organization login:', error);

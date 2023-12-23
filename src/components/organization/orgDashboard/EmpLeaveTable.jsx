@@ -7,16 +7,21 @@ import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/20/solid';
 import { CSVLink } from 'react-csv';
 import { Document, Page, Text, View, StyleSheet } from '@react-pdf/renderer';
 import * as XLSX from 'xlsx';
+import LoadingSpinner from '../../LoadingSpinner';
 
 const EmpLeaveTable = () => {
     const [leaveDetails, setLeaveDetails] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPages, setTotalPages] = useState(1);
+    const [loading, setLoading] = useState(false);
+
 
     useEffect(() => {
         const fetchAllEmployeesLeaveDetails = async () => {
             try {
+                setLoading(true)
                 const response = await getLeaveDetails({ page: currentPage });
+                setLoading(false)
                 if (response.data.success) {
                     setLeaveDetails(response.data?.employeeAndLeaveDetails);
                     setTotalPages(response.data?.totalPages);
@@ -160,6 +165,9 @@ const EmpLeaveTable = () => {
         setCurrentPage(newPage);
     };
     return (
+        <>
+        {!loading
+            ?
         <div className='mt-10'>
             <h1 className='text-2xl font-semibold mb-5'>Employee Leaves</h1>
             <div className='flex justify-end'>
@@ -244,6 +252,10 @@ const EmpLeaveTable = () => {
                 </div>
             </div>
         </div>
+                :
+                <LoadingSpinner />
+            }
+        </>
     )
 }
 

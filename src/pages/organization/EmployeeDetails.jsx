@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { getAllEmployees } from '../../api/OrganizationApi';
 import Sidebar from '../../components/organization/orgDashboard/Sidebar';
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/20/solid'
+import LoadingSpinner from '../../components/LoadingSpinner';
 
 
 const EmployeeDetails = () => {
@@ -10,11 +11,14 @@ const EmployeeDetails = () => {
     const [employeeData, setEmployeeData] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPages, setTotalPages] = useState(1);
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
         const fetchEmployees = async () => {
             try {
+                setLoading(true);
                 const response = await getAllEmployees({ page: currentPage });
+                setLoading(false)
                 setEmployeeData(response.data?.employees);
                 setTotalPages(response.data?.totalPages);
             } catch (error) {
@@ -39,6 +43,8 @@ const EmployeeDetails = () => {
     return (
         <div className='flex min-h-[100vh]'>
             <Sidebar />
+            {!loading
+                ?
             <div className='mx-auto min-w-[70%] p-8'>
                 <div className='mt-5'>
                     <div className='flex justify-between'>
@@ -120,6 +126,9 @@ const EmployeeDetails = () => {
                     </div>
                 </div>
             </div>
+               :
+               <LoadingSpinner />
+           }
         </div>
     )
 }
