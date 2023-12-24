@@ -4,15 +4,15 @@ import BankIcon from '../../../assets/payoutsLogo.png'
 const TrustedBanking = () => {
     return (
         <div className='mt-10'>
-            <h2 className='text-3xl font-bold text-center mt-10'>Trusted partnerships for your payouts banking needs</h2>
+            <h2 className='text-3xl font-bold text-center mt-10'>Auto integrations for your HR and accounting needs in Payouts</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 max-w-[80%] mt-10 md:mt-16 m-auto">
                 {features.map((feature, index) => (
                     <div key={index} className=" flex flex-col justify-around p-6 border rounded-md">
                         <div className='min-w-[18%]'>
                             <img src={feature.imageSrc} alt={feature.imageAlt} className="h-10 mb-4" />
                         </div>
+                        <p className='text-lg font-medium mt-3'>{feature.title}</p>
                         <p className='leading-8 mt-3'>{feature.description}</p>
-                        <button className='text-blue-500 font-bold mt-20'>{feature.button} &rarr;</button>
                     </div>
                 ))}
             </div>
@@ -24,23 +24,20 @@ const features = [
     {
         imageSrc: BankIcon,
         imageAlt: 'automaticCalculation',
-        title: 'Effortless data migration',
-        description: 'Bring all your existing data into payouts with minimum effort. Follow our pre-defined template to import salary or previous employment details, and eliminate duplicates and reduce manual work.',
-        button: 'Automate Salary Payments'
+        title: 'HR Management',
+        description: 'Take control of the complete employee journey with our cloud-based HRMS. Created for your needs, this user-friendly application helps you enrol staff, manage work hours, and tab their leave policies.',
     },
     {
         imageSrc: BankIcon,
         imageAlt: 'compensations',
-        title: 'Employee hikes, increments, and appraisals',
-        description: 'Attract and retain the right talent with the right rewards. Revise the CTC, and pick the date from which the hike in pay will be reflected on the payslips.',
-        button: 'Secure Salary Payments'
+        title: 'Taxation',
+        description: 'Find your way to a healthy tax-compliant business at the end of every month. Our cloud-based GST-compliant accounting application, records your payroll transactions automatically so you can say goodbye to the errors involved in manual data entries.',
     },
     {
         imageSrc: BankIcon,
         imageAlt: 'Salary',
-        title: 'Salary history and designation',
-        description: `Follow your employee's career progress by tracking their salary revision history and designation changes. Automatic updates in the self-service portal keeps employees informed too.`,
-        button: 'Make Salary Payments effortless'
+        title: 'Reimbursement',
+        description: `Pay business expense reimbursements along with salaries with this integration. Our expense management feature, makes it easy to streamline business travel, automate expense reporting, and work in unison with payroll operations.`,
     },
 ]
 

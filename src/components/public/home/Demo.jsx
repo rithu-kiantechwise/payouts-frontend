@@ -13,7 +13,7 @@ const Demo = () => {
         <div className='text-center max-w-[90%] lg:max-w-[80%] m-auto mt-10 lg:mt-20'>
             <div className='bg-violet-100 grid grid-cols-1 gap-2 p-8'>
                 <div className='grid grid-cols-1'>
-                    <h1 className='text-center text-4xl font-semibold col-span-4'>Cloud payroll system best suited for Indian businesses</h1>
+                    <h1 className='text-center text-4xl font-semibold col-span-4'>Say goodbye to manual complexities and embrace a hassle-free payroll experience.</h1>
                 </div>
                 <div className="grid grid-cols-1 lg:grid-cols-2 lg:max-w-[80%] mt-10 m-auto gap-4">
                     <button onClick={() => navigate('/organization/register')} className='uppercase p-4 rounded text-white font-bold bg-violet-500'>Access payouts</button>

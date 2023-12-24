@@ -5,8 +5,10 @@ import Complaint from '../../../assets/compliant.png'
 import Portal from '../../../assets/portal.png'
 import Salary from '../../../assets/salary.png'
 import Administrator from '../../../assets/administrator.png'
+import { useNavigate } from 'react-router-dom'
 
 const Experience = () => {
+    const navigate = useNavigate();
     return (
         <section className="mt-20">
             <div className="text-center">
@@ -22,7 +24,7 @@ const Experience = () => {
                 ))}
             </div>
             <div className="access-link mt-8 text-center">
-                <button className='text-blue-800 font-semibold'>Explore More Features</button>
+                <button onClick={() => navigate('/features')} className='text-blue-800 font-semibold'>Explore More Features</button>
             </div>
         </section>
     )
@@ -31,8 +33,8 @@ const features = [
     {
         imageSrc: Calculation,
         imageAlt: 'automaticCalculation',
-        title: 'Automatic payouts calculation',
-        description: 'Run payouts in a few clicks and automatically generate payslips online with a thorough breakdown of taxes, allowances, and deductions.',
+        title: 'Automatic payroll calculation',
+        description: 'Run payroll in a few clicks and automatically generate payslips online with a thorough breakdown of taxes, allowances, and deductions.',
     },
     {
         imageSrc: Hierarchy,
@@ -44,7 +46,7 @@ const features = [
         imageSrc: Salary,
         imageAlt: 'Salary',
         title: 'Pay employees on time, every time',
-        description: 'Transfer employees\' salaries directly to their bank accounts with timely online transfers and readily available bank advice.',
+        description: `Transfer employee's salaries directly to their bank accounts with timely online transfers and readily available bank advice.`,
     },
     {
         imageSrc: Complaint,
@@ -56,7 +58,7 @@ const features = [
         imageSrc: Portal,
         imageAlt: 'portal',
         title: 'Encourage employee self service',
-        description: 'Enable seamless collaboration between employees and your payouts staff and reduce the burden of employee requests.',
+        description: 'Enable seamless collaboration between employees and your payroll staff and reduce the burden of employee requests.',
     },
     {
         imageSrc: Administrator,

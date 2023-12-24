@@ -12,7 +12,7 @@ const Registration = () => {
   const [error, setError] = useState('');
   const [newOtp, setNewOtp] = useState('');
   const [loading, setLoading] = useState(false);
-  const [paymentButton, setPaymentButton] = useState(false);
+  const [isEmailVerified, setIsEmailVerified] = useState(false);
   const [signupData, setSignupData] = useState({
     name: '',
     email: '',
@@ -91,7 +91,7 @@ const Registration = () => {
       const newOtpString = String(newOtp);
       if (signupData?.otp === newOtpString) {
         toast.success('OTP verification succesful')
-        setPaymentButton(true);
+        setIsEmailVerified(true);
       }
       else {
         toast.error('Invalid OTP')
@@ -123,16 +123,16 @@ const Registration = () => {
         <div className='grid grid-cols-1 lg:grid-cols-2 lg:max-w-[80%] max-w-[90%] gap-10 mt-10 m-auto p-6'>
           <div className=''>
             <img src={PayoutsLogo} alt="Payouts" className='h-10' />
-            <h4 className='mt-6'> Payouts is online payouts software that helps businesses in India manage their payouts operations and pay employees on time.</h4>
-            <h2 className='mt-10'>We built  payouts so you can:</h2>
+            <h4 className='mt-6'> Payouts, an online payroll software, empowers businesses to efficiently manage payroll operations and ensure timely employee payments.</h4>
+            <h2 className='mt-10'>With Payouts, you can:</h2>
             <div className='leading-[2.5rem]'>
-              <p>&#9679; Streamline your payouts process end-to-end</p>
-              <p>&#9679; Define clear roles for your payouts staff</p>
-              <p>&#9679; Create salary components, allowances and more, the way you want</p>
-              <p>&#9679; Compute your employees' paycheck accurately every time</p>
-              <p>&#9679; Distribute salaries and payslips online</p>
-              <p>&#9679; Automatic payouts accounting with  Books</p>
-              <p>&#9679; Reduce payouts staff workload with collaborative self-service portal</p>
+              <p>&#9679; Seamlessly streamline your entire payroll process.</p>
+              <p>&#9679; Establish distinct roles for your payroll team.</p>
+              <p>&#9679; Customize salary components, allowances, and more to your preferences.</p>
+              <p>&#9679; Precisely calculate employee paychecks every time.</p>
+              <p>&#9679; Easily distribute salaries and digital payslips.</p>
+              <p>&#9679; Automate payroll accounting seamlessly through Payouts.</p>
+              <p>&#9679; Decrease payroll staff workload by utilizing the collaborative self-service portal.</p>
             </div>
           </div>
           <div className='text-center'>
@@ -210,8 +210,6 @@ const Registration = () => {
                     <div>
                       {error && <p className='text-red-500'>{error}</p>}
                     </div>
-
-                    <h6 className='text-sm mt-5'>Your data will be in INDIA data center.</h6>
                     <button
                       className='text-lg bg-violet-500 text-white uppercase rounded-3xl lg:px-20 px-10 py-2 mt-10'
                     >
@@ -245,15 +243,17 @@ const Registration = () => {
                         required
                         onChange={handleChange}
                         className='border-transparent px-8 py-2 min-w-[100%] my-1 border-0 outline-none focus:shadow-0 border-b border-b-gray-200  focus:border-b-blue-100 focus:border-b-2' />
+                      {!isEmailVerified &&
                       <button
-                        type='button'
-                        onClick={handleVerifyOTP}
-                        className='mt-3 text-md text-violet-800 font-medium hover:text-black'>
-                        Verify OTP
-                      </button>
+                      type='button'
+                      onClick={handleVerifyOTP}
+                      className='mt-3 text-md text-violet-800 font-medium hover:text-black'>
+                      Verify OTP
+                    </button>
+                      }
                     </div>
                     <button
-                      disabled={!paymentButton}
+                      disabled={!isEmailVerified}
                       className='text-lg bg-violet-500 text-white uppercase rounded-3xl lg:px-20 px-10 py-2 mt-10 mb-10'
                     >
                       Proceed to pay
@@ -261,7 +261,7 @@ const Registration = () => {
                   </form>}
               </div>
             </div>
-            <h2 className='mt-4'>Already have an account? <button className='text-blue-600 font-medium' onClick={() => navigate('/login')}>Sign in</button></h2>
+            <h2 className='mt-4'>Already have an account? <button className='text-blue-600 font-medium' onClick={() => navigate('/organization/login')}>Login</button></h2>
           </div>
         </div>
         :

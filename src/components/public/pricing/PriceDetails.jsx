@@ -29,13 +29,16 @@ const PriceDetails = () => {
                             </svg>
                         </div>
                         <button className='px-14 py-2 mt-10 border border-violet-800 bg-violet-200 text-violet-500 uppercase font-bold rounded'>Start Now</button>
-                        <h4 className='text-sm my-6'>No. of employees: <strong>Up to 10</strong></h4>
+                        <h4 className='text-sm my-6'>No. of employees: <strong>Minimum 20</strong></h4>
                     </div>
                     <div className='flex flex-col border-t items-start p-8 leading-[2rem] min-h-[100%]'>
-                        <h4>&#10003;&nbsp; Work locations: <strong>1</strong></h4>
-                        <h4>&#10003;&nbsp; Predefined alerts</h4>
-                        <h4>&#10003;&nbsp; Salary revision</h4>
-                        <h4>&#10003;&nbsp; Predefined user roles</h4>
+                        <h4>&#10003;&nbsp; Free trial for 14 days only.</h4>
+                        <h4>&#10003;&nbsp; Work locations: <strong>25</strong></h4>
+                        <h4>&#10003;&nbsp; Personalised alerts & reminders</h4>
+                        <h4>&#10003;&nbsp; Salary revision with approval</h4>
+                        <h4>&#10003;&nbsp; Custom user roles and permissions</h4>
+                        <h4>&#10003;&nbsp; Fast onboarding with salary templates</h4>
+                        <h4>&#10003;&nbsp; Custom data through custom fields</h4>
                         <div className='mt-10'>
                             <h2 className='font-bold'>Support</h2>
                             <h4>&#10003;&nbsp; Email</h4>
@@ -46,12 +49,12 @@ const PriceDetails = () => {
                     <div className='border-t-8 border-t-violet-500 p-5'>
                         <h1 className='text-lg font-bold uppercase mt-8'>P r e m i u m &nbsp; P l a n</h1>
                         <div className="lg:py-2 xl:py-6 ">
-                            <div className='mt-10'>
+                            <div className='mt-3'>
                                 <sup className="text-4xl font-medium">₹&nbsp;</sup>
                                 <span className="text-7xl font-extrabold">50</span>
                             </div>
-                            <p className="text-base mb-2">/employee/monthbilled annually</p>
-                            <h6 className='text-sm'><strong>₹60</strong> billed monthly</h6>
+                            <p className="text-base mb-2">(Per Employee / Monthly)</p>
+                            <h6 className='text-sm max-w-[80%] mx-auto'>Billed : 1 Month / 3 Months / 6 Months / 1 Year (Minimum 20 Employees)</h6>
                         </div>
                         <button className='px-14 py-2 bg-violet-500 text-white uppercase font-bold rounded mt-4'>Start Now</button>
                         <h4 className='text-sm my-6'>No. of employees: <strong>Minimum 20</strong></h4>
@@ -66,22 +69,8 @@ const PriceDetails = () => {
                         <div className='mt-10'>
                             <h2 className='font-bold'>Support</h2>
                             <h4>&#10003;&nbsp; Email</h4>
-                            <h4>&#10003;&nbsp; Voice</h4>
                         </div>
                     </div>
-                </div>
-                <div className='p-10 leading-[2rem] min-h-[100%] bg-violet-100'>
-                    <h2 className='text-lg pb-2 font-bold'>Common payouts Features</h2>
-                    <h4>&#10003;&nbsp; Automatic payouts calculation <br /> <span className='pl-4'>(Via ICICI, HSBC and YES Bank)</span></h4>
-                    <h4>&#10003;&nbsp; Income Tax, PF, LWF, PT and ESI</h4>
-                    <h4>&#10003;&nbsp; Detailed payouts reports</h4>
-                    <h4>&#10003;&nbsp; Employees loan management</h4>
-                </div>
-                <div className='flex flex-col justify-center items-start p-10 leading-[2rem] min-h-[100%] bg-violet-100'>
-                    <h4>&#10003;&nbsp; Payslips, Form 16 and TDS worksheets</h4>
-                    <h4>&#10003;&nbsp; Online IT declaration and proof collection</h4>
-                    <h4>&#10003;&nbsp; HR Integration - People</h4>
-                    <h4>&#10003;&nbsp; Accounting Integration - Books</h4>
                 </div>
             </div>
         </div>

@@ -2,7 +2,7 @@ import React from 'react'
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { openModal } from '../../../redux/modalSlice';
-import reportDashboardImage from '../../../assets/reportDashImg.png'
+import reportDashboardImage from '../../../assets/organization-employee-tax.png'
 import accuratetax from '../../../assets/accuratetax.png'
 import retirement from '../../../assets/retirement.png'
 import collecttax from '../../../assets/collecttax.png'

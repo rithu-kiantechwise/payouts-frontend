@@ -2,7 +2,7 @@ import React from 'react'
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { openModal } from '../../../redux/modalSlice';
-import EmployeeDashboardImage from '../../../assets/employeeDashImg.png'
+import EmployeeDashboardImage from '../../../assets/employee-dashboard.png'
 import migration from '../../../assets/migration.png'
 import trophy from '../../../assets/trophy.png'
 import salaryreimbursement from '../../../assets/salaryreimbursement.png'
@@ -45,8 +45,8 @@ const featureBanner = [
     {
         imageSrc: EmployeeDashboardImage,
         imageAlt: 'EmployeeDashboardImage',
-        bannerHeading: 'Manage your employees and stay on top of your onboarding process',
-        bannerDescription: 'Chart the right course for your payouts operations from the day you hire your first employee.',
+        bannerHeading: 'Efficiently oversee your workforce and streamline the onboarding journey.',
+        bannerDescription: 'From the moment you bring in your initial employee, effortlessly add, remove, and manage employee details, ensuring smooth business operations throughout.',
     },
 ];
 const features = [

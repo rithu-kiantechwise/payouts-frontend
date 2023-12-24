@@ -1,5 +1,5 @@
 import React from 'react'
-import DashboardImage from '../../../assets/employeeDashImg.png'
+import DashboardImage from '../../../assets/organization-dashboard.png'
 
 const BannerHelp = () => {
   return (

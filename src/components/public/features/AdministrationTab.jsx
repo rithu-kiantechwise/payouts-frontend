@@ -2,7 +2,7 @@ import React from 'react'
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { openModal } from '../../../redux/modalSlice';
-import AdminDashboardImage from '../../../assets/adminDashImg.png'
+import AdminDashboardImage from '../../../assets/organization-employee-details.png'
 import details from '../../../assets/details.png'
 import location from '../../../assets/location.png'
 import personalised from '../../../assets/personalised.png'
@@ -65,8 +65,8 @@ const featureBanner = [
     {
         imageSrc: AdminDashboardImage,
         imageAlt: 'AdminDashboardImage',
-        bannerHeading: 'Streamline your administration tasks and manage payouts like a pro',
-        bannerDescription: 'payouts is everything you need to administer payouts for your organization. You can grant user roles and permissions, delegate responsibilities, oversee approvals, and build your organization your way.',
+        bannerHeading: 'Streamline your administration tasks and manage payroll like a pro',
+        bannerDescription: 'payroll is everything you need to administer payroll for your organization. You can grant user roles and permissions, delegate responsibilities, oversee approvals, and build your organization your way.',
     },
 ];
 const Everything = [

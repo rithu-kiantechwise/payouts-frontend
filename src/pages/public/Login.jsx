@@ -98,6 +98,7 @@ const Login = () => {
                 Forgot Password?
               </button>
             </div>
+            <h1 className='self-baseline'>If you are an employee? <button className='font-medium text-blue-500 ' onClick={() => navigate('/employee/login')}>Employee Login</button></h1>
           </div>
           <h1 className='self-baseline'>Don't have Payouts account? <button className='font-medium text-blue-500 ' onClick={() => navigate('/organization/register')}>Sign Up Now</button></h1>
         </div>

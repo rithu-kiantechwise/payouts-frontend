@@ -2,7 +2,7 @@ import React from 'react'
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { openModal } from '../../../redux/modalSlice';
-import portalDashboardImage from '../../../assets/portalDashImg.png'
+import portalDashboardImage from '../../../assets/employee-dashboard.png'
 import menu from '../../../assets/menu.png'
 import reimbursement from '../../../assets/reimbursement.png'
 import passwordprotected from '../../../assets/passwordprotected.png'
@@ -44,8 +44,8 @@ const featureBanner = [
     {
         imageSrc: portalDashboardImage,
         imageAlt: 'portalDashboardImage',
-        bannerHeading: 'Self service your employees will love',
-        bannerDescription: 'Provide seamless collaboration between employees and payouts staff with a secure employee portal.',
+        bannerHeading: 'Employee self-service portal',
+        bannerDescription: 'Empowering daily access for employees to effortlessly download payslips and submit reimbursements via the Payouts application.',
     },
 ];
 const features = [

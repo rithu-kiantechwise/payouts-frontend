@@ -2,7 +2,7 @@ import React from 'react'
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { openModal } from '../../../redux/modalSlice';
-import payrollDashboardImage from '../../../assets/payrollDashImg.png'
+import payrollDashboardImage from '../../../assets/organization-employee-tax.png'
 import deductsocial from '../../../assets/deductsocial.png'
 import payclick from '../../../assets/payclick.png'
 import customdeduction from '../../../assets/customdeduction.png'
@@ -49,8 +49,8 @@ const featureBanner = [
     {
         imageSrc: payrollDashboardImage,
         imageAlt: 'payoutsDashboardImage',
-        bannerHeading: 'Automate and complete your payouts processing in minutes',
-        bannerDescription: 'Stop spending weeks on payouts processing. payouts has everything you need to complete your payouts and post-payouts activities faster.',
+        bannerHeading: 'Automate and complete your payroll processing in minutes',
+        bannerDescription: 'Stop spending weeks on payroll processing. Payouts has everything you need to complete your payroll and post-payroll activities faster.',
     },
 ];
 

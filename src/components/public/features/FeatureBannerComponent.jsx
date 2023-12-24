@@ -22,7 +22,7 @@ const FeatureBannerComponent = ({ data }) => {
                         </div>
                     </div>
                     <div className='col-span-1 shadow-lg h-fit'>
-                        <img src={featureBanner.imageSrc} alt={featureBanner.imageAlt} />
+                        <img src={featureBanner.imageSrc} alt={featureBanner.imageAlt} width={600}/>
                     </div>
                 </div>
             ))}

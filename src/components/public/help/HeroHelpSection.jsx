@@ -1,7 +1,7 @@
 import React from 'react'
 import { useDispatch } from 'react-redux';
 import { openModal } from '../../../redux/modalSlice';
-import HeroHelpImage from '../../../assets/bannerhelp.webp'
+import HeroHelpImage from '../../../assets/bannerhelp.png'
 
 const HeroHelpSection = () => {
     const dispatch = useDispatch();
@@ -16,7 +16,7 @@ const HeroHelpSection = () => {
                 </div>
                 <div className='col-span-1 md:col-span-1 lg:col-span-2 lg:max-w-[80%] m-auto p-6 lg:p-10'>
                     <h1 className='text-4xl text-white leading-[3rem]'>See Payouts in Action!</h1>
-                    <button onClick={() => triggerModal()} className='px-5 py-3 mt-8 font-semibold bg-yellow-300 rounded'>Get the Trial Access</button>
+                    <button onClick={() => triggerModal()} className='px-5 py-3 mt-8 font-semibold bg-white rounded'>Get the Trial Access</button>
                 </div>
             </div>
         </div>

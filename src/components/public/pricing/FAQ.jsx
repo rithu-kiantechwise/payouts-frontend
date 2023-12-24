@@ -10,7 +10,6 @@ const FAQ = () => {
                         <summary className='cursor-pointer list-outside'>
                         <span className="font-semibold text-2xl">{feature.question}</span>
                         </summary>
-                     
                         <p className='leading-8 mt-3'>{feature.answer}</p>
                     </details>
                 ))}
@@ -22,11 +21,11 @@ const FAQ = () => {
 const QuestionAndAnswer = [
     {
         question: 'Can I try the product before purchasing it?',
-        answer: `Absolutely, yes. Sign up now for a monthly free-trial and enjoy unrestricted access to all the features of Payouts. No credit card information required.`,
+        answer: `Absolutely, yes. Sign up now for a 14 days free-trial and enjoy unrestricted access to all the features of Payouts. No credit card information required.`,
     },
     {
         question: 'How is the free trial different from the free plan?',
-        answer: 'The free trial is simply the paid product with all benefits which you can access for a month, after which you are required to upgrade to continue using it. The free plan offers you Payouts for an unlimited period with a few limitations on the number of employees and some features.',
+        answer: 'The free plan offers you Payouts for an unlimited period with a few limitations on the number of employees and some features.',
     },
     {
         question: 'What happens when I am no longer eligible for the free plan?',
@@ -34,7 +33,7 @@ const QuestionAndAnswer = [
     },
     {
         question: 'I am convinced by Payouts. What are my payment options?',
-        answer: `We accept payments via Visa, MasterCard, and American Express. We also accept PayPal and wire transfer for the yearly plan.`,
+        answer: `We accept payments via Visa, MasterCard, and American Express. We also accept PayPal and wire transfer for all the plan.`,
     },
     {
         question: 'Do we need different Payouts licenses if our office is located in multiple states?',
@@ -43,10 +42,6 @@ const QuestionAndAnswer = [
     {
         question: 'Can data be imported from other Payouts software?',
         answer: `Yes, data can be imported from other Payouts software in a format that's compatible with Payouts. Our dedicated support team can guide you every step of the way to import your Payouts data successfully.`,
-    },
-    {
-        question: 'Is Payouts a part of One?',
-        answer: `Yes, Payouts is included in One. Reach out to our support team to understand how the pricing and licenses are handled.`,
     },
     {
         question: 'Do you store my credit card information?',

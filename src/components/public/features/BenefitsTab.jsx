@@ -2,7 +2,7 @@ import React from 'react'
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { openModal } from '../../../redux/modalSlice';
-import benefitsDashImage from '../../../assets/benefitsDashImg.png'
+import benefitsDashImage from '../../../assets/employee-salary-details.png'
 import pretaxdeduction from '../../../assets/pretaxdeduction.png'
 import salaryadvances from '../../../assets/salaryadvances.png'
 import multipleloan from '../../../assets/multipleloan.png'
@@ -72,7 +72,7 @@ const Boost = [
         imageSrc: fuelexpenses,
         imageAlt: 'fuelexpenses',
         title: 'Personalized employee benefits',
-        description: 'Reduce your payouts costs and data entry efforts by delegating routine document tasks to your employees. Employees can do things on their own from the client portal.',
+        description: 'Reduce your payroll costs and data entry efforts by delegating routine document tasks to your employees. Employees can do things on their own from the client portal.',
     },
     {
         imageSrc: trophy,

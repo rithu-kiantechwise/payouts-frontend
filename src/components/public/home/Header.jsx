@@ -1,18 +1,9 @@
 import React, { Fragment } from 'react'
-import CompanyLogo from '../../../assets/logo.png'
 import noProfile from '../../../assets/noprofile.jpg'
 import { Disclosure, Menu, Transition, } from '@headlessui/react'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 import { useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
-
-const navigation = [
-  { name: 'Home', href: '/', current: true },
-  { name: 'About', href: 'https://kiantechwise.com/about/', current: false },
-  { name: 'All Products', href: '#OurProductsPageLoading', current: false },
-  { name: 'Mail', href: 'mailto:info@kiantechwise.com', current: false },
-  { name: 'Contact', href: 'https://kiantechwise.com/contact-us/', current: false },
-]
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
@@ -44,28 +35,13 @@ const Header = () => {
                 </Disclosure.Button>
               </div>
               <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
-                <div className="flex flex-shrink-0 items-center">
-                  <img
-                    className="h-8 w-auto"
-                    src={CompanyLogo}
-                    alt="CompanyLogo"
-                  />
-                </div>
                 <div className="hidden sm:ml-6 sm:block">
                   <div className="flex space-x-4">
-                    {navigation.map((item) => (
-                      <a
-                        key={item.name}
-                        href={item.href}
-                        className={classNames(
-                          item.current ? 'text-violet-800' : 'hover:text-violet-800',
-                          'rounded-md px-3 py-2 text-sm font-medium'
-                        )}
-                        aria-current={item.current ? 'page' : undefined}
-                      >
-                        {item.name}
-                      </a>
-                    ))}
+                    <a
+                      href='#sd'
+                      className='text-violet-800 hover:text-violet-800 rounded-md px-3 py-2 text-sm font-medium'                      >
+                      Grab Your Offer Now!
+                    </a>
                   </div>
                 </div>
               </div>
@@ -129,7 +105,7 @@ const Header = () => {
                     </Transition>
                   </Menu>
                 ) : (
-                  <button onClick={() => navigate('/organization/login')} className='p-1 px-2 md:px-6 bg-violet-500 text-white font-medium uppercase'>Signin</button>
+                  <button onClick={() => navigate('/organization/login')} className='p-1 px-2 md:px-6 bg-violet-500 text-white font-medium uppercase'>Login</button>
                 )}
               </div>
             </div>
@@ -137,20 +113,13 @@ const Header = () => {
 
           <Disclosure.Panel className="sm:hidden">
             <div className="space-y-1 px-2 pb-3 pt-2">
-              {navigation.map((item) => (
-                <Disclosure.Button
-                  key={item.name}
-                  as="a"
-                  href={item.href}
-                  className={classNames(
-                    item.current ? 'text-violet-800 border' : 'hover:text-violet-800',
-                    'block rounded-md px-3 py-2 text-base font-medium'
-                  )}
-                  aria-current={item.current ? 'page' : undefined}
-                >
-                  {item.name}
-                </Disclosure.Button>
-              ))}
+              <Disclosure.Button
+                as="a"
+                href='#sd'
+                className='text-violet-800 border hover:text-violet-800 block rounded-md px-3 py-2 text-base font-medium'
+              >
+                Grab Your Offer Now!
+              </Disclosure.Button>
             </div>
           </Disclosure.Panel>
         </>
