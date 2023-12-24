@@ -104,7 +104,9 @@ const Registration = () => {
   const handlePayment = async (e) => {
     e.preventDefault();
     const stripe = await stripePromise;
+    setLoading(true);
     const response = await stripePayment();
+    setLoading(false);
     const session = response.data.session;
 
     const result = await stripe.redirectToCheckout({
@@ -244,12 +246,12 @@ const Registration = () => {
                         onChange={handleChange}
                         className='border-transparent px-8 py-2 min-w-[100%] my-1 border-0 outline-none focus:shadow-0 border-b border-b-gray-200  focus:border-b-blue-100 focus:border-b-2' />
                       {!isEmailVerified &&
-                      <button
-                      type='button'
-                      onClick={handleVerifyOTP}
-                      className='mt-3 text-md text-violet-800 font-medium hover:text-black'>
-                      Verify OTP
-                    </button>
+                        <button
+                          type='button'
+                          onClick={handleVerifyOTP}
+                          className='mt-3 text-md text-violet-800 font-medium hover:text-black'>
+                          Verify OTP
+                        </button>
                       }
                     </div>
                     <button

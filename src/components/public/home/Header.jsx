@@ -38,7 +38,7 @@ const Header = () => {
                 <div className="hidden sm:ml-6 sm:block">
                   <div className="flex space-x-4">
                     <a
-                      href='#sd'
+                      href='https://wa.me/7907019154'
                       className='text-violet-800 hover:text-violet-800 rounded-md px-3 py-2 text-sm font-medium'                      >
                       Grab Your Offer Now!
                     </a>
