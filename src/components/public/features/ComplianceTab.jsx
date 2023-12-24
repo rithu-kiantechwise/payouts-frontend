@@ -56,7 +56,7 @@ const featureBanner = [
         imageSrc: reportDashboardImage,
         imageAlt: 'reportDashboardImage',
         bannerHeading: 'Keep payouts compliance easy amidst changing tax laws',
-        bannerDescription: 'Keep your business on good legal footing with Kian payouts. Apply appropriate tax deductions, calculate mandatory government contributions, and generate tax-compliant payslips.',
+        bannerDescription: 'Keep your business on good legal footing with payouts. Apply appropriate tax deductions, calculate mandatory government contributions, and generate tax-compliant payslips.',
     },
 ];
 const Empower = [
@@ -64,7 +64,7 @@ const Empower = [
         imageSrc: accuratetax,
         imageAlt: 'accuratetax',
         title: 'Adapt to varying scenarios',
-        description: 'Bring all your existing data into Kian payouts with minimum effort. Follow our pre-defined template to import salary or previous employment details, and eliminate duplicates and reduce manual work.',
+        description: 'Bring all your existing data into payouts with minimum effort. Follow our pre-defined template to import salary or previous employment details, and eliminate duplicates and reduce manual work.',
     },
     {
         imageSrc: retirement,
@@ -109,7 +109,7 @@ const Automated = [
         imageSrc: retirement,
         imageAlt: 'retirement',
         title: 'Statutory compliance reports',
-        description: 'Bring all your existing data into Kian payouts with minimum effort. Follow our pre-defined template to import salary or previous employment details, and eliminate duplicates and reduce manual work.',
+        description: 'Bring all your existing data into payouts with minimum effort. Follow our pre-defined template to import salary or previous employment details, and eliminate duplicates and reduce manual work.',
     },
     {
         imageSrc: payrollcompailance,

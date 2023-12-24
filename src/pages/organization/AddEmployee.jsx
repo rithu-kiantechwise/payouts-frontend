@@ -82,9 +82,9 @@ const AddEmployee = () => {
     return (
         <div className='flex min-h-[100vh]'>
             <Sidebar />
-            {!loading
-                ?
-                <div className='mx-auto p-8'>
+            <div className='mx-auto p-8'>
+                {!loading
+                    ?
                     <form onSubmit={handleSubmit}>
                         <div className="border-b border-gray-900/10 pb-10">
                             <h2 className="text-base font-semibold leading-7 text-gray-900">Add New Employee</h2>
@@ -198,7 +198,7 @@ const AddEmployee = () => {
                                     </label>
                                     <div className="mt-2">
                                         <input
-                                            type="text"
+                                            type="number"
                                             name="phoneNumber"
                                             id="phoneNumber"
                                             required
@@ -233,7 +233,7 @@ const AddEmployee = () => {
                                     </label>
                                     <div className="mt-2">
                                         <input
-                                            type="text"
+                                            type="number"
                                             name="salary"
                                             id="salary"
                                             required
@@ -259,10 +259,10 @@ const AddEmployee = () => {
                             </button>
                         </div>
                     </form>
-                </div>
-                :
-                <LoadingSpinner />
-            }
+                    :
+                    <LoadingSpinner />
+                }
+            </div>
         </div>
     )
 }

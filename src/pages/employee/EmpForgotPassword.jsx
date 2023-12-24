@@ -127,7 +127,7 @@ const EmpForgotPassword = () => {
                                         <input
                                             id="otp"
                                             name="otp"
-                                            type="text"
+                                            type="number"
                                             required
                                             value={data.otp}
                                             onChange={handleChange}

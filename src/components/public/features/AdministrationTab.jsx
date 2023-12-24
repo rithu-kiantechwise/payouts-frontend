@@ -66,7 +66,7 @@ const featureBanner = [
         imageSrc: AdminDashboardImage,
         imageAlt: 'AdminDashboardImage',
         bannerHeading: 'Streamline your administration tasks and manage payouts like a pro',
-        bannerDescription: 'Kian payouts is everything you need to administer payouts for your organization. You can grant user roles and permissions, delegate responsibilities, oversee approvals, and build your organization your way.',
+        bannerDescription: 'payouts is everything you need to administer payouts for your organization. You can grant user roles and permissions, delegate responsibilities, oversee approvals, and build your organization your way.',
     },
 ];
 const Everything = [
@@ -86,7 +86,7 @@ const Everything = [
         imageSrc: personalised,
         imageAlt: 'personalised',
         title: 'Personalized salary components',
-        description: `Choose different allowances, earnings, reimbursements, and prerequisite for different employees. Easily enable or disable individual components, and Kian payouts will adjust to your settings and calculate the right pay.`,
+        description: `Choose different allowances, earnings, reimbursements, and prerequisite for different employees. Easily enable or disable individual components, and payouts will adjust to your settings and calculate the right pay.`,
     },
     {
         imageSrc: allowance,

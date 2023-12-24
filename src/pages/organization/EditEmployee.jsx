@@ -95,9 +95,9 @@ const EditEmployee = () => {
     return (
         <div className='flex min-h-[100vh]'>
             <Sidebar />
-            {!loading
-                ?
-                <div className='mx-auto p-8'>
+            <div className='mx-auto p-8'>
+                {!loading
+                    ?
                     <form onSubmit={handleSubmit}>
                         <div className="border-b border-gray-900/10 pb-10">
                             <h2 className="text-base font-semibold leading-7 text-gray-900">Edit Employee Details</h2>
@@ -196,7 +196,7 @@ const EditEmployee = () => {
                                     </label>
                                     <div className="mt-2">
                                         <input
-                                            type="text"
+                                            type="number"
                                             name="phoneNumber"
                                             id="phoneNumber"
                                             required
@@ -230,7 +230,7 @@ const EditEmployee = () => {
                                     </label>
                                     <div className="mt-2">
                                         <input
-                                            type="text"
+                                            type="number"
                                             name="salary"
                                             id="salary"
                                             required
@@ -256,10 +256,10 @@ const EditEmployee = () => {
                             </button>
                         </div>
                     </form>
-                </div>
-                :
-                <LoadingSpinner />
-            }
+                    :
+                    <LoadingSpinner />
+                }
+            </div>
         </div>
     )
 }

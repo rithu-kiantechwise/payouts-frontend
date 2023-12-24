@@ -54,7 +54,7 @@ const Boost = [
         imageSrc: pretaxdeduction,
         imageAlt: 'pretaxdeduction',
         title: 'Manage employee insurances',
-        description: 'Bring all your existing data into Kian payouts with minimum effort. Follow our pre-defined template to import salary or previous employment details, and eliminate duplicates and reduce manual work.',
+        description: 'Bring all your existing data into payouts with minimum effort. Follow our pre-defined template to import salary or previous employment details, and eliminate duplicates and reduce manual work.',
     },
     {
         imageSrc: salaryadvances,

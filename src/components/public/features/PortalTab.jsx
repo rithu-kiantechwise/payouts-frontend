@@ -83,7 +83,7 @@ const features = [
         imageSrc: statusupdates,
         imageAlt: 'statusupdates',
         title: 'Status updates on employee loans',
-        description: 'Kian payouts automatically deducts loan payments and updates the outstanding balance and tenure left for employee loans. Employees can find the latest updates in the portal.',
+        description: 'payouts automatically deducts loan payments and updates the outstanding balance and tenure left for employee loans. Employees can find the latest updates in the portal.',
     },
 ];
 

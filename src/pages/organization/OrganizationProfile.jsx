@@ -67,7 +67,7 @@ const OrganizationProfile = () => {
               </label>
               <div className="mt-2">
                 <input
-                  type="text"
+                  type="number"
                   name="phoneNumber"
                   id="phoneNumber"
                   value={user?.phoneNumber ?? ''}

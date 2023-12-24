@@ -50,7 +50,7 @@ const featureBanner = [
         imageSrc: payrollDashboardImage,
         imageAlt: 'payoutsDashboardImage',
         bannerHeading: 'Automate and complete your payouts processing in minutes',
-        bannerDescription: 'Stop spending weeks on payouts processing. Kian payouts has everything you need to complete your payouts and post-payouts activities faster.',
+        bannerDescription: 'Stop spending weeks on payouts processing. payouts has everything you need to complete your payouts and post-payouts activities faster.',
     },
 ];
 
@@ -77,7 +77,7 @@ const features = [
         imageSrc: customdeduction,
         imageAlt: 'customdeduction',
         title: 'Apply custom deductions to payslips',
-        description: 'Set up one-time or recurring profiles to take care of voluntary and mandatory payouts deductions. Kian payouts automatically deducts the right amount and applies the appropriate taxes during each pay run.',
+        description: 'Set up one-time or recurring profiles to take care of voluntary and mandatory payouts deductions. payouts automatically deducts the right amount and applies the appropriate taxes during each pay run.',
     },
     {
         imageSrc: personalised,
@@ -95,7 +95,7 @@ const features = [
         imageSrc: timenotification,
         imageAlt: 'timenotification',
         title: 'Receive timely notifications',
-        description: 'Kian payouts lets you confirm processed payouts, see upcoming tax submission dates, and stay on top of your payouts operations.',
+        description: 'payouts lets you confirm processed payouts, see upcoming tax submission dates, and stay on top of your payouts operations.',
     },
     {
         imageSrc: automated,
@@ -107,7 +107,7 @@ const features = [
         imageSrc: holidays,
         imageAlt: 'holidays',
         title: 'Adapt pay runs to holidays',
-        description: `Pay date falls on a weekend or a government-declared holiday? Kian payouts automatically adapts your pay runs to process the day before the closure.`,
+        description: `Pay date falls on a weekend or a government-declared holiday? payouts automatically adapts your pay runs to process the day before the closure.`,
     },
     {
         imageSrc: employeeleaves,
@@ -119,7 +119,7 @@ const features = [
         imageSrc: manageemployee,
         imageAlt: 'manageemployee',
         title: 'Manage employee exits professionally',
-        description: `Letting an employee go might be hard, but once the decision is made, Kian payouts makes the process easy. Run termination payouts to handle your employees' notice pay, leave encashment, and other exit requirements effortlessly.`,
+        description: `Letting an employee go might be hard, but once the decision is made, payouts makes the process easy. Run termination payouts to handle your employees' notice pay, leave encashment, and other exit requirements effortlessly.`,
     },
 ];
 

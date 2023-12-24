@@ -80,8 +80,8 @@ const PriceDetails = () => {
                 <div className='flex flex-col justify-center items-start p-10 leading-[2rem] min-h-[100%] bg-violet-100'>
                     <h4>&#10003;&nbsp; Payslips, Form 16 and TDS worksheets</h4>
                     <h4>&#10003;&nbsp; Online IT declaration and proof collection</h4>
-                    <h4>&#10003;&nbsp; HR Integration - Kian People</h4>
-                    <h4>&#10003;&nbsp; Accounting Integration - Kian Books</h4>
+                    <h4>&#10003;&nbsp; HR Integration - People</h4>
+                    <h4>&#10003;&nbsp; Accounting Integration - Books</h4>
                 </div>
             </div>
         </div>

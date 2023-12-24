@@ -97,14 +97,14 @@ const EmployeeProfile = () => {
             </div>
 
             <div className="sm:col-span-3">
-              <label htmlFor="lastName" className="block text-sm font-medium leading-6 text-gray-900">
+              <label htmlFor="dob" className="block text-sm font-medium leading-6 text-gray-900">
                 DOB
               </label>
               <div className="mt-2">
                 <input
-                  type="text"
-                  name="lastName"
-                  id="lastName"
+                  type="date"
+                  name="dob"
+                  id="dob"
                   value={formattedDate ?? ''}
                   required
                   disabled
@@ -119,7 +119,7 @@ const EmployeeProfile = () => {
               </label>
               <div className="mt-2">
                 <input
-                  type="text"
+                  type="number"
                   id="salary"
                   name="salary"
                   value={user?.salary ?? ''}
@@ -153,7 +153,7 @@ const EmployeeProfile = () => {
               </label>
               <div className="mt-2">
                 <input
-                  type="text"
+                  type="number"
                   name="phoneNumber"
                   id="phoneNumber"
                   value={user?.phoneNumber ?? ''}

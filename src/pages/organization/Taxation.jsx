@@ -22,7 +22,7 @@ const Taxation = () => {
         tax: 0,
         bonus: 0,
     });
-    
+
 
     useEffect(() => {
         fetchEmployees();
@@ -33,7 +33,7 @@ const Taxation = () => {
             const response = await getAllEmployees({ page: currentPage });
             setLoading(false)
             setEmployeeData(response.data?.employees);
-            setTotalPages(response.data?.totalPages);   
+            setTotalPages(response.data?.totalPages);
         } catch (error) {
             console.error('Error fetching employees:', error);
         }
@@ -188,176 +188,178 @@ const Taxation = () => {
     return (
         <div className='flex min-h-[100vh]'>
             <Sidebar />
-            {!loading
-                ?
             <div className='min-w-[80%] mx-auto p-8'>
-                <div>
-                    <h2 className='text-2xl font-semibold'>Apply tax</h2>
-                    <form onSubmit={handleSubmit}>
-                        <div className="mt-5 max-w-[40%] grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-                            <div className="sm:col-span-6">
-                                <label htmlFor="pf" className="block text-md font-medium leading-6 text-gray-900">
-                                    PF <span className='text-gray-400 text-xs'>in percentage</span>
-                                </label>
-                                <div className="mt-2">
-                                    <input
-                                        id='pf'
-                                        type="number"
-                                        name="pf"
-                                        value={formData.pf}
-                                        onChange={handleChange}
-                                        className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-200 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                                    />
-                                </div>
-                            </div>
+                {!loading
+                    ?
+                    <div>
 
-                            <div className="sm:col-span-6">
-                                <label htmlFor="esi" className="block text-md font-medium leading-6 text-gray-900">
-                                    ESI <span className='text-gray-400 text-xs'>in percentage</span>
-                                </label>
-                                <div className="mt-2">
-                                    <input
-                                        id='esi'
-                                        type="number"
-                                        name="esi"
-                                        value={formData.esi}
-                                        onChange={handleChange}
-                                        className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-200 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                                    />
+                        <h2 className='text-2xl font-semibold'>Apply tax</h2>
+                        <form onSubmit={handleSubmit}>
+                            <div className="mt-5 max-w-[40%] grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+                                <div className="sm:col-span-6">
+                                    <label htmlFor="pf" className="block text-md font-medium leading-6 text-gray-900">
+                                        PF <span className='text-gray-400 text-xs'>in percentage</span>
+                                    </label>
+                                    <div className="mt-2">
+                                        <input
+                                            id='pf'
+                                            type="number"
+                                            name="pf"
+                                            value={formData.pf}
+                                            onChange={handleChange}
+                                            className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-200 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                        />
+                                    </div>
                                 </div>
-                            </div>
 
-                            <div className="sm:col-span-6">
-                                <label htmlFor="tax" className="block text-md font-medium leading-6 text-gray-900">
-                                    Tax <span className='text-gray-400 text-xs'>in percentage</span>
-                                </label>
-                                <div className="mt-2">
-                                    <input
-                                        id='tax'
-                                        type="number"
-                                        name="tax"
-                                        value={formData.tax}
-                                        onChange={handleChange}
-                                        className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-200 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                                    />
+                                <div className="sm:col-span-6">
+                                    <label htmlFor="esi" className="block text-md font-medium leading-6 text-gray-900">
+                                        ESI <span className='text-gray-400 text-xs'>in percentage</span>
+                                    </label>
+                                    <div className="mt-2">
+                                        <input
+                                            id='esi'
+                                            type="number"
+                                            name="esi"
+                                            value={formData.esi}
+                                            onChange={handleChange}
+                                            className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-200 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                        />
+                                    </div>
                                 </div>
-                            </div>
 
-                            <div className="sm:col-span-6">
-                                <label htmlFor="bonus" className="block text-md font-medium leading-6 text-gray-900">
-                                    Bonus <span className='text-gray-400 text-xs'>in rupees</span>
-                                </label>
-                                <div className="mt-2">
-                                    <input
-                                        id='bonus'
-                                        type="number"
-                                        name="bonus"
-                                        value={formData.bonus}
-                                        onChange={handleChange}
-                                        className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-200 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                                    />
+                                <div className="sm:col-span-6">
+                                    <label htmlFor="tax" className="block text-md font-medium leading-6 text-gray-900">
+                                        Tax <span className='text-gray-400 text-xs'>in percentage</span>
+                                    </label>
+                                    <div className="mt-2">
+                                        <input
+                                            id='tax'
+                                            type="number"
+                                            name="tax"
+                                            value={formData.tax}
+                                            onChange={handleChange}
+                                            className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-200 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                        />
+                                    </div>
+                                </div>
+
+                                <div className="sm:col-span-6">
+                                    <label htmlFor="bonus" className="block text-md font-medium leading-6 text-gray-900">
+                                        Bonus <span className='text-gray-400 text-xs'>in rupees</span>
+                                    </label>
+                                    <div className="mt-2">
+                                        <input
+                                            id='bonus'
+                                            type="number"
+                                            name="bonus"
+                                            value={formData.bonus}
+                                            onChange={handleChange}
+                                            className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-200 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                        />
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div className="mt-6 flex items-center gap-x-6">
-                            <button
-                                type='submit'
-                                className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
-                                Set Tax to all employees
-                            </button>
-                        </div>
-                    </form>
-                </div>
-                <div className='mx-auto min-w-[70%] p-8'>
-                    <div className='mt-5'>
-                        <h1 className='text-xl font-semibold'>Tax Details</h1>
-                        <div className='flex justify-end'>
-                        {downloadCSV()}
-                        <button onClick={downloadPDF} className="ml-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                            PDF
-                        </button>
-                        <button onClick={downloadXLSX} className="ml-2 bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
-                            Excel
-                        </button>
-                        </div>
-                        <table className="min-w-full border-gray-300 text-center items-center border rounded-md mt-5">
-                            <thead className='bg-slate-800 text-white'>
-                                <tr className='text-center'>
-                                    <th className="py-2 px-4 border-b">EmployeeID</th>
-                                    <th className="py-2 px-4 border-b">FullName</th>
-                                    <th className="py-2 px-4 border-b">Email</th>
-                                    <th className="py-2 px-4 border-b">Position</th>
-                                    <th className="py-2 px-4 border-b">PF</th>
-                                    <th className="py-2 px-4 border-b">TAX</th>
-                                    <th className="py-2 px-4 border-b">ESI</th>
-                                    <th className="py-2 px-4 border-b">Bonus</th>
-                                    <th className="py-2 px-4 border-b">Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {employeeData?.map((item) => (
-                                    <tr key={item._id}>
-                                        <td className="py-2 px-4 border-b">{item.employeeID}</td>
-                                        <td className="py-2 px-4 border-b">{item.firstName} {item.lastName}</td>
-                                        <td className="py-2 px-4 border-b">{item.email}</td>
-                                        <td className="py-2 px-4 border-b">{item.position}</td>
-                                        <td className="py-2 px-4 border-b">{item.pf}%</td>
-                                        <td className="py-2 px-4 border-b">{item.tax}%</td>
-                                        <td className="py-2 px-4 border-b">{item.esi}%</td>
-                                        <td className="py-2 px-4 border-b">₹ {item.bonus}</td>
-                                        <td className="flex gap-2 py-2 px-4 border-b">
-                                            <button
-                                                onClick={() => handleUpdate(item._id)}
-                                                className='px-4 py-2 bg-blue-800 rounded-md text-white font-medium'>
-                                                Update Tax
-                                            </button>
-                                        </td>
-                                    </tr>
-                                ))}
-                            </tbody>
-                        </table>
-                        <div className="flex items-center justify-between border-t border-gray-200 bg-white px-4 py-2 sm:px-6">
-                            <div className="hidden sm:flex sm:flex-1 sm:items-center sm:justify-between">
-                                <div>
-                                    <p className="text-sm text-gray-700">
-                                        Showing <span className="font-medium">1</span> to <span className="font-medium">10</span>
-                                    </p>
+                            <div className="mt-6 flex items-center gap-x-6">
+                                <button
+                                    type='submit'
+                                    className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+                                    Set Tax to all employees
+                                </button>
+                            </div>
+                        </form>
+
+                        <div className='mx-auto min-w-[70%] p-8'>
+                            <div className='mt-5'>
+                                <h1 className='text-xl font-semibold'>Tax Details</h1>
+                                <div className='flex justify-end'>
+                                    {downloadCSV()}
+                                    <button onClick={downloadPDF} className="ml-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                                        PDF
+                                    </button>
+                                    <button onClick={downloadXLSX} className="ml-2 bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
+                                        Excel
+                                    </button>
                                 </div>
-                                <div>
-                                    <nav className="isolate inline-flex -space-x-px rounded-md shadow-sm" aria-label="Pagination">
-                                        <button
-                                            onClick={() => handlePageChange(currentPage - 1)}
-                                            disabled={currentPage === 1}
-                                            className="relative inline-flex items-center rounded-l-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0"
-                                        >
-                                            <span className="sr-only">Previous</span>
-                                            <ChevronLeftIcon className="h-5 w-5" aria-hidden="true" />
-                                        </button>
-                                        <button
-                                            aria-current="page"
-                                            disabled
-                                            className="relative z-10 inline-flex items-center bg-violet-600 px-4 py-2 text-sm font-semibold text-white focus:z-20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                                        >
-                                            {currentPage}
-                                        </button>
-                                        <button
-                                            onClick={() => handlePageChange(currentPage + 1)}
-                                            disabled={currentPage === totalPages}
-                                            className="relative inline-flex items-center rounded-r-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0"
-                                        >
-                                            <span className="sr-only">Next</span>
-                                            <ChevronRightIcon className="h-5 w-5" aria-hidden="true" />
-                                        </button>
-                                    </nav>
+                                <table className="min-w-full border-gray-300 text-center items-center border rounded-md mt-5">
+                                    <thead className='bg-slate-800 text-white'>
+                                        <tr className='text-center'>
+                                            <th className="py-2 px-4 border-b">EmployeeID</th>
+                                            <th className="py-2 px-4 border-b">FullName</th>
+                                            <th className="py-2 px-4 border-b">Email</th>
+                                            <th className="py-2 px-4 border-b">Position</th>
+                                            <th className="py-2 px-4 border-b">PF</th>
+                                            <th className="py-2 px-4 border-b">TAX</th>
+                                            <th className="py-2 px-4 border-b">ESI</th>
+                                            <th className="py-2 px-4 border-b">Bonus</th>
+                                            <th className="py-2 px-4 border-b">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {employeeData?.map((item) => (
+                                            <tr key={item._id}>
+                                                <td className="py-2 px-4 border-b">{item.employeeID}</td>
+                                                <td className="py-2 px-4 border-b">{item.firstName} {item.lastName}</td>
+                                                <td className="py-2 px-4 border-b">{item.email}</td>
+                                                <td className="py-2 px-4 border-b">{item.position}</td>
+                                                <td className="py-2 px-4 border-b">{item.pf}%</td>
+                                                <td className="py-2 px-4 border-b">{item.tax}%</td>
+                                                <td className="py-2 px-4 border-b">{item.esi}%</td>
+                                                <td className="py-2 px-4 border-b">₹ {item.bonus}</td>
+                                                <td className="flex gap-2 py-2 px-4 border-b">
+                                                    <button
+                                                        onClick={() => handleUpdate(item._id)}
+                                                        className='px-4 py-2 bg-blue-800 rounded-md text-white font-medium'>
+                                                        Update Tax
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        ))}
+                                    </tbody>
+                                </table>
+                                <div className="flex items-center justify-between border-t border-gray-200 bg-white px-4 py-2 sm:px-6">
+                                    <div className="hidden sm:flex sm:flex-1 sm:items-center sm:justify-between">
+                                        <div>
+                                            <p className="text-sm text-gray-700">
+                                                Showing <span className="font-medium">1</span> to <span className="font-medium">10</span>
+                                            </p>
+                                        </div>
+                                        <div>
+                                            <nav className="isolate inline-flex -space-x-px rounded-md shadow-sm" aria-label="Pagination">
+                                                <button
+                                                    onClick={() => handlePageChange(currentPage - 1)}
+                                                    disabled={currentPage === 1}
+                                                    className="relative inline-flex items-center rounded-l-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0"
+                                                >
+                                                    <span className="sr-only">Previous</span>
+                                                    <ChevronLeftIcon className="h-5 w-5" aria-hidden="true" />
+                                                </button>
+                                                <button
+                                                    aria-current="page"
+                                                    disabled
+                                                    className="relative z-10 inline-flex items-center bg-violet-600 px-4 py-2 text-sm font-semibold text-white focus:z-20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                                                >
+                                                    {currentPage}
+                                                </button>
+                                                <button
+                                                    onClick={() => handlePageChange(currentPage + 1)}
+                                                    disabled={currentPage === totalPages}
+                                                    className="relative inline-flex items-center rounded-r-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0"
+                                                >
+                                                    <span className="sr-only">Next</span>
+                                                    <ChevronRightIcon className="h-5 w-5" aria-hidden="true" />
+                                                </button>
+                                            </nav>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                    :
+                    <LoadingSpinner />
+                }
             </div>
-                 :
-                 <LoadingSpinner />
-             }
         </div>
     )
 }

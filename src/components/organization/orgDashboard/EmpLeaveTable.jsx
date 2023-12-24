@@ -166,92 +166,92 @@ const EmpLeaveTable = () => {
     };
     return (
         <>
-        {!loading
-            ?
-        <div className='mt-10'>
-            <h1 className='text-2xl font-semibold mb-5'>Employee Leaves</h1>
-            <div className='flex justify-end'>
-                {downloadCSV()}
-                <button onClick={downloadPDF} className="ml-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                    PDF
-                </button>
-                <button onClick={downloadXLSX} className="ml-2 bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
-                    Excel
-                </button>
-            </div>
-            <table className="min-w-full border-gray-300 text-center items-center border rounded-md mt-5">
-                <thead className='bg-slate-800 text-white'>
-                    <tr className='text-center'>
-                        <th className="py-2 px-4 border-b">Employee ID</th>
-                        <th className="py-2 px-4 border-b">Full Name</th>
-                        <th className="py-2 px-4 border-b">Leave Date</th>
-                        <th className="py-2 px-4 border-b">Reason</th>
-                        <th className="py-2 px-4 border-b">Status</th>
-                        <th className="py-2 px-4 border-b">Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {leaveDetails.map(({ employee, leaveDetails }) => (
-                        <React.Fragment key={employee._id}>
-                            {sortLeaveDetails(leaveDetails).map((leave) => (
-                                <tr key={leave._id}>
-                                    <td className="py-2 px-4 border-b">{employee?.employeeID}</td>
-                                    <td className="py-2 px-4 border-b">{employee?.firstName} {employee?.lastName}</td>
-                                    <td className="py-2 px-4 border-b">
-                                        {new Date(leave?.startDate).toLocaleDateString()} - {new Date(leave?.endDate).toLocaleDateString()}
-                                    </td>
-                                    <td className="py-2 px-4 border-b">{leave?.reason}</td>
-                                    <td className={`py-2 px-4 border-b font-medium ${getStatusColor(leave?.status)}`}>{leave?.status}</td>
-
-                                    <td className="py-2 px-4 border-b">
-                                        <Dropdown label="Update" dismissOnClick={false}>
-                                            <Dropdown.Item onClick={() => handleLeaveStatus(leave._id, 'Approved')} className='text-green-700'>Approve</Dropdown.Item>
-                                            <Dropdown.Item onClick={() => handleLeaveStatus(leave._id, 'Rejected')} className='text-red-700'>Reject</Dropdown.Item>
-                                        </Dropdown>
-                                    </td>
-                                </tr>
-                            ))}
-                        </React.Fragment>
-                    ))}
-                </tbody>
-            </table>
-            <div className="flex items-center justify-between border-t border-gray-200 bg-white px-4 py-2 sm:px-6">
-                <div className="hidden sm:flex sm:flex-1 sm:items-center sm:justify-between">
-                    <div>
-                        <p className="text-sm text-gray-700">
-                            Showing <span className="font-medium">1</span> to <span className="font-medium">10</span>
-                        </p>
+            {!loading
+                ?
+                <div className='mt-10'>
+                    <h1 className='text-2xl font-semibold mb-5'>Employee Leaves</h1>
+                    <div className='flex justify-end'>
+                        {downloadCSV()}
+                        <button onClick={downloadPDF} className="ml-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                            PDF
+                        </button>
+                        <button onClick={downloadXLSX} className="ml-2 bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
+                            Excel
+                        </button>
                     </div>
-                    <div>
-                        <nav className="isolate inline-flex -space-x-px rounded-md shadow-sm" aria-label="Pagination">
-                            <button
-                                onClick={() => handlePageChange(currentPage - 1)}
-                                disabled={currentPage === 1}
-                                className="relative inline-flex items-center rounded-l-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0"
-                            >
-                                <span className="sr-only">Previous</span>
-                                <ChevronLeftIcon className="h-5 w-5" aria-hidden="true" />
-                            </button>
-                            <button
-                                aria-current="page"
-                                disabled
-                                className="relative z-10 inline-flex items-center bg-violet-600 px-4 py-2 text-sm font-semibold text-white focus:z-20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                            >
-                                {currentPage}
-                            </button>
-                            <button
-                                onClick={() => handlePageChange(currentPage + 1)}
-                                disabled={currentPage === totalPages}
-                                className="relative inline-flex items-center rounded-r-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0"
-                            >
-                                <span className="sr-only">Next</span>
-                                <ChevronRightIcon className="h-5 w-5" aria-hidden="true" />
-                            </button>
-                        </nav>
+                    <table className="min-w-full border-gray-300 text-center items-center border rounded-md mt-5">
+                        <thead className='bg-slate-800 text-white'>
+                            <tr className='text-center'>
+                                <th className="py-2 px-4 border-b">Employee ID</th>
+                                <th className="py-2 px-4 border-b">Full Name</th>
+                                <th className="py-2 px-4 border-b">Leave Date</th>
+                                <th className="py-2 px-4 border-b">Reason</th>
+                                <th className="py-2 px-4 border-b">Status</th>
+                                <th className="py-2 px-4 border-b">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {leaveDetails.map(({ employee, leaveDetails }) => (
+                                <React.Fragment key={employee._id}>
+                                    {sortLeaveDetails(leaveDetails).map((leave) => (
+                                        <tr key={leave._id}>
+                                            <td className="py-2 px-4 border-b">{employee?.employeeID}</td>
+                                            <td className="py-2 px-4 border-b">{employee?.firstName} {employee?.lastName}</td>
+                                            <td className="py-2 px-4 border-b">
+                                                {new Date(leave?.startDate).toLocaleDateString()} - {new Date(leave?.endDate).toLocaleDateString()}
+                                            </td>
+                                            <td className="py-2 px-4 border-b">{leave?.reason}</td>
+                                            <td className={`py-2 px-4 border-b font-medium ${getStatusColor(leave?.status)}`}>{leave?.status}</td>
+
+                                            <td className="py-2 px-4 border-b">
+                                                <Dropdown label="Update" dismissOnClick={false}>
+                                                    <Dropdown.Item onClick={() => handleLeaveStatus(leave._id, 'Approved')} className='text-green-700'>Approve</Dropdown.Item>
+                                                    <Dropdown.Item onClick={() => handleLeaveStatus(leave._id, 'Rejected')} className='text-red-700'>Reject</Dropdown.Item>
+                                                </Dropdown>
+                                            </td>
+                                        </tr>
+                                    ))}
+                                </React.Fragment>
+                            ))}
+                        </tbody>
+                    </table>
+                    <div className="flex items-center justify-between border-t border-gray-200 bg-white px-4 py-2 sm:px-6">
+                        <div className="hidden sm:flex sm:flex-1 sm:items-center sm:justify-between">
+                            <div>
+                                <p className="text-sm text-gray-700">
+                                    Showing <span className="font-medium">1</span> to <span className="font-medium">10</span>
+                                </p>
+                            </div>
+                            <div>
+                                <nav className="isolate inline-flex -space-x-px rounded-md shadow-sm" aria-label="Pagination">
+                                    <button
+                                        onClick={() => handlePageChange(currentPage - 1)}
+                                        disabled={currentPage === 1}
+                                        className="relative inline-flex items-center rounded-l-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0"
+                                    >
+                                        <span className="sr-only">Previous</span>
+                                        <ChevronLeftIcon className="h-5 w-5" aria-hidden="true" />
+                                    </button>
+                                    <button
+                                        aria-current="page"
+                                        disabled
+                                        className="relative z-10 inline-flex items-center bg-violet-600 px-4 py-2 text-sm font-semibold text-white focus:z-20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                                    >
+                                        {currentPage}
+                                    </button>
+                                    <button
+                                        onClick={() => handlePageChange(currentPage + 1)}
+                                        disabled={currentPage === totalPages}
+                                        className="relative inline-flex items-center rounded-r-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0"
+                                    >
+                                        <span className="sr-only">Next</span>
+                                        <ChevronRightIcon className="h-5 w-5" aria-hidden="true" />
+                                    </button>
+                                </nav>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </div>
                 :
                 <LoadingSpinner />
             }

@@ -92,7 +92,7 @@ const Reimbursement = () => {
                                 <input
                                     id="amount"
                                     name="amount"
-                                    type="text"
+                                    type="number"
                                     value={inputData.amount}
                                     required
                                     onChange={handleChange}

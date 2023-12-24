@@ -25,7 +25,7 @@ const Leave = () => {
         } catch (error) {
             console.log(error);
         }
-      
+
     };
 
     const handleEventClick = (event) => {
@@ -39,17 +39,19 @@ const Leave = () => {
     return (
         <div className='flex min-h-[100vh]'>
             <Sidebar />
-            {!loading
-                ?
             <div className='mx-auto min-w-[80%] p-8'>
-                <h1 className='text-2xl font-semibold'>Leave Application</h1>
-                <LeaveForm onLeaveSet={handleLeaveSet} />
-                <h1 className='text-2xl text-center font-semibold mt-6'>Leave Calendar</h1>
-                <LeaveCalendar events={events} onSelectEvent={handleEventClick} />
+                {!loading
+                    ?
+                    <div>
+                        <h1 className='text-2xl font-semibold'>Leave Application</h1>
+                        <LeaveForm onLeaveSet={handleLeaveSet} />
+                        <h1 className='text-2xl text-center font-semibold mt-6'>Leave Calendar</h1>
+                        <LeaveCalendar events={events} onSelectEvent={handleEventClick} />
+                    </div>
+                    :
+                    <LoadingSpinner />
+                }
             </div>
-                :
-                <LoadingSpinner />
-            }
         </div>
     )
 }
