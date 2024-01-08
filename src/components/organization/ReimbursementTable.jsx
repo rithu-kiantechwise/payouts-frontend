@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { saveAs } from 'file-saver';
-import { getReimbursement, updateReimbursementStatus } from '../../../api/OrganizationApi';
+import { getReimbursement, updateReimbursementStatus } from '../../api/OrganizationApi';
 import toast from 'react-hot-toast';
 import { Dropdown } from 'flowbite-react';
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/20/solid';
 import { CSVLink } from 'react-csv';
 import { Document, Page, Text, View, StyleSheet } from '@react-pdf/renderer';
 import * as XLSX from 'xlsx';
-import LoadingSpinner from '../../LoadingSpinner';
+import LoadingSpinner from '../LoadingSpinner';
 
 const ReimbursementTable = () => {
     const [reimbursements, setReimbursements] = useState([]);

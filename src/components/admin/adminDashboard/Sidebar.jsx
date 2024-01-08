@@ -15,7 +15,8 @@ const Sidebar = () => {
         return location.pathname === path;
     };
     const logoutFunction = async () => {
-        localStorage.clear();
+        localStorage.removeItem('adminToken');
+        localStorage.removeItem('refreshToken');
         dispatch(logoutUser());
         navigate('/admin/login');
     }

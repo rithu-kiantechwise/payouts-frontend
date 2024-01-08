@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { saveAs } from 'file-saver';
-import Sidebar from '../../components/organization/orgDashboard/Sidebar';
+import Sidebar from '../../components/organization/Sidebar';
 import toast from 'react-hot-toast';
 import { getAllEmployees, updateAllEmployeesTaxes } from '../../api/OrganizationApi';
 import { useNavigate } from 'react-router-dom';

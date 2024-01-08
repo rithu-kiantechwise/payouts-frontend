@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { getAllEmployees } from '../../api/OrganizationApi';
-import Sidebar from '../../components/organization/orgDashboard/Sidebar';
+import Sidebar from '../../components/organization/Sidebar';
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/20/solid'
 import LoadingSpinner from '../../components/LoadingSpinner';
 

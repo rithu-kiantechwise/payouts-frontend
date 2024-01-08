@@ -17,7 +17,8 @@ const Sidebar = () => {
     };
     const logoutFunction = async () => {
         employeeLogout();
-        localStorage.clear();
+        localStorage.removeItem('employeeToken');
+        localStorage.removeItem('refreshToken');
         dispatch(logoutUser());
         navigate('/employee/login');
     }

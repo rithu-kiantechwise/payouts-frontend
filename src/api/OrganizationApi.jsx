@@ -44,6 +44,17 @@ export const activatePremiumSubscription = async (credentials) => {
     }
 }
 
+export const cancelPremiumSubscription = async (credentials) => {
+    try {
+        const response = await organizationApi.post('/cancel-register', credentials, { withCredentials: true })
+
+        return response;
+    } catch (error) {
+        console.error('Error during organization register:', error);
+        return error.response
+    }
+}
+
 export const stripePayment = async (credentials) => {
     try {
         const response = await organizationApi.post(`/checkout-payment`, credentials, { withCredentials: true })
@@ -203,6 +214,20 @@ export const getLeaveDetails = async (credentials) => {
         return response;
     } catch (error) {
         console.error('Error during employee deletion:', error);
+        return error.response
+    }
+}
+
+export const getEmployeeAttendance = async (credentials) => {
+    try {
+        const response = await organizationApi.get(`/get-attendance`, {
+            withCredentials: true,
+            params: credentials,
+        })
+
+        return response;
+    } catch (error) {
+        console.error('Error during employee attendance:', error);
         return error.response
     }
 }

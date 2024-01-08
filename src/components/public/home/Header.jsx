@@ -39,6 +39,8 @@ const Header = () => {
                   <div className="flex space-x-4">
                     <a
                       href='https://wa.me/7907019154'
+                      target='_blank'
+                      rel='noopener noreferrer'
                       className='text-violet-800 hover:text-violet-800 rounded-md px-3 py-2 text-sm font-medium'                      >
                       Grab Your Offer Now!
                     </a>
@@ -115,7 +117,9 @@ const Header = () => {
             <div className="space-y-1 px-2 pb-3 pt-2">
               <Disclosure.Button
                 as="a"
-                href='#sd'
+                href='https://wa.me/7907019154'
+                target='_blank'
+                rel='noopener noreferrer'
                 className='text-violet-800 border hover:text-violet-800 block rounded-md px-3 py-2 text-base font-medium'
               >
                 Grab Your Offer Now!

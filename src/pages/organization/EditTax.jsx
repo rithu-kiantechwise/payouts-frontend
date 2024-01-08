@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom';
 import { getEmployeeById, updateSelectedEmployeesTaxes } from '../../api/OrganizationApi';
-import Sidebar from '../../components/organization/orgDashboard/Sidebar';
+import Sidebar from '../../components/organization/Sidebar';
 import toast from 'react-hot-toast';
 import LoadingSpinner from '../../components/LoadingSpinner';
 

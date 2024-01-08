@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import toast from 'react-hot-toast';
 import { getEmployeeById, updateEmployee } from '../../api/OrganizationApi';
 import { useLocation, useNavigate } from 'react-router-dom';
-import Sidebar from '../../components/organization/orgDashboard/Sidebar';
+import Sidebar from '../../components/organization/Sidebar';
 import LoadingSpinner from '../../components/LoadingSpinner';
 
 const EditEmployee = () => {

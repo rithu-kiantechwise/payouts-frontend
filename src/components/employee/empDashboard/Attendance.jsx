@@ -3,7 +3,7 @@ import { employeeCheckout, sendOTP, verifyOTP } from '../../../api/EmployeeApi';
 import toast from 'react-hot-toast';
 import LoadingSpinner from '../../LoadingSpinner';
 
-const Attendance = () => {
+const Attendance = ({ onCheckInChange,onCheckOutChange }) => {
     const [showInput, setShowInput] = useState(false);
     const [otp, setOtp] = useState('');
     const [newOtp, setNewOtp] = useState('');
@@ -30,9 +30,10 @@ const Attendance = () => {
             setLoading(true);
             const response = await verifyOTP();
             setLoading(false);
-            setOtp('')
+            setOtp('');
             if (response.data.success) {
-                toast.success(response.data.message)
+                toast.success(response.data.message);
+                onCheckInChange(true);
                 setShowInput(false);
             } else {
                 toast.error(response.data.message)
@@ -48,6 +49,7 @@ const Attendance = () => {
         setLoading(false);
         if (response.data.success) {
             toast.success(response.data.message)
+            onCheckOutChange(true);
         } else {
             toast.error(response.data.message)
         }

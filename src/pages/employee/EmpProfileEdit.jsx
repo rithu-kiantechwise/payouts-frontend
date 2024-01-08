@@ -89,8 +89,8 @@ const EmpProfileEdit = () => {
             formData.append('position', employeeData.position);
             formData.append('phoneNumber', employeeData.phoneNumber);
             formData.append('image', employeeData.selectedImageFile);
-            setLoading(true)
 
+            setLoading(true)
             const response = await editEmpProfile(formData)
             setLoading(false)
 
@@ -244,7 +244,7 @@ const EmpProfileEdit = () => {
                                             name="position"
                                             required
                                             value={employeeData.position}
-                                            onChange={handleChange}
+                                            disabled
                                             className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-400 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                                         />
                                     </div>

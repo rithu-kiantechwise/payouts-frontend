@@ -3,7 +3,7 @@ import toast from 'react-hot-toast';
 import { employeeRegister } from '../../api/OrganizationApi';
 import { useNavigate } from 'react-router-dom';
 import LoadingSpinner from '../../components/LoadingSpinner';
-import Sidebar from '../../components/organization/orgDashboard/Sidebar';
+import Sidebar from '../../components/organization/Sidebar';
 
 const AddEmployee = () => {
     const navigate = useNavigate();

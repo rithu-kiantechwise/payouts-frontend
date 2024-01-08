@@ -1,35 +1,30 @@
 import React, { useEffect, useState } from 'react'
-import { getAttendanceDetails } from '../../../api/EmployeeApi';
+import LoadingSpinner from '../LoadingSpinner';
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/20/solid';
-import LoadingSpinner from '../../LoadingSpinner';
+import { getEmployeeAttendance } from '../../api/OrganizationApi';
 
-const AttendanceDetails = ({ isEmployeeCheckedIn }) => {
-    const [attendanceDetails, setAttendanceDetails] = useState(null);
+const AttendanceDetails = () => {
+    const [loading, setLoading] = useState(false);
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPages, setTotalPages] = useState(1);
-    const [loading, setLoading] = useState(false);
+    const [attendanceDetails, setAttendanceDetails] = useState([]);
 
     useEffect(() => {
-        const fetchSalaryDetails = async () => {
+        const fetchEmployees = async () => {
             try {
-                setLoading(true)
-                const response = await getAttendanceDetails({ page: currentPage });
+                setLoading(true);
+                const response = await getEmployeeAttendance({ page: currentPage });
                 setLoading(false)
-
-                setAttendanceDetails(response.data.attendanceDetails);
+                setAttendanceDetails(response.data?.attendanceDetails);
                 setTotalPages(response.data?.totalPages);
             } catch (error) {
-                console.error("Error fetching salary details:", error);
+                console.error('Error fetching employees:', error);
             }
-        };
-        fetchSalaryDetails();
-    }, [currentPage, isEmployeeCheckedIn]);
+        }
+        fetchEmployees();
+    }, [currentPage])
 
     const formatDateTime = (dateTime, option) => {
-        if (!dateTime) {
-            return 'N/A';
-        }
-        
         const options = {
             date: {
                 year: 'numeric',
@@ -45,6 +40,10 @@ const AttendanceDetails = ({ isEmployeeCheckedIn }) => {
         return new Intl.DateTimeFormat('en-US', options[option]).format(new Date(dateTime));
     };
 
+    const roundToDecimal = (number, decimalPlaces) => {
+        return Math.round(number * 10 ** decimalPlaces) / 10 ** decimalPlaces;
+    };
+
     const handlePageChange = (newPage) => {
         setCurrentPage(newPage);
     };
@@ -53,32 +52,38 @@ const AttendanceDetails = ({ isEmployeeCheckedIn }) => {
         <>
             {!loading
                 ?
-                <div className='p-2'>
-                    <h2 className='text-2xl font-semibold p-5'>Attendance Details</h2>
+                <div className=''>
+                    <h1 className='text-2xl font-semibold mb-5'>Employee Attendance Details</h1>
+                    {/* <div className='flex justify-end'>
+                        {downloadCSV()}
+                        <button onClick={downloadPDF} className="ml-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                            PDF
+                        </button>
+                        <button onClick={downloadXLSX} className="ml-2 bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
+                            Excel
+                        </button>
+                    </div> */}
                     <table className="min-w-full border-gray-300 text-center items-center border rounded-md mt-5">
+
                         <thead className='bg-slate-800 text-white'>
                             <tr className='text-center'>
+                                <th className="py-2 px-4 border-b">Employee ID</th>
+                                <th className="py-2 px-4 border-b">Name</th>
                                 <th className="py-2 px-4 border-b">Date</th>
-                                <th className="py-2 px-4 border-b">CheckIn</th>
-                                <th className="py-2 px-4 border-b">CheckOut</th>
-                                <th className="py-2 px-4 border-b">Total hours</th>
+                                <th className="py-2 px-4 border-b">Check-In time</th>
+                                <th className="py-2 px-4 border-b">Check-out time</th>
+                                <th className="py-2 px-4 border-b">Total worked hours</th>
                             </tr>
                         </thead>
                         <tbody>
-                            {attendanceDetails?.map((data, index) => (
-                                <tr className='text-center' key={index}>
-                                    <td className="py-2 px-4 border-b">
-                                        {formatDateTime(data.date, 'date')}
-                                    </td>
-                                    <td className="py-2 px-4 border-b">
-                                        {data.checkInTime ? formatDateTime(data.checkInTime, 'time') : 'Not Checked in'}
-                                    </td>
-                                    <td className="py-2 px-4 border-b">
-                                        {data.checkOutTime ? formatDateTime(data.checkOutTime, 'time') : 'Not Checked out'}
-                                    </td>
-                                    <td className="py-2 px-4 border-b">
-                                        {data.totalWorkedHours}
-                                    </td>
+                            {attendanceDetails.map((employee, index) => (
+                                <tr key={index}>
+                                    <td className="py-2 border-b">{employee.employeeId}</td>
+                                    <td className="py-2 border-b">{employee.employeeName}</td>
+                                    <td className="py-2 border-b">{employee.checkInTime ? formatDateTime(employee.checkInTime, 'date') : 'N/A'}</td>
+                                    <td className="py-2 border-b">{employee.checkInTime ? formatDateTime(employee.checkInTime, 'time') : 'N/A'}</td>
+                                    <td className="py-2 border-b">{employee.checkOutTime ? formatDateTime(employee.checkOutTime, 'time') : 'N/A'}</td>
+                                    <td className="py-2 border-b">{roundToDecimal(employee.totalWorkedHours, 2)} hours</td>
                                 </tr>
                             ))}
                         </tbody>
@@ -87,7 +92,7 @@ const AttendanceDetails = ({ isEmployeeCheckedIn }) => {
                         <div className="hidden sm:flex sm:flex-1 sm:items-center sm:justify-between">
                             <div>
                                 <p className="text-sm text-gray-700">
-                                    Showing <span className="font-medium">1</span> to <span className="font-medium">10</span>
+                                    Showing <span className="font-medium">{currentPage}</span> of <span className="font-medium">{totalPages}</span>
                                 </p>
                             </div>
                             <div>

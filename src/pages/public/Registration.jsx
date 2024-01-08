@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import PayoutsLogo from '../../assets/payoutsLogo.png'
 import { useNavigate } from 'react-router-dom'
-import { activatePremiumSubscription, organizationRegister, stripePayment } from '../../api/OrganizationApi';
+import { activatePremiumSubscription, cancelPremiumSubscription, organizationRegister, stripePayment } from '../../api/OrganizationApi';
 import { loadStripe } from '@stripe/stripe-js';
 import toast from 'react-hot-toast';
 import LoadingSpinner from '../../components/LoadingSpinner';
@@ -10,6 +10,7 @@ const Registration = () => {
   const navigate = useNavigate();
   const [step, setStep] = useState(1);
   const [error, setError] = useState('');
+  const [errors, setErrors] = useState({});
   const [newOtp, setNewOtp] = useState('');
   const [loading, setLoading] = useState(false);
   const [isEmailVerified, setIsEmailVerified] = useState(false);
@@ -20,9 +21,11 @@ const Registration = () => {
     phoneNumber: '',
     location: '',
     otp: '',
+    allowedEmployees: '',
+    plan: '',
   });
 
-  const stripePromise = loadStripe('pk_test_51OJqAQSD0QFNYJECgjkoW3U7ZLDkQvDHvitr3RqE5Qd5YNrmSFYlnAK9O05yzfbP562g2jNuBIVTIPBq2Emo8bn5006XRjHrfh');
+  const stripePromise = loadStripe('pk_live_51OPMHXSHtHwrHp77uCrFgiwYdNE8TMrz0pGyplD29qt1y73SaZZUbWJoyfi1vB4Qpqa2UGCXY8IL2oLo7X5DSPQD00aNpjKwIb');
 
   useEffect(() => {
     const query = new URLSearchParams(window.location.search);
@@ -30,9 +33,9 @@ const Registration = () => {
       handleSuccessfulPayment();
 
     } else if (query.get("canceled")) {
-      toast.error("Payment Cancelled");
+      handleCancelledPayment();
     }
-  }, []);
+  });
 
   const handleChange = (e) => {
     try {
@@ -49,7 +52,19 @@ const Registration = () => {
   const handleSuccessfulPayment = async () => {
     try {
       const organizationId = localStorage.getItem('organizationId')
-      const response = await activatePremiumSubscription({ organizationId });
+      const planDuration = parseInt(signupData.plan);
+      console.log(planDuration,'planDuration');
+      const subscriptionStartDate = new Date();
+      const subscriptionEndDate = new Date();
+      subscriptionEndDate.setMonth(subscriptionEndDate.getMonth() + planDuration);
+
+      const subscriptionData = {
+        organizationId,
+        planDuration,
+        subscriptionStartDate,
+        subscriptionEndDate,
+      };
+      const response = await activatePremiumSubscription(subscriptionData);
       if (response.data.success) {
         toast.success(response.data.message);
         localStorage.clear();
@@ -62,26 +77,44 @@ const Registration = () => {
     }
   }
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const handleCancelledPayment = async () => {
     try {
-      setLoading(true);
-      const response = await organizationRegister(signupData);
-      setLoading(false);
+      const organizationId = localStorage.getItem('organizationId')
+      const response = await cancelPremiumSubscription({ organizationId });
       if (response.data.success) {
-        const newUser = response.data.newUser
-        console.log(response.data.otp);
-        toast.success(response.data.message)
-        setNewOtp(response.data.otp)
-        localStorage.setItem('organizationId', newUser._id)
-        setSignupData(newUser)
-        setStep(2)
+        toast.success(response.data.message);
+        localStorage.removeItem('organizationId');
+        navigate('/organization/login');
       } else {
-        toast.error(response.data.message)
+        toast.error(response.data.message);
       }
     } catch (error) {
-      console.error('Login failed:', error);
-      setError('Invalid email or password');
+      console.error('Error in handleSuccessfulPayment:', error);
+    }
+  }
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (validateForm()) {
+      try {
+        setLoading(true);
+        const response = await organizationRegister(signupData);
+        setLoading(false);
+        if (response.data.success) {
+          const newUser = response.data.newUser
+          console.log(response.data.otp);
+          toast.success(response.data.message)
+          setNewOtp(response.data.otp)
+          localStorage.setItem('organizationId', newUser._id)
+          setSignupData(newUser)
+          setStep(2)
+        } else {
+          toast.error(response.data.message)
+        }
+      } catch (error) {
+        console.error('Login failed:', error);
+        setError('Invalid email or password');
+      }
     }
   };
 
@@ -105,17 +138,59 @@ const Registration = () => {
     e.preventDefault();
     const stripe = await stripePromise;
     setLoading(true);
-    const response = await stripePayment();
+    const response = await stripePayment(signupData);
     setLoading(false);
     const session = response.data.session;
-
     const result = await stripe.redirectToCheckout({
       sessionId: session.id,
     });
-
     if (result.error) {
       console.error(result.error.message);
     }
+  };
+
+  const validateForm = () => {
+    const newErrors = {};
+
+    // Validate name
+    if (!signupData.name.trim()) {
+      newErrors.name = 'Name is required';
+    }
+
+    // Validate email
+    if (!signupData.email.trim()) {
+      newErrors.email = 'Email is required';
+    } else if (!/\S+@\S+\.\S+/.test(signupData.email)) {
+      newErrors.email = 'Invalid email address';
+    }
+
+    // Validate phoneNumber
+    if (!signupData.phoneNumber.trim()) {
+      newErrors.phoneNumber = 'Phone Number is required';
+    } else if (!/^\d{10}$/g.test(signupData.phoneNumber)) {
+      newErrors.phoneNumber = 'Invalid phone number (10 digits)';
+    }
+
+    // Validate password
+    if (!signupData.password.trim()) {
+      newErrors.password = 'Password is required';
+    } else if (signupData.password.length < 6) {
+      newErrors.password = 'Password must be at least 6 characters';
+    }
+
+    // Validate location
+    if (!signupData.location.trim()) {
+      newErrors.location = 'Location is required';
+    }
+
+    // Validate allowedEmployees
+    if (!signupData.allowedEmployees) {
+      newErrors.allowedEmployees = 'Number of Employees is required';
+    }
+
+    setErrors(newErrors);
+
+    return Object.keys(newErrors).length === 0;
   };
 
   return (
@@ -154,7 +229,10 @@ const Registration = () => {
                         required
                         onChange={handleChange}
                         placeholder='Company Name'
-                        className='border-transparent px-8 py-2 my-1 min-w-[100%] mt-8 border-0 outline-none focus:shadow-0 border-b border-b-gray-200  focus:border-b-blue-100 focus:border-b-2' />
+                        className='border-transparent px-8 py-2 my-1 min-w-[100%] mt-8 border-0 outline-none focus:shadow-0 border-b border-b-gray-200 focus:border-b-blue-100 focus:border-b-2' />
+                    </div>
+                    <div>
+                      {errors.name && <p className='text-red-500'>{errors.name}</p>}
                     </div>
 
                     <div>
@@ -168,7 +246,10 @@ const Registration = () => {
                         required
                         onChange={handleChange}
                         placeholder='Email'
-                        className='border-transparent px-8 py-2 min-w-[100%] my-1 border-0 outline-none focus:shadow-0 border-b border-b-gray-200  focus:border-b-blue-100 focus:border-b-2' />
+                        className='border-transparent px-8 py-2 min-w-[100%] my-1 border-0 outline-none focus:shadow-0 border-b border-b-gray-200 focus:border-b-blue-100 focus:border-b-2' />
+                    </div>
+                    <div>
+                      {errors.email && <p className='text-red-500'>{errors.email}</p>}
                     </div>
 
                     <div>
@@ -181,7 +262,10 @@ const Registration = () => {
                         value={signupData.phoneNumber}
                         required
                         onChange={handleChange}
-                        className='border-transparent px-8 py-2 min-w-[100%] my-1 border-0 outline-none focus:shadow-0 border-b border-b-gray-200  focus:border-b-blue-100 focus:border-b-2' />
+                        className='border-transparent px-8 py-2 min-w-[100%] my-1 border-0 outline-none focus:shadow-0 border-b border-b-gray-200 focus:border-b-blue-100 focus:border-b-2' />
+                    </div>
+                    <div>
+                      {errors.phoneNumber && <p className='text-red-500'>{errors.phoneNumber}</p>}
                     </div>
 
                     <div>
@@ -194,7 +278,10 @@ const Registration = () => {
                         required
                         onChange={handleChange}
                         placeholder='Password'
-                        className='border-transparent px-8 py-2 min-w-[100%] my-1 border-0 outline-none focus:shadow-0 border-b border-b-gray-200  focus:border-b-blue-100 focus:border-b-2' />
+                        className='border-transparent px-8 py-2 min-w-[100%] my-1 border-0 outline-none focus:shadow-0 border-b border-b-gray-200 focus:border-b-blue-100 focus:border-b-2' />
+                    </div>
+                    <div>
+                      {errors.password && <p className='text-red-500'>{errors.password}</p>}
                     </div>
 
                     <div>
@@ -207,10 +294,38 @@ const Registration = () => {
                         required
                         onChange={handleChange}
                         placeholder='Location'
-                        className='border-transparent px-8 py-2 min-w-[100%] my-1 border-0 outline-none focus:shadow-0 border-b border-b-gray-200  focus:border-b-blue-100 focus:border-b-2' />
+                        className='border-transparent px-8 py-2 min-w-[100%] my-1 border-0 outline-none focus:shadow-0 border-b border-b-gray-200 focus:border-b-blue-100 focus:border-b-2' />
                     </div>
                     <div>
-                      {error && <p className='text-red-500'>{error}</p>}
+                      {errors.location && <p className='text-red-500'>{errors.location}</p>}
+                    </div>
+
+                    <div>
+                      <label htmlFor="allowedEmployees"></label>
+                      <select
+                        id="allowedEmployees"
+                        name="allowedEmployees"
+                        value={signupData.allowedEmployees}
+                        required
+                        onChange={handleChange}
+                        className='border-transparent px-8 py-2 min-w-[100%] my-1 border-0 outline-none focus:shadow-0 border-b border-b-gray-200 focus:border-b-blue-100 focus:border-b-2'
+                      >
+                        <option disabled value='' className='text-gray-100'>No. of Employees</option>
+                        {[...Array(81).keys()].map((value) => (
+                          value + 20 <= 100 && (
+                            <option key={value} value={value + 20}>
+                              {value + 20}
+                            </option>
+                          )
+                        ))}
+                      </select>
+                    </div>
+                    <div>
+                      {errors.allowedEmployees && <p className='text-red-500'>{errors.allowedEmployees}</p>}
+                    </div>
+
+                    <div>
+                      {error && <p className='text-red-600 text-sm'>{error}</p>}
                     </div>
                     <button
                       className='text-lg bg-violet-500 text-white uppercase rounded-3xl lg:px-20 px-10 py-2 mt-10'
@@ -253,6 +368,27 @@ const Registration = () => {
                           Verify OTP
                         </button>
                       }
+                    </div>
+
+                    <div>
+                      <label htmlFor="plan"></label>
+                      <select
+                        id="plan"
+                        name="plan"
+                        value={signupData.plan}
+                        required
+                        onChange={handleChange}
+                        className='border-transparent px-8 py-2 min-w-[100%] my-1 border-0 outline-none focus:shadow-0 border-b border-b-gray-200 focus:border-b-blue-100 focus:border-b-2'
+                      >
+                        <option disabled value='1'>Select a plan</option>
+                        <option value="12">1 Year subscription</option>
+                        <option value="6">6 Months subscription</option>
+                        <option value="3">3 Months subscription</option>
+                        <option value="1">1 Month subscription</option>
+                      </select>
+                    </div>
+                    <div>
+                      {error && <p className='text-red-600 text-sm'>{error}</p>}
                     </div>
                     <button
                       disabled={!isEmailVerified}

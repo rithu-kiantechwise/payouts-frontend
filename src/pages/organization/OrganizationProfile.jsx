@@ -1,7 +1,7 @@
 import React from 'react'
 import { useSelector } from 'react-redux';
 import noProfile from '../../assets/noprofile.jpg'
-import Sidebar from '../../components/organization/orgDashboard/Sidebar';
+import Sidebar from '../../components/organization/Sidebar';
 import { useNavigate } from 'react-router-dom';
 
 const OrganizationProfile = () => {

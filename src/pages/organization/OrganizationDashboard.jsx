@@ -1,7 +1,7 @@
 import React from 'react';
-import Sidebar from '../../components/organization/orgDashboard/Sidebar';
-import EmpLeaveTable from '../../components/organization/orgDashboard/EmpLeaveTable';
-import ReimbursementTable from '../../components/organization/orgDashboard/ReimbursementTable';
+import Sidebar from '../../components/organization/Sidebar';
+import EmpLeaveTable from '../../components/organization/EmpLeaveTable';
+import ReimbursementTable from '../../components/organization/ReimbursementTable';
 
 const OrganizationDashboard = () => {
 

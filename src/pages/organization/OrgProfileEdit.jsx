@@ -4,7 +4,7 @@ import { editOrgProfile } from '../../api/OrganizationApi';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import noProfile from '../../assets/noprofile.jpg'
-import Sidebar from '../../components/organization/orgDashboard/Sidebar';
+import Sidebar from '../../components/organization/Sidebar';
 import { loginUser } from '../../redux/userSlice';
 import LoadingSpinner from '../../components/LoadingSpinner';
 
