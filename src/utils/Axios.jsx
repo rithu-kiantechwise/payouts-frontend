@@ -55,5 +55,5 @@ const createAxiosInstance = (baseURL, tokenKey) => {
 };
 
 export const adminApi = createAxiosInstance(`${process.env.REACT_APP_API_URL}/admin`, "adminToken");
-export const organizationApi = createAxiosInstance(`https://www.api.payouts.online/organization`, "organizationToken");
+export const organizationApi = createAxiosInstance(`${process.env.REACT_APP_API_URL}/organization`, "organizationToken");
 export const employeeApi = createAxiosInstance(`${process.env.REACT_APP_API_URL}/employee`, "employeeToken");
