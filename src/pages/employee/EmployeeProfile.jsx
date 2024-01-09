@@ -172,7 +172,7 @@ const EmployeeProfile = () => {
                   name="bankAccount.accountHolderName"
                   id="accountHolderName"
                   disabled
-                  value={user?.bankAccount.accountHolderName ?? ''}
+                  value={user?.bankAccount?.accountHolderName ?? ''}
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-200 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
               </div>
@@ -188,7 +188,7 @@ const EmployeeProfile = () => {
                   id="accountNumber"
                   name="bankAccount.accountNumber"
                   disabled
-                  value={user?.bankAccount.accountNumber ?? ''}
+                  value={user?.bankAccount?.accountNumber ?? ''}
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-200 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
               </div>
@@ -204,7 +204,7 @@ const EmployeeProfile = () => {
                   id="bankName"
                   name="bankAccount.bankName"
                   disabled
-                  value={user?.bankAccount.bankName ?? ''}
+                  value={user?.bankAccount?.bankName ?? ''}
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-200 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
               </div>
@@ -220,7 +220,7 @@ const EmployeeProfile = () => {
                   id="branch"
                   name="bankAccount.branch"
                   disabled
-                  value={user?.bankAccount.branch ?? ''}
+                  value={user?.bankAccount?.branch ?? ''}
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-200 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
               </div>
@@ -236,7 +236,7 @@ const EmployeeProfile = () => {
                   id="IFSCcode"
                   name="bankAccount.IFSCcode"
                   disabled
-                  value={user?.bankAccount.IFSCcode ?? ''}
+                  value={user?.bankAccount?.IFSCcode ?? ''}
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-200 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
               </div>
@@ -252,7 +252,7 @@ const EmployeeProfile = () => {
                   id="upiId"
                   name="bankAccount.upiId"
                   disabled
-                  value={user?.bankAccount.upiId ?? ''}
+                  value={user?.bankAccount?.upiId ?? ''}
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-200 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
               </div>
