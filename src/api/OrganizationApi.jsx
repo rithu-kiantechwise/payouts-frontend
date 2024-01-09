@@ -135,9 +135,12 @@ export const getAllEmployees = async (credentials) => {
     }
 }
 
-export const getEmployeeById = async (employeeID) => {
+export const getEmployeeById = async (credentials) => {
     try {
-        const response = await organizationApi.get(`/employee-details/${employeeID}`)
+        const response = await organizationApi.get(`/employee-details`, {
+            withCredentials: true,
+            params: credentials,
+        })
 
         return response;
     } catch (error) {

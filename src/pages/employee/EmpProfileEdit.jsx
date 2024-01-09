@@ -24,8 +24,15 @@ const EmpProfileEdit = () => {
         salary: '',
         dob: '',
         imageUrl: '',
+        bankAccount: {
+            accountHolderName: '',
+            accountNumber: '',
+            bankName: '',
+            branch: '',
+            IFSCcode: '',
+            upiId: '',
+        },
     });
-
     useEffect(() => {
         if (user) {
             const formattedDob = new Date(user?.dob).toLocaleDateString('en-CA', {
@@ -43,6 +50,14 @@ const EmpProfileEdit = () => {
                 salary: user?.salary,
                 dob: formattedDob,
                 imageUrl: user?.imageUrl,
+                bankAccount: {
+                    accountHolderName: user?.bankAccount?.accountHolderName || '',
+                    accountNumber: user?.bankAccount?.accountNumber || '',
+                    bankName: user?.bankAccount?.bankName || '',
+                    branch: user?.bankAccount?.branch || '',
+                    IFSCcode: user?.bankAccount?.IFSCcode || '',
+                    upiId: user?.bankAccount?.upiId || '',
+                },
             });
         }
     }, [user])
@@ -50,10 +65,21 @@ const EmpProfileEdit = () => {
     const handleChange = (e) => {
         try {
             const { name, value } = e.target;
-            setEmployeeData(prevEmployeeData => ({
-                ...prevEmployeeData,
-                [name]: value,
-            }));
+            if (name.includes('.')) {
+                const [parentProp, childProp] = name.split('.');
+                setEmployeeData((prevEmployeeData) => ({
+                    ...prevEmployeeData,
+                    [parentProp]: {
+                        ...prevEmployeeData[parentProp],
+                        [childProp]: value,
+                    },
+                }));
+            } else {
+                setEmployeeData((prevEmployeeData) => ({
+                    ...prevEmployeeData,
+                    [name]: value,
+                }));
+            }
         } catch (error) {
             console.error('Error in handleChange:', error);
         }
@@ -89,6 +115,12 @@ const EmpProfileEdit = () => {
             formData.append('position', employeeData.position);
             formData.append('phoneNumber', employeeData.phoneNumber);
             formData.append('image', employeeData.selectedImageFile);
+            formData.append('accountHolderName', employeeData.bankAccount.accountHolderName);
+            formData.append('accountNumber', employeeData.bankAccount.accountNumber);
+            formData.append('bankName', employeeData.bankAccount.bankName);
+            formData.append('branch', employeeData.bankAccount.branch);
+            formData.append('IFSCcode', employeeData.bankAccount.IFSCcode);
+            formData.append('upiId', employeeData.bankAccount.upiId);
 
             setLoading(true)
             const response = await editEmpProfile(formData)
@@ -250,17 +282,125 @@ const EmpProfileEdit = () => {
                                     </div>
                                 </div>
 
-                                <div className="sm:col-span-2 sm:col-start-1">
+                                <div className="sm:col-span-3">
                                     <label htmlFor="phoneNumber" className="block text-sm font-medium leading-6 text-gray-900">
                                         Phone Number
                                     </label>
                                     <div className="mt-2">
                                         <input
                                             type="number"
-                                            name="phoneNumber"
                                             id="phoneNumber"
+                                            name="phoneNumber"
                                             required
                                             value={employeeData.phoneNumber}
+                                            onChange={handleChange}
+                                            className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-400 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                        />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+                                <div className="sm:col-span-2">
+                                    <h2 className="text-base font-semibold text-gray-900">Bank Account Details</h2>
+                                </div>
+
+                                <div className="sm:col-span-2 sm:col-start-1">
+                                    <label htmlFor="accountHolderName" className="block text-sm font-medium leading-6 text-gray-900">
+                                        Account Holder Name
+                                    </label>
+                                    <div className="mt-2">
+                                        <input
+                                            type="text"
+                                            name="bankAccount.accountHolderName"
+                                            id="accountHolderName"
+                                            required
+                                            value={employeeData.bankAccount.accountHolderName}
+                                            onChange={handleChange}
+                                            className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-400 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                        />
+                                    </div>
+                                </div>
+
+                                <div className="sm:col-span-2">
+                                    <label htmlFor="accountNumber" className="block text-sm font-medium leading-6 text-gray-900">
+                                        Account Number
+                                    </label>
+                                    <div className="mt-2">
+                                        <input
+                                            type="number"
+                                            id="accountNumber"
+                                            name="bankAccount.accountNumber"
+                                            required
+                                            value={employeeData.bankAccount.accountNumber}
+                                            onChange={handleChange}
+                                            className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-400 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                        />
+                                    </div>
+                                </div>
+
+                                <div className="sm:col-span-2">
+                                    <label htmlFor="bankName" className="block text-sm font-medium leading-6 text-gray-900">
+                                        Bank Name
+                                    </label>
+                                    <div className="mt-2">
+                                        <input
+                                            type="text"
+                                            id="bankName"
+                                            name="bankAccount.bankName"
+                                            required
+                                            value={employeeData.bankAccount.bankName}
+                                            onChange={handleChange}
+                                            className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-400 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                        />
+                                    </div>
+                                </div>
+
+                                <div className="sm:col-span-2">
+                                    <label htmlFor="branch" className="block text-sm font-medium leading-6 text-gray-900">
+                                        Branch
+                                    </label>
+                                    <div className="mt-2">
+                                        <input
+                                            type="text"
+                                            id="branch"
+                                            name="bankAccount.branch"
+                                            required
+                                            value={employeeData.bankAccount.branch}
+                                            onChange={handleChange}
+                                            className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-400 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                        />
+                                    </div>
+                                </div>
+
+                                <div className="sm:col-span-2">
+                                    <label htmlFor="IFSCcode" className="block text-sm font-medium leading-6 text-gray-900">
+                                        IFSC code
+                                    </label>
+                                    <div className="mt-2">
+                                        <input
+                                            type="text"
+                                            id="IFSCcode"
+                                            name="bankAccount.IFSCcode"
+                                            required
+                                            value={employeeData.bankAccount.IFSCcode}
+                                            onChange={handleChange}
+                                            className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-400 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                        />
+                                    </div>
+                                </div>
+
+                                <div className="sm:col-span-2">
+                                    <label htmlFor="upiId" className="block text-sm font-medium leading-6 text-gray-900">
+                                        Upi Id
+                                    </label>
+                                    <div className="mt-2">
+                                        <input
+                                            type="text"
+                                            id="upiId"
+                                            name="bankAccount.upiId"
+                                            required
+                                            value={employeeData.bankAccount.upiId}
                                             onChange={handleChange}
                                             className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-400 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                                         />

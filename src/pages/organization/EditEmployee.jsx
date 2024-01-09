@@ -18,17 +18,25 @@ const EditEmployee = () => {
         phoneNumber: '',
         dob: '',
         salary: '',
+        bankAccount: {
+            accountHolderName: '',
+            accountNumber: '',
+            bankName: '',
+            branch: '',
+            IFSCcode: '',
+            upiId: '',
+        },
     });
 
     useEffect(() => {
         const employeeID = location.state?.employeeID
-        fetchEmployeeDetails(employeeID)
+        fetchEmployeeDetails(employeeID);
     }, [location.state?.employeeID]);
 
     const fetchEmployeeDetails = async (employeeID) => {
         try {
             setLoading(true);
-            const response = await getEmployeeById(employeeID);
+            const response = await getEmployeeById({ employeeID });
             setLoading(false);
             const formattedDob = new Date(response.data.dob).toLocaleDateString('en-CA', {
                 year: 'numeric',
@@ -47,10 +55,21 @@ const EditEmployee = () => {
     const handleChange = (e) => {
         try {
             const { name, value } = e.target;
-            setEmployeeData({
-                ...employeeData,
-                [name]: value,
-            });
+            if (name.includes('.')) {
+                const [parentProp, childProp] = name.split('.');
+                setEmployeeData((prevEmployeeData) => ({
+                    ...prevEmployeeData,
+                    [parentProp]: {
+                        ...prevEmployeeData[parentProp],
+                        [childProp]: value,
+                    },
+                }));
+            } else {
+                setEmployeeData((prevEmployeeData) => ({
+                    ...prevEmployeeData,
+                    [name]: value,
+                }));
+            }
         } catch (error) {
             console.error('Error in handleChange:', error);
         }
@@ -116,7 +135,7 @@ const EditEmployee = () => {
                                             value={employeeData.employeeID}
                                             onChange={handleChange}
                                             disabled
-                                            className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                            className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-200 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                                         />
                                     </div>
                                 </div>
@@ -132,7 +151,7 @@ const EditEmployee = () => {
                                             required
                                             value={employeeData.firstName}
                                             onChange={handleChange}
-                                            className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                            className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-400 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                                         />
                                     </div>
                                 </div>
@@ -149,7 +168,7 @@ const EditEmployee = () => {
                                             required
                                             value={employeeData.lastName}
                                             onChange={handleChange}
-                                            className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                            className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-400 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                                         />
                                     </div>
                                 </div>
@@ -168,7 +187,7 @@ const EditEmployee = () => {
                                             value={employeeData.email}
                                             onChange={handleChange}
                                             disabled
-                                            className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                            className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-200 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                                         />
                                     </div>
                                 </div>
@@ -185,7 +204,7 @@ const EditEmployee = () => {
                                             required
                                             value={employeeData.position}
                                             onChange={handleChange}
-                                            className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                            className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-400 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                                         />
                                     </div>
                                 </div>
@@ -202,7 +221,7 @@ const EditEmployee = () => {
                                             required
                                             value={employeeData.phoneNumber}
                                             onChange={handleChange}
-                                            className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                            className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-400 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                                         />
                                     </div>
                                 </div>
@@ -219,7 +238,7 @@ const EditEmployee = () => {
                                             required
                                             value={employeeData.dob}
                                             onChange={handleChange}
-                                            className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                            className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-400 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                                         />
                                     </div>
                                 </div>
@@ -236,7 +255,115 @@ const EditEmployee = () => {
                                             required
                                             value={employeeData.salary}
                                             onChange={handleChange}
-                                            className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                            className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-400 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                        />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+                                <div className="sm:col-span-2">
+                                    <h2 className="text-base font-semibold text-gray-900">Bank Account Details</h2>
+                                </div>
+
+                                <div className="sm:col-span-2 sm:col-start-1">
+                                    <label htmlFor="accountHolderName" className="block text-sm font-medium leading-6 text-gray-900">
+                                        Account Holder Name
+                                    </label>
+                                    <div className="mt-2">
+                                        <input
+                                            type="text"
+                                            name="bankAccount.accountHolderName"
+                                            id="accountHolderName"
+                                            required
+                                            value={employeeData.bankAccount.accountHolderName}
+                                            onChange={handleChange}
+                                            className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-400 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                        />
+                                    </div>
+                                </div>
+
+                                <div className="sm:col-span-2">
+                                    <label htmlFor="accountNumber" className="block text-sm font-medium leading-6 text-gray-900">
+                                        Account Number
+                                    </label>
+                                    <div className="mt-2">
+                                        <input
+                                            type="number"
+                                            id="accountNumber"
+                                            name="bankAccount.accountNumber"
+                                            required
+                                            value={employeeData.bankAccount.accountNumber}
+                                            onChange={handleChange}
+                                            className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-400 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                        />
+                                    </div>
+                                </div>
+
+                                <div className="sm:col-span-2">
+                                    <label htmlFor="bankName" className="block text-sm font-medium leading-6 text-gray-900">
+                                        Bank Name
+                                    </label>
+                                    <div className="mt-2">
+                                        <input
+                                            type="text"
+                                            id="bankName"
+                                            name="bankAccount.bankName"
+                                            required
+                                            value={employeeData.bankAccount.bankName}
+                                            onChange={handleChange}
+                                            className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-400 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                        />
+                                    </div>
+                                </div>
+
+                                <div className="sm:col-span-2">
+                                    <label htmlFor="branch" className="block text-sm font-medium leading-6 text-gray-900">
+                                        Branch
+                                    </label>
+                                    <div className="mt-2">
+                                        <input
+                                            type="text"
+                                            id="branch"
+                                            name="bankAccount.branch"
+                                            required
+                                            value={employeeData.bankAccount.branch}
+                                            onChange={handleChange}
+                                            className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-400 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                        />
+                                    </div>
+                                </div>
+
+                                <div className="sm:col-span-2">
+                                    <label htmlFor="IFSCcode" className="block text-sm font-medium leading-6 text-gray-900">
+                                        IFSC code
+                                    </label>
+                                    <div className="mt-2">
+                                        <input
+                                            type="text"
+                                            id="IFSCcode"
+                                            name="bankAccount.IFSCcode"
+                                            required
+                                            value={employeeData.bankAccount.IFSCcode}
+                                            onChange={handleChange}
+                                            className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-400 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                        />
+                                    </div>
+                                </div>
+
+                                <div className="sm:col-span-2">
+                                    <label htmlFor="upiId" className="block text-sm font-medium leading-6 text-gray-900">
+                                        Upi Id
+                                    </label>
+                                    <div className="mt-2">
+                                        <input
+                                            type="text"
+                                            id="upiId"
+                                            name="bankAccount.upiId"
+                                            required
+                                            value={employeeData.bankAccount.upiId}
+                                            onChange={handleChange}
+                                            className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-400 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                                         />
                                     </div>
                                 </div>

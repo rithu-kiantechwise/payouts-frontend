@@ -22,6 +22,14 @@ const SingleEmployeePage = () => {
     phoneNumber: '',
     dob: '',
     salary: '',
+    bankAccount: {
+      accountHolderName: '',
+      accountNumber: '',
+      bankName: '',
+      branch: '',
+      IFSCcode: '',
+      upiId: '',
+    },
   });
 
   useEffect(() => {
@@ -32,7 +40,7 @@ const SingleEmployeePage = () => {
   const fetchEmployeeDetails = async (employeeID) => {
     try {
       setLoading(true)
-      const response = await getEmployeeById(employeeID);
+      const response = await getEmployeeById({ employeeID });
       setLoading(false)
       const formattedDob = new Date(response.data.dob).toLocaleDateString('en-CA', {
         year: 'numeric',
@@ -121,7 +129,6 @@ const SingleEmployeePage = () => {
                       name="employeeID"
                       id="employeeID"
                       value={employeeData?.employeeID ?? ''}
-                      required
                       disabled
                       className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-200 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                     />
@@ -137,7 +144,6 @@ const SingleEmployeePage = () => {
                       name="firstName"
                       id="firstName"
                       value={employeeData?.firstName ?? ''}
-                      required
                       disabled
                       className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-200 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                     />
@@ -154,7 +160,6 @@ const SingleEmployeePage = () => {
                       name="lastName"
                       id="lastName"
                       value={employeeData?.lastName ?? ''}
-                      required
                       disabled
                       className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-200 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                     />
@@ -171,7 +176,6 @@ const SingleEmployeePage = () => {
                       name="email"
                       id="email"
                       value={employeeData?.email ?? ''}
-                      required
                       disabled
                       className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-200 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                     />
@@ -188,7 +192,6 @@ const SingleEmployeePage = () => {
                       name="dob"
                       id="dob"
                       value={employeeData?.dob ?? ''}
-                      required
                       disabled
                       className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-200 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                     />
@@ -205,7 +208,6 @@ const SingleEmployeePage = () => {
                       id="salary"
                       name="salary"
                       value={employeeData?.salary ?? ''}
-                      required
                       disabled
                       className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-200 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                     />
@@ -222,7 +224,6 @@ const SingleEmployeePage = () => {
                       id="position"
                       name="position"
                       value={employeeData?.position ?? ''}
-                      required
                       disabled
                       className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-200 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                     />
@@ -239,7 +240,107 @@ const SingleEmployeePage = () => {
                       name="phoneNumber"
                       id="phoneNumber"
                       value={employeeData?.phoneNumber ?? ''}
-                      required
+                      disabled
+                      className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-200 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                    />
+                  </div>
+                </div>
+              </div>
+              <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+                <div className="sm:col-span-2">
+                  <h2 className="text-base font-semibold text-gray-900">Bank Account Details</h2>
+                </div>
+
+                <div className="sm:col-span-2 sm:col-start-1">
+                  <label htmlFor="accountHolderName" className="block text-sm font-medium leading-6 text-gray-900">
+                    Account Holder Name
+                  </label>
+                  <div className="mt-2">
+                    <input
+                      type="text"
+                      name="bankAccount.accountHolderName"
+                      id="accountHolderName"
+                      value={employeeData.bankAccount.accountHolderName}
+                      disabled
+                      className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-200 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                    />
+                  </div>
+                </div>
+
+                <div className="sm:col-span-2">
+                  <label htmlFor="accountNumber" className="block text-sm font-medium leading-6 text-gray-900">
+                    Account Number
+                  </label>
+                  <div className="mt-2">
+                    <input
+                      type="number"
+                      id="accountNumber"
+                      name="bankAccount.accountNumber"
+                      value={employeeData.bankAccount.accountNumber}
+                      disabled
+                      className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-200 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                    />
+                  </div>
+                </div>
+
+                <div className="sm:col-span-2">
+                  <label htmlFor="bankName" className="block text-sm font-medium leading-6 text-gray-900">
+                    Bank Name
+                  </label>
+                  <div className="mt-2">
+                    <input
+                      type="text"
+                      id="bankName"
+                      name="bankAccount.bankName"
+                      value={employeeData.bankAccount.bankName}
+                      disabled
+                      className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-200 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                    />
+                  </div>
+                </div>
+
+                <div className="sm:col-span-2">
+                  <label htmlFor="branch" className="block text-sm font-medium leading-6 text-gray-900">
+                    Branch
+                  </label>
+                  <div className="mt-2">
+                    <input
+                      type="text"
+                      id="branch"
+                      name="bankAccount.branch"
+                      value={employeeData.bankAccount.branch}
+                      disabled
+                      className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-200 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                    />
+                  </div>
+                </div>
+
+                <div className="sm:col-span-2">
+                  <label htmlFor="IFSCcode" className="block text-sm font-medium leading-6 text-gray-900">
+                    IFSC code
+                  </label>
+                  <div className="mt-2">
+                    <input
+                      type="text"
+                      id="IFSCcode"
+                      name="bankAccount.IFSCcode"
+                      value={employeeData.bankAccount.IFSCcode}
+                      disabled
+                      className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-200 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                    />
+                  </div>
+                </div>
+
+                <div className="sm:col-span-2">
+                  <label htmlFor="upiId" className="block text-sm font-medium leading-6 text-gray-900">
+                    Upi Id
+                  </label>
+                  <div className="mt-2">
+                    <input
+                      type="text"
+                      id="upiId"
+                      name="bankAccount.upiId"
+                      value={employeeData.bankAccount.upiId}
                       disabled
                       className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-200 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                     />

@@ -45,6 +45,11 @@ const AttendanceDetails = ({ isEmployeeCheckedIn }) => {
         return new Intl.DateTimeFormat('en-US', options[option]).format(new Date(dateTime));
     };
 
+    const transformDateFormat = (originalDate) => {
+        const [month, day, year] = originalDate.split('/');
+        return `${day}/${month}/${year}`;
+    };
+
     const handlePageChange = (newPage) => {
         setCurrentPage(newPage);
     };
@@ -68,7 +73,7 @@ const AttendanceDetails = ({ isEmployeeCheckedIn }) => {
                             {attendanceDetails?.map((data, index) => (
                                 <tr className='text-center' key={index}>
                                     <td className="py-2 px-4 border-b">
-                                        {formatDateTime(data.date, 'date')}
+                                        {transformDateFormat(formatDateTime(data.date, 'date'))}
                                     </td>
                                     <td className="py-2 px-4 border-b">
                                         {data.checkInTime ? formatDateTime(data.checkInTime, 'time') : 'Not Checked in'}

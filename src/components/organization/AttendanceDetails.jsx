@@ -10,7 +10,7 @@ const AttendanceDetails = () => {
     const [attendanceDetails, setAttendanceDetails] = useState([]);
 
     useEffect(() => {
-        const fetchEmployees = async () => {
+        const fetchAttendance = async () => {
             try {
                 setLoading(true);
                 const response = await getEmployeeAttendance({ page: currentPage });
@@ -18,18 +18,18 @@ const AttendanceDetails = () => {
                 setAttendanceDetails(response.data?.attendanceDetails);
                 setTotalPages(response.data?.totalPages);
             } catch (error) {
-                console.error('Error fetching employees:', error);
+                console.error('Error fetching attendance details:', error);
             }
         }
-        fetchEmployees();
+        fetchAttendance();
     }, [currentPage])
 
     const formatDateTime = (dateTime, option) => {
         const options = {
             date: {
-                year: 'numeric',
+                day: 'numeric',
                 month: 'numeric',
-                day: 'numeric'
+                year: 'numeric',
             },
             time: {
                 hour: 'numeric',
@@ -40,12 +40,19 @@ const AttendanceDetails = () => {
         return new Intl.DateTimeFormat('en-US', options[option]).format(new Date(dateTime));
     };
 
+    const transformDateFormat = (originalDate) => {
+        const [month, day, year] = originalDate.split('/');
+        return `${day}/${month}/${year}`;
+    };
+
     const roundToDecimal = (number, decimalPlaces) => {
         return Math.round(number * 10 ** decimalPlaces) / 10 ** decimalPlaces;
     };
 
     const handlePageChange = (newPage) => {
-        setCurrentPage(newPage);
+        if (newPage >= 1 && newPage <= totalPages) {
+            setCurrentPage(newPage);
+        }
     };
 
     return (
@@ -80,9 +87,9 @@ const AttendanceDetails = () => {
                                 <tr key={index}>
                                     <td className="py-2 border-b">{employee.employeeId}</td>
                                     <td className="py-2 border-b">{employee.employeeName}</td>
-                                    <td className="py-2 border-b">{employee.checkInTime ? formatDateTime(employee.checkInTime, 'date') : 'N/A'}</td>
-                                    <td className="py-2 border-b">{employee.checkInTime ? formatDateTime(employee.checkInTime, 'time') : 'N/A'}</td>
-                                    <td className="py-2 border-b">{employee.checkOutTime ? formatDateTime(employee.checkOutTime, 'time') : 'N/A'}</td>
+                                    <td className="py-2 border-b">{employee.checkInTime ? transformDateFormat(formatDateTime(employee.checkInTime, 'date')) : 'N/A'}</td>
+                                    <td className="py-2 border-b">{employee.checkInTime ? formatDateTime(employee.checkInTime, 'time') : 'Not Checked in'}</td>
+                                    <td className="py-2 border-b">{employee.checkOutTime ? formatDateTime(employee.checkOutTime, 'time') : 'Not Checked out'}</td>
                                     <td className="py-2 border-b">{roundToDecimal(employee.totalWorkedHours, 2)} hours</td>
                                 </tr>
                             ))}
