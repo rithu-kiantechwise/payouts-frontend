@@ -34,23 +34,24 @@ const createAxiosInstance = (baseURL, tokenKey) => {
                         originalRequest.headers.Authorization = 'Bearer ' + newToken;
                         return axios(originalRequest);
                     } catch (refreshError) {
-                         if (refreshError.response && refreshError.response.status === 401) {
-                            // Unauthorized, clear authentication-related items
-                            localStorage.removeItem(tokenKey);
-                            localStorage.removeItem("refreshToken");
-                            toast.error('Session expired. Please signin again');
-                        } else {
-                            // Other refresh errors
-                            toast.error('Failed to refresh token. Please signin again');
-                        }
+                        handleSessionExpired();
+                        window.location.href = "/organization/login";
                     }
                 } else {
-                    // window.location.href = '/login';
+                    return Promise.reject(error);
                 }
+            } else if (error.response && error.response.status === 403) {
+                handleSessionExpired();
+                window.location.href = "/organization/login";
             }
             return Promise.reject(error);
         }
     );
+    const handleSessionExpired = () => {
+        localStorage.clear();
+        toast.error('Session Expired, Please Login');
+    };
+
     return api;
 };
 
