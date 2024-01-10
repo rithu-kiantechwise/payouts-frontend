@@ -13,7 +13,7 @@ const OrganizationProtectedRoute = () => {
         const freeTrialEndDate = user?.freeTrial?.endDate
         const freeTrialDateCheck = new Date(freeTrialEndDate) > new Date();
 
-        if ((user.premium.isActive && premiumDateCheck) || (user.freeTrial.isActive && freeTrialDateCheck)) {
+        if ((user?.premium?.isActive && premiumDateCheck) || (user?.freeTrial?.isActive && freeTrialDateCheck)) {
             return <Outlet />;
         }
         else {

@@ -7,7 +7,7 @@ const createAxiosInstance = (baseURL, tokenKey) => {
     api.interceptors.request.use((req) => {
         const token = localStorage.getItem(tokenKey);
         if (token) {
-            req.headers.Authorization = "Bearer " + token;
+            req.headers.Authorization = `Bearer ${token}`;
         }
         return req;
     });
@@ -35,24 +35,31 @@ const createAxiosInstance = (baseURL, tokenKey) => {
                         return axios(originalRequest);
                     } catch (refreshError) {
                         handleSessionExpired();
-                        window.location.href = "/organization/login";
                     }
                 } else {
                     return Promise.reject(error);
                 }
             } else if (error.response && error.response.status === 403) {
                 handleSessionExpired();
-                window.location.href = "/organization/login";
             }
             return Promise.reject(error);
         }
     );
     const handleSessionExpired = () => {
         localStorage.clear();
-        toast.error('Session Expired, Please Login');
+        localStorage.setItem('sessionExpired', 'true');
+        window.location.href = "/organization/login";
     };
 
     return api;
+};
+
+window.onload = () => {
+    const sessionExpired = localStorage.getItem('sessionExpired');
+    if (sessionExpired === 'true') {
+        localStorage.removeItem('sessionExpired');
+        toast.error('Session Expired, Please Login');
+    }
 };
 
 export const adminApi = createAxiosInstance(`${process.env.REACT_APP_API_URL}/admin`, "adminToken");
