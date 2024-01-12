@@ -1,6 +1,6 @@
-import React from 'react'
+import React from 'react';
 import { Toaster } from 'react-hot-toast';
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import PublicRoute from './routes/PublicRoute';
 import EmployeeRoute from './routes/employeeRoute/EmployeeRoute';
 import AdminRoute from './routes/adminRoute/AdminRoute';
@@ -17,7 +17,7 @@ const App = () => {
         <Route path='/organization/*' element={<OrganizationRoute />} />
       </Routes>
     </BrowserRouter>
-  )
-}
+  );
+};
 
 export default App;

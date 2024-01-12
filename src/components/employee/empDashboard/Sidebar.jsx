@@ -26,9 +26,11 @@ const Sidebar = () => {
     return (
         <div>
             <aside className="flex flex-col w-64 min-h-[100%] px-4 py-8 overflow-y-auto border-r rtl:border-r-0 rtl:border-l bg-gray-900 border-gray-700">
-                <a href="#sfd" className="mx-auto">
+                <button
+                    onClick={() => navigate('/')}
+                    className="mx-auto">
                     <img className="w-auto h-6 sm:h-7" src={payoutsLogo} alt="" />
-                </a>
+                </button>
 
                 <Link to={'/employee/employee-profile'} className='flex flex-col items-center mt-6 -mx-2'>
                     {

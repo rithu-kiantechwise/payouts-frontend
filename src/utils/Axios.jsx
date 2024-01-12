@@ -30,7 +30,6 @@ const createAxiosInstance = (baseURL, tokenKey) => {
                         );
                         const newToken = response.data.newAccessToken;
                         localStorage.setItem(tokenKey, newToken);
-
                         originalRequest.headers.Authorization = 'Bearer ' + newToken;
                         return axios(originalRequest);
                     } catch (refreshError) {
@@ -50,7 +49,6 @@ const createAxiosInstance = (baseURL, tokenKey) => {
         localStorage.setItem('sessionExpired', 'true');
         window.location.href = "/organization/login";
     };
-
     return api;
 };
 

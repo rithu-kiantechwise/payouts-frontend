@@ -190,8 +190,8 @@ const AttendanceDetails = () => {
                             <div>
                                 <nav className="isolate inline-flex -space-x-px rounded-md shadow-sm" aria-label="Pagination">
                                     <button
-                                        onClick={() => handlePageChange(currentPage - 1)}
-                                        disabled={currentPage === 1}
+                                        onClick={() => handlePageChange(currentPage + 1)}
+                                        // disabled={currentPage === totalPages}
                                         className="relative inline-flex items-center rounded-l-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0"
                                     >
                                         <span className="sr-only">Previous</span>
@@ -205,8 +205,8 @@ const AttendanceDetails = () => {
                                         {currentPage}
                                     </button>
                                     <button
-                                        onClick={() => handlePageChange(currentPage + 1)}
-                                        // disabled={currentPage === totalPages}
+                                        onClick={() => handlePageChange(currentPage - 1)}
+                                        disabled={currentPage === 1}
                                         className="relative inline-flex items-center rounded-r-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0"
                                     >
                                         <span className="sr-only">Next</span>

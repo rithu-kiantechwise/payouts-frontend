@@ -13,23 +13,24 @@ const AdminRoute = () => {
   const dispatch = useDispatch();
 
   const fetchAdmin = async () => {
-      if (localStorage.getItem('adminToken')) {
-          const response = await fetchAdminData();
-          dispatch(loginUser(response.data?.adminDetail));
-      }
+    if (localStorage.getItem('adminToken')) {
+      const response = await fetchAdminData();
+      dispatch(loginUser(response?.data));
+    }
   }
 
   useEffect(() => {
-      fetchAdmin();
+    fetchAdmin();
   });
+
   return (
-   <Routes>
-     <Route path='/login/*' element={<AdminLogin />} />
-     <Route path='/forgot-password/*' element={<AdminForgotPassword />} />
-     <Route path='/dashboard/*' element={<AdminDashboard />} />
-     <Route path='/organization-details/*' element={<ManageOrganization />} />
-     <Route path='/new-organization/*' element={<AddOrganization />} />
-   </Routes>
+    <Routes>
+      <Route path='/login/*' element={<AdminLogin />} />
+      <Route path='/forgot-password/*' element={<AdminForgotPassword />} />
+      <Route path='/dashboard/*' element={<AdminDashboard />} />
+      <Route path='/organization-details/*' element={<ManageOrganization />} />
+      <Route path='/new-organization/*' element={<AddOrganization />} />
+    </Routes>
   )
 }
 

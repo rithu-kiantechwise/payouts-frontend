@@ -15,7 +15,7 @@ const EmpLeaveTable = () => {
     const [totalPages, setTotalPages] = useState(1);
     const [loading, setLoading] = useState(false);
 
-
+    console.log(leaveDetails, 'leaveDetails');
     useEffect(() => {
         const fetchAllEmployeesLeaveDetails = async () => {
             try {
@@ -185,6 +185,7 @@ const EmpLeaveTable = () => {
                                 <th className="py-2 px-4 border-b">Employee ID</th>
                                 <th className="py-2 px-4 border-b">Full Name</th>
                                 <th className="py-2 px-4 border-b">Leave Date</th>
+                                <th className="py-2 px-4 border-b">Leave time</th>
                                 <th className="py-2 px-4 border-b">Reason</th>
                                 <th className="py-2 px-4 border-b">Status</th>
                                 <th className="py-2 px-4 border-b">Action</th>
@@ -199,6 +200,9 @@ const EmpLeaveTable = () => {
                                             <td className="py-2 px-4 border-b">{employee?.firstName} {employee?.lastName}</td>
                                             <td className="py-2 px-4 border-b">
                                                 {new Date(leave?.startDate).toLocaleDateString()} - {new Date(leave?.endDate).toLocaleDateString()}
+                                            </td>
+                                            <td className="py-2 px-4 border-b">
+                                                {leave?.startTime} - {leave?.endTime}
                                             </td>
                                             <td className="py-2 px-4 border-b">{leave?.reason}</td>
                                             <td className={`py-2 px-4 border-b font-medium ${getStatusColor(leave?.status)}`}>{leave?.status}</td>

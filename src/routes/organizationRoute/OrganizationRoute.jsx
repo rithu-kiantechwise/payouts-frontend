@@ -30,8 +30,9 @@ const OrganizationRoute = () => {
   }
 
   useEffect(() => {
-    fetchOrganization()
+    fetchOrganization();
   });
+
   return (
     <Routes>
       <Route element={<OrganizationPublicRoute />}>

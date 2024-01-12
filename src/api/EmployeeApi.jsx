@@ -150,6 +150,17 @@ export const applyLeave = async (credentials) => {
     }
 }
 
+export const updateLeave = async (credentials) => {
+    try {
+        const response = await employeeApi.post(`/edit-leave`, credentials, { withCredentials: true })
+
+        return response;
+    } catch (error) {
+        console.error('Error during employee deletion:', error);
+        return error.response
+    }
+}
+
 export const getAllLeave = async (credentials) => {
     try {
         const response = await employeeApi.get(`/get-leave`, credentials, { withCredentials: true })
@@ -157,6 +168,31 @@ export const getAllLeave = async (credentials) => {
         return response;
     } catch (error) {
         console.error('Error during employee deletion:', error);
+        return error.response
+    }
+}
+
+export const getUpcomingLeave = async (credentials) => {
+    try {
+        const response = await employeeApi.get(`/upcoming-leave`, credentials, { withCredentials: true })
+
+        return response;
+    } catch (error) {
+        console.error('Error during employee deletion:', error);
+        return error.response
+    }
+}
+
+export const fetchLeaveDetails = async (credentials) => {
+    try {
+        const response = await employeeApi.get(`/leave-details`, {
+            withCredentials: true,
+            params: credentials,
+        })
+
+        return response;
+    } catch (error) {
+        console.error('Error during leave fetch:', error);
         return error.response
     }
 }

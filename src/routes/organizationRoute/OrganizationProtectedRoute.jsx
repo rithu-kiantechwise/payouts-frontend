@@ -4,7 +4,11 @@ import { Navigate, Outlet } from 'react-router-dom';
 
 const OrganizationProtectedRoute = () => {
     const token = localStorage.getItem("organizationToken");
-    const user = useSelector((state) => state.user?.user);
+    const user = useSelector((state) => state?.user?.user);
+
+    if (!token) {
+        return <Navigate to={"/organization/login"} />;
+    }
 
     if (user) {
         const premiumEndDate = user?.premium?.subscriptionEndDate
@@ -15,8 +19,7 @@ const OrganizationProtectedRoute = () => {
 
         if ((user?.premium?.isActive && premiumDateCheck) || (user?.freeTrial?.isActive && freeTrialDateCheck)) {
             return <Outlet />;
-        }
-        else {
+        } else {
             <Navigate to={"/organization/payment"} />
         }
     }

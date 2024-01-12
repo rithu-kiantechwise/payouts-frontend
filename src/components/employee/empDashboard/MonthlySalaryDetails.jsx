@@ -9,7 +9,7 @@ const MonthlySalaryDetails = () => {
     const [totalPages, setTotalPages] = useState(1);
     const [loading, setLoading] = useState(false);
 
-
+    console.log(salaryDetails, 'salaryDetails');
     useEffect(() => {
         const fetchSalaryDetails = async () => {
             try {
@@ -52,15 +52,19 @@ const MonthlySalaryDetails = () => {
                         <tbody>
                             {salaryDetails?.map((data) => (
                                 <tr className='text-center' key={data.month}>
-                                    <td>{data.month}</td>
+                                    <td className="py-2 px-4 border-b">{data.month}</td>
                                     <td className="py-2 px-4 border-b">
-                                        <ul>
-                                            {data.reimbursements.map((reimbursement) => (
-                                                <li key={reimbursement._id}>
-                                                    ₹ {reimbursement.amount}
-                                                </li>
-                                            ))}
-                                        </ul>
+                                        {data.reimbursements && data.reimbursements.length > 0 ? (
+                                            <ul>
+                                                {data.reimbursements.map((reimbursement) => (
+                                                    <li key={reimbursement._id}>
+                                                        ₹ {reimbursement.amount}
+                                                    </li>
+                                                ))}
+                                            </ul>
+                                        ) : (
+                                            'N/A'
+                                        )}
                                     </td>
                                     <td className="py-2 px-4 border-b">
                                         ₹ {data.actualSalary}

@@ -275,7 +275,6 @@ const EditEmployee = () => {
                                             type="text"
                                             name="bankAccount.accountHolderName"
                                             id="accountHolderName"
-                                            required
                                             value={employeeData.bankAccount.accountHolderName}
                                             onChange={handleChange}
                                             className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-400 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
@@ -292,7 +291,6 @@ const EditEmployee = () => {
                                             type="number"
                                             id="accountNumber"
                                             name="bankAccount.accountNumber"
-                                            required
                                             value={employeeData.bankAccount.accountNumber}
                                             onChange={handleChange}
                                             className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-400 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
@@ -309,7 +307,6 @@ const EditEmployee = () => {
                                             type="text"
                                             id="bankName"
                                             name="bankAccount.bankName"
-                                            required
                                             value={employeeData.bankAccount.bankName}
                                             onChange={handleChange}
                                             className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-400 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
@@ -326,7 +323,6 @@ const EditEmployee = () => {
                                             type="text"
                                             id="branch"
                                             name="bankAccount.branch"
-                                            required
                                             value={employeeData.bankAccount.branch}
                                             onChange={handleChange}
                                             className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-400 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
@@ -343,7 +339,6 @@ const EditEmployee = () => {
                                             type="text"
                                             id="IFSCcode"
                                             name="bankAccount.IFSCcode"
-                                            required
                                             value={employeeData.bankAccount.IFSCcode}
                                             onChange={handleChange}
                                             className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-400 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
@@ -360,7 +355,6 @@ const EditEmployee = () => {
                                             type="text"
                                             id="upiId"
                                             name="bankAccount.upiId"
-                                            required
                                             value={employeeData.bankAccount.upiId}
                                             onChange={handleChange}
                                             className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-400 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"

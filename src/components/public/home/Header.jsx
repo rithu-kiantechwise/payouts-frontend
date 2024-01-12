@@ -1,9 +1,13 @@
-import React, { Fragment } from 'react'
+import React, { Fragment, useEffect, useState } from 'react'
 import noProfile from '../../../assets/noprofile.jpg'
 import { Disclosure, Menu, Transition, } from '@headlessui/react'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 import { useNavigate } from 'react-router-dom'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { fetchEmployeeData } from '../../../api/EmployeeApi'
+import { fetchOrganizationData } from '../../../api/OrganizationApi'
+import { loginUser } from '../../../redux/userSlice'
+import { fetchAdminData } from '../../../api/AdminApi'
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
@@ -11,7 +15,40 @@ function classNames(...classes) {
 
 const Header = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const [dashboardLink, setDashboardLink] = useState('/');
+  const [profileLink, setProfileLink] = useState('/');
   const user = useSelector((state) => state.user.user);
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      try {
+        let response;
+
+        if (localStorage.getItem('employeeToken')) {
+          response = await fetchEmployeeData();
+          setDashboardLink('/employee/dashboard');
+          setProfileLink('/employee/employee-profile');
+        } else if (localStorage.getItem('organizationToken')) {
+          response = await fetchOrganizationData();
+          setDashboardLink('/organization/dashboard');
+          setProfileLink('/organization/organization-profile');
+        } else if (localStorage.getItem('adminToken')) {
+          response = await fetchAdminData();
+          setDashboardLink('/admin/dashboard');
+          setProfileLink('/admin/admin-profile');
+        }
+
+        if (response?.data) {
+          dispatch(loginUser(response.data));
+        }
+      } catch (error) {
+        console.error('Error fetching user data:', error);
+      }
+    };
+    fetchUser();
+  }, []);
+
   const logoutFunction = () => {
     localStorage.clear()
   }
@@ -76,21 +113,21 @@ const Header = () => {
                         <Menu.Item>
                           {({ active }) => (
                             <button
-                              onClick={() => navigate('/organization/dashboard')}
+                              onClick={() => navigate(dashboardLink)}
                               className={classNames(active ? 'bg-gray-100' : '', 'block min-w-full text-left px-4 py-2 text-sm text-gray-700')}
                             >
-                              Dasboard
+                              Dashboard
                             </button>
                           )}
                         </Menu.Item>
                         <Menu.Item>
                           {({ active }) => (
-                            <a
-                              href="#s"
+                            <button
+                              onClick={() => navigate(profileLink)}
                               className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
                             >
                               Profile Settings
-                            </a>
+                            </button>
                           )}
                         </Menu.Item>
                         <Menu.Item>
