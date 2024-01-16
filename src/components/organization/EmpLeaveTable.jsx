@@ -15,7 +15,6 @@ const EmpLeaveTable = () => {
     const [totalPages, setTotalPages] = useState(1);
     const [loading, setLoading] = useState(false);
 
-    console.log(leaveDetails, 'leaveDetails');
     useEffect(() => {
         const fetchAllEmployeesLeaveDetails = async () => {
             try {
@@ -139,13 +138,19 @@ const EmpLeaveTable = () => {
                 leaveDetails: leaveDetails.find((leave) => leave._id === leaveId)?.status
             }))
             const isAnyLeaveApprovedOrRejected = currentStatus.some(
-                (item) => item.leaveDetails === 'Approved' || item.leaveDetails === 'Rejected'
+                (item) => ['Approved', 'Rejected'].includes(item.leaveDetails)
+            );
+            const isLeaveCancelled = currentStatus.some(
+                (item) => item.leaveDetails === 'Cancelled'
             );
             if (isAnyLeaveApprovedOrRejected) {
                 toast.error('Cannot update status. Status is already Approved or Rejected.');
                 return;
             }
-
+            if (isLeaveCancelled) {
+                toast.error('Cannot update status. Status is already Cancelled.');
+                return;
+            }
             const response = await updateLeaveStatus({ leaveId, newStatus });
             if (response.data.success) {
                 setLeaveDetails((prevLeaveDetails) =>
@@ -161,9 +166,11 @@ const EmpLeaveTable = () => {
             console.error('Error updating leave status:', error);
         }
     };
+
     const handlePageChange = (newPage) => {
         setCurrentPage(newPage);
     };
+
     return (
         <>
             {!loading
@@ -285,6 +292,8 @@ const getStatusColor = (status) => {
         case 'Rejected':
             return 'text-red-700';
         case 'Pending':
+            return 'text-orange-500';
+        case 'Cancelled':
             return 'text-orange-500';
         default:
             return '';

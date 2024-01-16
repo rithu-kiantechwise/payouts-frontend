@@ -53,7 +53,7 @@ const Registration = () => {
     try {
       const organizationId = localStorage.getItem('organizationId')
       const planDuration = parseInt(signupData.plan);
-      console.log(planDuration,'planDuration');
+      console.log(planDuration, 'planDuration');
       const subscriptionStartDate = new Date();
       const subscriptionEndDate = new Date();
       subscriptionEndDate.setMonth(subscriptionEndDate.getMonth() + planDuration);
@@ -199,7 +199,10 @@ const Registration = () => {
         ?
         <div className='grid grid-cols-1 lg:grid-cols-2 lg:max-w-[80%] max-w-[90%] gap-10 mt-10 m-auto p-6'>
           <div className=''>
-            <img src={PayoutsLogo} alt="Payouts" className='h-10' />
+            <button
+              onClick={() => navigate('/')}>
+              <img src={PayoutsLogo} alt="Payouts" className='h-10' />
+            </button>
             <h4 className='mt-6'> Payouts, an online payroll software, empowers businesses to efficiently manage payroll operations and ensure timely employee payments.</h4>
             <h2 className='mt-10'>With Payouts, you can:</h2>
             <div className='leading-[2.5rem]'>

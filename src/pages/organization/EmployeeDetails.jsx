@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { getAllEmployees } from '../../api/OrganizationApi';
 import Sidebar from '../../components/organization/Sidebar';
-import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/20/solid'
+import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/20/solid';
 import LoadingSpinner from '../../components/LoadingSpinner';
 
 
@@ -55,8 +55,13 @@ const EmployeeDetails = () => {
                             <div className=''>
                                 <button
                                     onClick={() => navigate('/organization/new-employee')}
-                                    className='px-3 py-2 bg-violet-700 font-medium text-white rounded mt-5'>
+                                    className='px-3 py-2 bg-violet-700 font-medium text-white rounded mt-5 mr-5'>
                                     Add employee
+                                </button>
+                                <button
+                                    onClick={() => navigate('/organization/salary-details')}
+                                    className='px-3 py-2 bg-violet-700 font-medium text-white rounded mt-5'>
+                                    Employee salary
                                 </button>
                             </div>
                         </div>
@@ -131,6 +136,6 @@ const EmployeeDetails = () => {
             </div>
         </div>
     )
-}
+};
 
 export default EmployeeDetails;

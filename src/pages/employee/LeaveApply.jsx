@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 import LoadingSpinner from '../../components/LoadingSpinner';
-import { applyLeave, fetchLeaveDetails, updateLeave } from '../../api/EmployeeApi';
+import { applyLeave, cancelLeave, fetchLeaveDetails, updateLeave } from '../../api/EmployeeApi';
 import { useLocation, useNavigate } from 'react-router-dom';
 import Sidebar from '../../components/employee/empDashboard/Sidebar';
+import Swal from 'sweetalert2';
+import withReactContent from 'sweetalert2-react-content';
+const MySwal = withReactContent(Swal);
 
 const LeaveApply = () => {
     const location = useLocation();
@@ -51,6 +54,56 @@ const LeaveApply = () => {
             getLeaveDetails();
         }
     }, [location.state?.leaveId]);
+
+    const handleCancel = async (e) => {
+        e.preventDefault();
+        try {
+            MySwal.fire({
+                title: "Are you sure?",
+                text: "You won't be able to revert this!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Yes, Cancel it!",
+            }).then(async (result) => {
+                if (result.isConfirmed) {
+                    MySwal.fire({
+                        title: "Cancelling...",
+                        icon: "info",
+                        allowOutsideClick: false,
+                        showConfirmButton: false,
+                    });
+                    try {
+                        const leaveId = formData._id;
+                        setLoading(true);
+                        const response = await cancelLeave({ leaveId });
+                        setLoading(false);
+
+                        if (response.data?.success) {
+                            MySwal.fire({
+                                title: "Cancelled!",
+                                text: response.data.message,
+                                icon: "success",
+                            });
+                            navigate('/employee/leave-calendar');
+                        } else {
+                            MySwal.fire({
+                                title: "Already Cancelled",
+                                text: response.data.message || 'An unexpected error occurred',
+                                icon: "warning",
+                            });
+                        }
+                    } catch (error) {
+                        console.error('Error cancelling leave:', error);
+                        toast.error('An unexpected error occurred while cancelling leave.');
+                    }
+                }
+            });
+        } catch (error) {
+            console.error('Error deleting employee:', error);
+        }
+    };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -165,6 +218,14 @@ const LeaveApply = () => {
                                 </div>
                             </div>
                             <div className="mt-6 flex items-center gap-x-6">
+                                {location.state?.leaveId ?
+                                    <button
+                                        onClick={handleCancel}
+                                        className="rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600">
+                                        {location.state?.leaveId ? 'Cancel Leave' : ''}
+                                    </button>
+                                    : ''
+                                }
                                 <button
                                     type='submit'
                                     className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">

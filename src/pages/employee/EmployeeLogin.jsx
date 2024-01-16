@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import payoutsLogo from '../../assets/payoutsLogo.png'
+import PayoutsLogo from '../../assets/payoutsLogo.png'
 import { employeeLogin } from '../../api/EmployeeApi';
 import toast from 'react-hot-toast'
 import { useNavigate } from 'react-router-dom';
@@ -78,10 +78,10 @@ const EmployeeLogin = () => {
                     <div className="sm:mx-auto sm:w-full sm:max-w-sm">
                         <img
                             className="mx-auto h-10 w-auto"
-                            src={payoutsLogo}
+                            src={PayoutsLogo}
                             alt="payoutsLogo"
                         />
-                        <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
+                        <h2 className="mt-5 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
                             Sign in to your account
                         </h2>
                     </div>

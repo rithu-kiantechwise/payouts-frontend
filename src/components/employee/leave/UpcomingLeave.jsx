@@ -64,6 +64,8 @@ const UpcomingLeave = () => {
                 return 'text-red-700';
             case 'Pending':
                 return 'text-orange-500';
+            case 'Cancelled':
+                return 'text-orange-500';
             default:
                 return '';
         }
@@ -117,7 +119,7 @@ const UpcomingLeave = () => {
                                     </td>
                                     <td className="py-2 border-b">{item.startTime}</td>
                                     <td className="py-2 border-b">{item.endTime}</td>
-                                    <td className={`py-2 px-4 border-b font-medium ${getStatusColor(item.status)}`}>{item.status}</td>
+                                    <td className={`py-2 border-b font-medium ${getStatusColor(item.status)}`}>{item.status}</td>
                                     <td className="py-2 border-b">
                                         <button
                                             onClick={() => handleEdit(item._id)}

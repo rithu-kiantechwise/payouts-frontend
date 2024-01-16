@@ -11,17 +11,6 @@ export const employeeLogin = async (credentials) => {
     }
 }
 
-export const employeeLogout = async () => {
-    try {
-        const response = await employeeApi.post('/employee-logout', null, { withCredentials: true });
-
-        return response;
-    } catch (error) {
-        console.error('Error during employee logout:', error);
-        return error.response;
-    }
-};
-
 export const fetchEmployeeData = async (credentials) => {
     try {
         const response = await employeeApi.post(`/fetch-employee`, credentials, { withCredentials: true })
@@ -153,6 +142,17 @@ export const applyLeave = async (credentials) => {
 export const updateLeave = async (credentials) => {
     try {
         const response = await employeeApi.post(`/edit-leave`, credentials, { withCredentials: true })
+
+        return response;
+    } catch (error) {
+        console.error('Error during employee deletion:', error);
+        return error.response
+    }
+}
+
+export const cancelLeave = async (credentials) => {
+    try {
+        const response = await employeeApi.post(`/cancel-leave`, credentials, { withCredentials: true })
 
         return response;
     } catch (error) {

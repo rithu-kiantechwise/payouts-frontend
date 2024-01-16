@@ -1,10 +1,9 @@
-import React from 'react'
-import payoutsLogo from '../../../assets/payoutsLogo.png'
-import noProfile from '../../../assets/noprofile.jpg'
-import { Link, useLocation, useNavigate } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
-import { logoutUser } from '../../../redux/userSlice'
-import { employeeLogout } from '../../../api/EmployeeApi'
+import React from 'react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { logoutUser } from '../../../redux/userSlice';
+import payoutsLogo from '../../../assets/payoutsLogo.png';
+import noProfile from '../../../assets/noprofile.jpg';
 
 const Sidebar = () => {
     const navigate = useNavigate();
@@ -16,11 +15,9 @@ const Sidebar = () => {
         return location.pathname === path;
     };
     const logoutFunction = async () => {
-        employeeLogout();
         localStorage.removeItem('employeeToken');
-        localStorage.removeItem('refreshToken');
         dispatch(logoutUser());
-        navigate('/employee/login');
+        navigate('/');
     }
 
     return (
@@ -29,17 +26,15 @@ const Sidebar = () => {
                 <button
                     onClick={() => navigate('/')}
                     className="mx-auto">
-                    <img className="w-auto h-6 sm:h-7" src={payoutsLogo} alt="" />
+                    <img className="w-auto h-6 sm:h-7" src={payoutsLogo} alt="Payouts Logo" />
                 </button>
 
                 <Link to={'/employee/employee-profile'} className='flex flex-col items-center mt-6 -mx-2'>
-                    {
-                        user?.imageUrl
-                            ?
-                            <img className="object-cover w-28 h-28 mx-2 rounded-full cursor-pointer" src={user?.imageUrl} alt="avatar" />
-                            :
-                            <img className="object-cover w-28 h-28 mx-2 rounded-full cursor-pointer" src={noProfile} alt="avatar" />
-                    }
+                    <img
+                        className="object-cover w-28 h-28 mx-2 rounded-full cursor-pointer"
+                        src={user?.imageUrl || noProfile}
+                        alt="avatar"
+                    />
                     <h4 className="mx-2 mt-2 font-medium text-gray-200">{user?.firstName + ' ' + user?.lastName}</h4>
                     <p className="mx-2 mt-1 text-sm font-medium text-gray-400">{user?.email}</p>
                 </Link>

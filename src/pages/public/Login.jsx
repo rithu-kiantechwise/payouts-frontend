@@ -58,7 +58,10 @@ const Login = () => {
         <div className='grid grid-cols-1 place-items-center h-screen'>
           <div className='p-10 bg-white min-w-[30%] shadow-xl'>
             <div className='mx-auto'>
+              <button
+              onClick={()=>navigate('/')}>
               <img src={PayoutsLogo} alt="Payouts" className='h-10 mt-5' />
+              </button>
               <h1 className='text-2xl font-semibold mt-6'>Login</h1>
               <h4 className='text-sm'>to access Payouts</h4>
               <form onSubmit={handleLogin}>

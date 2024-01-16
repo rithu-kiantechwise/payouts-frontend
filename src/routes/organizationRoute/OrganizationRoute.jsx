@@ -18,6 +18,7 @@ import SingleEmployeePage from '../../pages/organization/SingleEmployeePage';
 import Taxation from '../../pages/organization/Taxation';
 import EditTax from '../../pages/organization/EditTax';
 import Attendance from '../../pages/organization/Attendance';
+import SalaryDetails from '../../pages/organization/SalaryDetails';
 
 const OrganizationRoute = () => {
   const dispatch = useDispatch();
@@ -48,6 +49,7 @@ const OrganizationRoute = () => {
         <Route path='/organization-profile/*' element={<OrganizationProfile />} />
         <Route path='/employee-attendance/*' element={<Attendance />} />
         <Route path='/employee-details/*' element={<EmployeeDetails />} />
+        <Route path='/salary-details/*' element={<SalaryDetails />} />
         <Route path='/employee-single/*' element={<SingleEmployeePage />} />
         <Route path='/new-employee/*' element={<AddEmployee />} />
         <Route path='/edit-employee/*' element={<EditEmployee />} />

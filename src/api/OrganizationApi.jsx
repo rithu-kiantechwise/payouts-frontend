@@ -235,6 +235,20 @@ export const getEmployeeAttendance = async (credentials) => {
     }
 }
 
+export const getEmployeeSalary = async (credentials) => {
+    try {
+        const response = await organizationApi.get(`/get-salary`, {
+            withCredentials: true,
+            params: credentials,
+        })
+
+        return response;
+    } catch (error) {
+        console.error('Error during employee salary:', error);
+        return error.response
+    }
+}
+
 export const updateLeaveStatus = async (credentials) => {
     try {
         const response = await organizationApi.put(`/update-leave`, credentials, { withCredentials: true })
