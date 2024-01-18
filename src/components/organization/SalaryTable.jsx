@@ -28,115 +28,103 @@ const SalaryTable = () => {
         fetchSalary();
     }, [currentPage]);
 
-    console.log(salaryDetails, 'salaryDetails');
-
-    const formatDateTime = (dateTime, option) => {
-        const options = {
-            date: {
-                day: 'numeric',
-                month: 'numeric',
-                year: 'numeric',
-            },
-            time: {
-                hour: 'numeric',
-                minute: 'numeric'
-            }
-        };
-
-        return new Intl.DateTimeFormat('en-US', options[option]).format(new Date(dateTime));
-    };
-
-    const transformDateFormat = (originalDate) => {
-        const [month, day, year] = originalDate.split('/');
-        return `${day}/${month}/${year}`;
-    };
-
-    const roundToDecimal = (number, decimalPlaces) => {
-        return Math.round(number * 10 ** decimalPlaces) / 10 ** decimalPlaces;
-    };
-
     const downloadCSV = () => {
-        const csvData = salaryDetails.map(employee => ({
-            'Employee ID': employee.employeeId,
-            'Name': employee.employeeName,
-            'Date': employee.checkInTime ? transformDateFormat(formatDateTime(employee.checkInTime, 'date')) : 'N/A',
-            'Check-In time': employee.checkInTime ? formatDateTime(employee.checkInTime, 'time') : 'Not Checked in',
-            'Check-out time': employee.checkOutTime ? formatDateTime(employee.checkOutTime, 'time') : 'Not Checked out',
-            'Total worked hours': roundToDecimal(employee.totalWorkedHours, 2) + ' hours',
-        }));
+        const csvData = salaryDetails.map(data => {
+            const reimbursementDetails = data.reimbursements && data.reimbursements.length > 0
+                ? data.reimbursements.map(reimbursement => `₹ ${reimbursement.amount}`).join(', ')
+                : 'N/A';
+
+            return {
+                'Employee ID': data.employeeId,
+                'Employee Name': data.employeeName,
+                'Reimbursement': reimbursementDetails,
+                'Actual Salary': data.actualSalary,
+                'Deduction': data.roundedDeduction,
+                'Bonus': data.roundedBonus,
+                'Total Salary': data.roundedNetSalary,
+            };
+        });
 
         const headers = [
             { label: 'Employee ID', key: 'Employee ID' },
-            { label: 'Name', key: 'Name' },
-            { label: 'Date', key: 'Date' },
-            { label: 'Check-In time', key: 'Check-In time' },
-            { label: 'Check-out time', key: 'Check-out time' },
-            { label: 'Total worked hours', key: 'Total worked hours' },
+            { label: 'Employee Name', key: 'Employee Name' },
+            { label: 'Reimbursement', key: 'Reimbursement' },
+            { label: 'Actual Salary', key: 'Actual Salary' },
+            { label: 'Deduction', key: 'Deduction' },
+            { label: 'Bonus', key: 'Bonus' },
+            { label: 'Total Salary', key: 'Total Salary' },
         ];
 
         return (
             <CSVLink
                 data={csvData}
                 headers={headers}
-                filename={'attendance_details.csv'}
+                filename={'salary_details.csv'}
                 className="ml-2 bg-blue-800 text-white font-semibold py-2 px-4 rounded"
             >
                 CSV
             </CSVLink>
         );
     };
-
     const downloadPDF = () => {
         const unit = "pt";
         const size = "A4";
         const orientation = "portrait";
-        const dataDate = salaryDetails.map((employee) => employee.checkInTime ? transformDateFormat(formatDateTime(employee.checkInTime, 'date')) : 'N/A');
         const marginLeft = 40;
         const doc = new jsPDF(orientation, unit, size);
         doc.setFontSize(15);
+        const dateString = salaryDetails.length > 0 ? salaryDetails[0].month : 'N/A';
 
         const title = 'Employee Salary Details';
-        const headers = [[
+        const headers = [
             'Employee ID',
             'Name',
-            'Date',
-            'Check-In time',
-            'Check-out time',
-            'Total worked hours',
-        ]];
+            'Reimbursements',
+            'Actual Salary',
+            'Deductions',
+            'Bonus',
+            'Total Salary',
 
-        const data = salaryDetails.map(employee => [
-            employee.employeeId,
-            employee.employeeName,
-            employee.checkInTime ? transformDateFormat(formatDateTime(employee.checkInTime, 'date')) : 'N/A',
-            employee.checkInTime ? formatDateTime(employee.checkInTime, 'time') : 'Not Checked in',
-            employee.checkOutTime ? formatDateTime(employee.checkOutTime, 'time') : 'Not Checked out',
-            roundToDecimal(employee.totalWorkedHours, 2) + ' hours'
-        ])
+        ];
+        const data = salaryDetails.map(data => [
+            data.employeeId,
+            data.employeeName,
+            data.reimbursements && data.reimbursements.length > 0
+                ? data.reimbursements.map(reimbursement => `Rs.${reimbursement.amount}`).join(', ')
+                : 'N/A',
+            data.actualSalary,
+            data.roundedDeduction,
+            data.roundedBonus,
+            data.roundedNetSalary,
+        ]);
 
         let content = {
             startY: 50,
-            head: headers,
+            head: [headers],
             body: data
         };
-
         doc.text(title, marginLeft, 40);
         autoTable(doc, content);
-
-        doc.save(dataDate + 'salary_details.pdf');
+        doc.save(dateString + '_salary_details.pdf');
     };
 
     const downloadXLSX = () => {
-        const excelData = salaryDetails.map(employee => ({
-            'Employee ID': employee.employeeId,
-            'Name': employee.employeeName,
-            'Date': employee.checkInTime ? transformDateFormat(formatDateTime(employee.checkInTime, 'date')) : 'N/A',
-            'Check-In time': employee.checkInTime ? formatDateTime(employee.checkInTime, 'time') : 'Not Checked in',
-            'Check-out time': employee.checkOutTime ? formatDateTime(employee.checkOutTime, 'time') : 'Not Checked out',
-            'Total worked hours': roundToDecimal(employee.totalWorkedHours, 2) + ' hours',
-        }));
+        const excelData = salaryDetails.map(data => {
+            const reimbursementDetails = data.reimbursements && data.reimbursements.length > 0
+                ? data.reimbursements.map(reimbursement => `₹ ${reimbursement.amount}`).join(', ')
+                : 'N/A';
 
-        exportExcel(excelData, 'attendance_details.xlsx');
+            return {
+                'Employee ID': data.employeeId,
+                'Employee Name': data.employeeName,
+                'Reimbursement': reimbursementDetails,
+                'Actual Salary': data.actualSalary,
+                'Deduction': data.roundedDeduction,
+                'Bonus': data.roundedBonus,
+                'Total Salary': data.roundedNetSalary,
+            };
+        });
+        exportExcel(excelData, '_salary_details.xlsx');
     };
 
     const handlePageChange = (newPage) => {
@@ -161,7 +149,6 @@ const SalaryTable = () => {
                     <table className="min-w-full border-gray-300 text-center items-center border rounded-md mt-5">
                         <thead className='bg-slate-800 text-white'>
                             <tr className='text-center'>
-                                <th className="py-2 px-4 border-b">Month</th>
                                 <th className="py-2 px-4 border-b">Employee Id</th>
                                 <th className="py-2 px-4 border-b">Employee Name</th>
                                 <th className="py-2 px-4 border-b">Reimbursements</th>
@@ -172,46 +159,48 @@ const SalaryTable = () => {
                             </tr>
                         </thead>
                         <tbody>
-                            {salaryDetails?.map((data) => (
-                                <tr className='text-center' key={data.month}>
-
-                                    <td className="py-2 px-4 border-b">{data.month}</td>
-                                    <td className="py-2 px-4 border-b">
-                                        ₹ {data.actualSalary}
-                                    </td>
-                                    <td className="py-2 px-4 border-b">
-                                        {data.reimbursements && data.reimbursements.length > 0 ? (
-                                            <ul>
-                                                {data.reimbursements.map((reimbursement) => (
-                                                    <li key={reimbursement._id}>
-                                                        ₹ {reimbursement.amount}
-                                                    </li>
-                                                ))}
-                                            </ul>
-                                        ) : (
-                                            'N/A'
-                                        )}
-                                    </td>
-                                    <td className="py-2 px-4 border-b">
-                                        ₹ {data.actualSalary}
-                                    </td>
-                                    <td className="py-2 px-4 border-b">
-                                        ₹ {data.roundedPf}
-                                    </td>
-                                    <td className="py-2 px-4 border-b">
-                                        ₹ {data.roundedEsi}
-                                    </td>
-                                    <td className="py-2 px-4 border-b">
-                                        ₹ {data.roundedTax}
-                                    </td>
-                                    <td className="py-2 px-4 border-b">
-                                        ₹ {data.roundedBonus}
-                                    </td>
-                                    <td className="py-2 px-4 border-b">
-                                        ₹ {data.roundedNetSalary}
-                                    </td>
-                                </tr>
-                            ))}
+                            {salaryDetails && salaryDetails.length > 0 && (
+                                <>
+                                    <tr className='text-center'>
+                                        <td colSpan="7" className="py-2 px-4 border-b font-medium text-lg">{salaryDetails[0].month}</td>
+                                    </tr>
+                                    {salaryDetails.map((data) => (
+                                        <tr className='text-center' key={data.employeeId}>
+                                            <td className="py-2 px-4 border-b">
+                                                {data.employeeId}
+                                            </td>
+                                            <td className="py-2 px-4 border-b">
+                                                {data.employeeName}
+                                            </td>
+                                            <td className="py-2 px-4 border-b">
+                                                {data.reimbursements && data.reimbursements.length > 0 ? (
+                                                    <ul>
+                                                        {data.reimbursements.map((reimbursement) => (
+                                                            <li key={reimbursement._id}>
+                                                                ₹ {reimbursement.amount}
+                                                            </li>
+                                                        ))}
+                                                    </ul>
+                                                ) : (
+                                                    'N/A'
+                                                )}
+                                            </td>
+                                            <td className="py-2 px-4 border-b">
+                                                ₹ {data.actualSalary}
+                                            </td>
+                                            <td className="py-2 px-4 border-b">
+                                                ₹ {data.roundedDeduction}
+                                            </td>
+                                            <td className="py-2 px-4 border-b">
+                                                ₹ {data.roundedBonus}
+                                            </td>
+                                            <td className="py-2 px-4 border-b">
+                                                ₹ {data.roundedNetSalary}
+                                            </td>
+                                        </tr>
+                                    ))}
+                                </>
+                            )}
                         </tbody>
                     </table>
                     <div className="flex items-center justify-between border-t border-gray-200 bg-white px-4 py-2 sm:px-6">

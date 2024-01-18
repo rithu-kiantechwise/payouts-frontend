@@ -82,7 +82,6 @@ const ReimbursementTable = () => {
             'Description': reimbursement.description,
             'Status': reimbursement.status,
         }));
-        console.log(csvData, 'csvvvv');
 
         const headers = [
             { label: 'Image', key: 'Image' },
