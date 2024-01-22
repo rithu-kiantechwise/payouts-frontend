@@ -196,3 +196,39 @@ export const fetchLeaveDetails = async (credentials) => {
         return error.response
     }
 }
+
+export const getNotification = async (credentials) => {
+    try {
+        const response = await employeeApi.get(`/get-notification`, {
+            withCredentials: true,
+            params: credentials,
+        })
+
+        return response;
+    } catch (error) {
+        console.error('Error during employee salary:', error);
+        return error.response
+    }
+}
+
+export const deleteNotification = async (credentials) => {
+    try {
+        const response = await employeeApi.post(`/delete-notification`, credentials, { withCredentials: true })
+
+        return response;
+    } catch (error) {
+        console.error('Error during employee deletion:', error);
+        return error.response
+    }
+}
+
+export const unreadNotification = async (credentials) => {
+    try {
+        const response = await employeeApi.post(`/unread-notification`, credentials, { withCredentials: true })
+
+        return response;
+    } catch (error) {
+        console.error('Error during employee deletion:', error);
+        return error.response
+    }
+}

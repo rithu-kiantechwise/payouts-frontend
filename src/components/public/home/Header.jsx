@@ -124,7 +124,7 @@ const Header = () => {
                           {({ active }) => (
                             <button
                               onClick={() => navigate(profileLink)}
-                              className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
+                              className={classNames(active ? 'bg-gray-100' : '', 'block min-w-full text-left px-4 py-2 text-sm text-gray-700')}
                             >
                               Profile Settings
                             </button>

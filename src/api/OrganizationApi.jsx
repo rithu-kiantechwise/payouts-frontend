@@ -3,7 +3,7 @@ import { organizationApi } from "../utils/Axios";
 export const organizationLogin = async (credentials) => {
     try {
         const response = await organizationApi.post('/organization-login', credentials, { withCredentials: true })
-        
+
         return response;
     } catch (error) {
         console.error('Error during organization login:', error);
@@ -245,6 +245,42 @@ export const getEmployeeSalary = async (credentials) => {
         return response;
     } catch (error) {
         console.error('Error during employee salary:', error);
+        return error.response
+    }
+}
+
+export const getNotification = async (credentials) => {
+    try {
+        const response = await organizationApi.get(`/get-notification`, {
+            withCredentials: true,
+            params: credentials,
+        })
+
+        return response;
+    } catch (error) {
+        console.error('Error during employee salary:', error);
+        return error.response
+    }
+}
+
+export const deleteNotification = async (credentials) => {
+    try {
+        const response = await organizationApi.post(`/delete-notification`, credentials, { withCredentials: true })
+
+        return response;
+    } catch (error) {
+        console.error('Error during employee deletion:', error);
+        return error.response
+    }
+}
+
+export const unreadNotification = async (credentials) => {
+    try {
+        const response = await organizationApi.post(`/unread-notification`, credentials, { withCredentials: true })
+
+        return response;
+    } catch (error) {
+        console.error('Error during employee deletion:', error);
         return error.response
     }
 }

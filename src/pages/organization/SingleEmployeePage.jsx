@@ -260,7 +260,7 @@ const SingleEmployeePage = () => {
                       type="text"
                       name="bankAccount.accountHolderName"
                       id="accountHolderName"
-                      value={employeeData.bankAccount.accountHolderName}
+                      value={employeeData.bankAccount?.accountHolderName ?? ''}
                       disabled
                       className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-200 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                     />
@@ -276,7 +276,7 @@ const SingleEmployeePage = () => {
                       type="number"
                       id="accountNumber"
                       name="bankAccount.accountNumber"
-                      value={employeeData.bankAccount.accountNumber}
+                      value={employeeData.bankAccount?.accountNumber ?? ''}
                       disabled
                       className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-200 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                     />
@@ -292,7 +292,7 @@ const SingleEmployeePage = () => {
                       type="text"
                       id="bankName"
                       name="bankAccount.bankName"
-                      value={employeeData.bankAccount.bankName}
+                      value={employeeData.bankAccount?.bankName ?? ''}
                       disabled
                       className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-200 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                     />
@@ -308,7 +308,7 @@ const SingleEmployeePage = () => {
                       type="text"
                       id="branch"
                       name="bankAccount.branch"
-                      value={employeeData.bankAccount.branch}
+                      value={employeeData.bankAccount?.branch ?? ''}
                       disabled
                       className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-200 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                     />
@@ -324,7 +324,7 @@ const SingleEmployeePage = () => {
                       type="text"
                       id="IFSCcode"
                       name="bankAccount.IFSCcode"
-                      value={employeeData.bankAccount.IFSCcode}
+                      value={employeeData.bankAccount?.IFSCcode ?? ''}
                       disabled
                       className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-200 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                     />
@@ -340,7 +340,7 @@ const SingleEmployeePage = () => {
                       type="text"
                       id="upiId"
                       name="bankAccount.upiId"
-                      value={employeeData.bankAccount.upiId}
+                      value={employeeData.bankAccount?.upiId ?? ''}
                       disabled
                       className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-200 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                     />
