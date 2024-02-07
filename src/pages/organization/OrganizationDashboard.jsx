@@ -4,7 +4,7 @@ import Sidebar from '../../components/organization/Sidebar';
 import EmpLeaveTable from '../../components/organization/EmpLeaveTable';
 import ReimbursementTable from '../../components/organization/ReimbursementTable';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBell } from '@fortawesome/free-solid-svg-icons';
+import { faBell } from '@fortawesome/free-regular-svg-icons';
 import { deleteNotification, getNotification, unreadNotification } from '../../api/OrganizationApi';
 
 const OrganizationDashboard = () => {
@@ -48,13 +48,11 @@ const OrganizationDashboard = () => {
         <div className='flex min-h-[100vh]'>
             <Sidebar />
             <div className='min-w-[80%] mx-auto p-8'>
-                <div className=''>
+                <div className='flex justify-end'>
                     <Menu as="div" className="relative inline-block text-left right-0">
-                        <div>
-                            <Menu.Button className="inline-flex w-full justify-center gap-x-1.5 bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm hover:bg-gray-50">
-                                <FontAwesomeIcon icon={faBell} onClick={handleOpen} className='cursor-pointer text-gray-800 text-4xl' />
+                            <Menu.Button className="inline-flex w-full justify-center gap-x-1.5 bg-white px-3 py-2 text-sm font-semibold text-gray-900">
+                                <FontAwesomeIcon icon={faBell} onClick={handleOpen} className='cursor-pointer text-gray-800 text-2xl' />
                             </Menu.Button>
-                        </div>
                         <Transition
                             as={Fragment}
                             enter="transition ease-out duration-100"

@@ -3,8 +3,8 @@ import { useDispatch } from 'react-redux';
 import { Route, Routes } from 'react-router-dom';
 import { loginUser } from '../../redux/userSlice';
 import { fetchOrganizationData } from '../../api/OrganizationApi';
-import Registration from '../../pages/public/Registration';
 import Login from '../../pages/public/Login';
+import Registration from '../../pages/public/Registration';
 import OrganizationDashboard from '../../pages/organization/OrganizationDashboard';
 import EmployeeDetails from '../../pages/organization/EmployeeDetails';
 import OrganizationProfile from '../../pages/organization/OrganizationProfile';
@@ -19,6 +19,7 @@ import Taxation from '../../pages/organization/Taxation';
 import EditTax from '../../pages/organization/EditTax';
 import Attendance from '../../pages/organization/Attendance';
 import SalaryDetails from '../../pages/organization/SalaryDetails';
+import Checkout from '../../pages/organization/Checkout';
 
 const OrganizationRoute = () => {
   const dispatch = useDispatch();
@@ -41,6 +42,7 @@ const OrganizationRoute = () => {
         <Route path='/register/*' element={<Registration />} />
         <Route path='/login/*' element={<Login />} />
         <Route path='/forgot-password/*' element={<OrgForgotPassword />} />
+        <Route path='/checkout/*' element={<Checkout />} />
 
       </Route>
       <Route element={<OrganizationProtectedRoute />}>
@@ -56,7 +58,6 @@ const OrganizationRoute = () => {
         <Route path='/edit-profile/*' element={<OrgProfileEdit />} />
         <Route path='/employee-tax/*' element={<Taxation />} />
         <Route path='/edit-tax/*' element={<EditTax />} />
-
       </Route>
     </Routes>
   )

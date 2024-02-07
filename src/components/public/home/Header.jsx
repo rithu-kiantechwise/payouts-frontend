@@ -47,7 +47,7 @@ const Header = () => {
       }
     };
     fetchUser();
-  }, []);
+  }, [dispatch]);
 
   const logoutFunction = () => {
     localStorage.clear()

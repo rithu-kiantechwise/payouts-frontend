@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from 'react'
-import PayoutsLogo from '../../assets/payoutsLogo.png'
-import { useNavigate } from 'react-router-dom'
-import { activatePremiumSubscription, cancelPremiumSubscription, organizationRegister, stripePayment } from '../../api/OrganizationApi';
-import { loadStripe } from '@stripe/stripe-js';
+import React, { useState } from 'react';
 import toast from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom'
+import PayoutsLogo from '../../assets/payoutsLogo.png'
 import LoadingSpinner from '../../components/LoadingSpinner';
+import { createPayment, organizationRegister } from '../../api/OrganizationApi';
 
 const Registration = () => {
   const navigate = useNavigate();
@@ -25,18 +24,6 @@ const Registration = () => {
     plan: '',
   });
 
-  const stripePromise = loadStripe('pk_live_51OPMHXSHtHwrHp77uCrFgiwYdNE8TMrz0pGyplD29qt1y73SaZZUbWJoyfi1vB4Qpqa2UGCXY8IL2oLo7X5DSPQD00aNpjKwIb');
-
-  useEffect(() => {
-    const query = new URLSearchParams(window.location.search);
-    if (query.get("success")) {
-      handleSuccessfulPayment();
-
-    } else if (query.get("canceled")) {
-      handleCancelledPayment();
-    }
-  });
-
   const handleChange = (e) => {
     try {
       const { name, value } = e.target;
@@ -49,50 +36,6 @@ const Registration = () => {
     }
   };
 
-  const handleSuccessfulPayment = async () => {
-    try {
-      const organizationId = localStorage.getItem('organizationId')
-      const planDuration = parseInt(signupData.plan);
-      console.log(planDuration, 'planDuration');
-      const subscriptionStartDate = new Date();
-      const subscriptionEndDate = new Date();
-      subscriptionEndDate.setMonth(subscriptionEndDate.getMonth() + planDuration);
-
-      const subscriptionData = {
-        organizationId,
-        planDuration,
-        subscriptionStartDate,
-        subscriptionEndDate,
-      };
-      const response = await activatePremiumSubscription(subscriptionData);
-      if (response.data.success) {
-        toast.success(response.data.message);
-        localStorage.clear();
-        navigate('/organization/login');
-      } else {
-        toast.error(response.data.message);
-      }
-    } catch (error) {
-      console.error('Error in handleSuccessfulPayment:', error);
-    }
-  }
-
-  const handleCancelledPayment = async () => {
-    try {
-      const organizationId = localStorage.getItem('organizationId')
-      const response = await cancelPremiumSubscription({ organizationId });
-      if (response.data.success) {
-        toast.success(response.data.message);
-        localStorage.removeItem('organizationId');
-        navigate('/organization/login');
-      } else {
-        toast.error(response.data.message);
-      }
-    } catch (error) {
-      console.error('Error in handleSuccessfulPayment:', error);
-    }
-  }
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (validateForm()) {
@@ -101,13 +44,13 @@ const Registration = () => {
         const response = await organizationRegister(signupData);
         setLoading(false);
         if (response.data.success) {
-          const newUser = response.data.newUser
+          const newUser = response.data.newUser;
           console.log(response.data.otp);
-          toast.success(response.data.message)
-          setNewOtp(response.data.otp)
-          localStorage.setItem('organizationId', newUser._id)
-          setSignupData(newUser)
-          setStep(2)
+          toast.success(response.data.message);
+          setNewOtp(response.data.otp);
+          localStorage.setItem('organizationId', newUser._id);
+          setSignupData(newUser);
+          setStep(2);
         } else {
           toast.error(response.data.message)
         }
@@ -136,22 +79,19 @@ const Registration = () => {
 
   const handlePayment = async (e) => {
     e.preventDefault();
-    const stripe = await stripePromise;
-    setLoading(true);
-    const response = await stripePayment(signupData);
-    setLoading(false);
-    const session = response.data.session;
-    const result = await stripe.redirectToCheckout({
-      sessionId: session.id,
-    });
-    if (result.error) {
-      console.error(result.error.message);
+    try {
+      setLoading(true);
+      const { data } = await createPayment(signupData);
+      navigate('/organization/checkout', { state: { paymentData: data } });
+    } catch (error) {
+      console.error('Error in handlePayment:', error);
+    } finally {
+      setLoading(false);
     }
   };
 
   const validateForm = () => {
     const newErrors = {};
-
     // Validate name
     if (!signupData.name.trim()) {
       newErrors.name = 'Name is required';
@@ -187,9 +127,7 @@ const Registration = () => {
     if (!signupData.allowedEmployees) {
       newErrors.allowedEmployees = 'Number of Employees is required';
     }
-
     setErrors(newErrors);
-
     return Object.keys(newErrors).length === 0;
   };
 
@@ -314,12 +252,10 @@ const Registration = () => {
                         className='border-transparent px-8 py-2 min-w-[100%] my-1 border-0 outline-none focus:shadow-0 border-b border-b-gray-200 focus:border-b-blue-100 focus:border-b-2'
                       >
                         <option disabled value='' className='text-gray-100'>No. of Employees</option>
-                        {[...Array(81).keys()].map((value) => (
-                          value + 20 <= 100 && (
-                            <option key={value} value={value + 20}>
-                              {value + 20}
-                            </option>
-                          )
+                        {[...Array(50).keys()].map((value) => (
+                          <option key={value + 1} value={value + 1}>
+                            {value + 1}
+                          </option>
                         ))}
                       </select>
                     </div>
@@ -383,7 +319,7 @@ const Registration = () => {
                         onChange={handleChange}
                         className='border-transparent px-8 py-2 min-w-[100%] my-1 border-0 outline-none focus:shadow-0 border-b border-b-gray-200 focus:border-b-blue-100 focus:border-b-2'
                       >
-                        <option disabled value='1'>Select a plan</option>
+                        <option disabled value=''>Select a plan</option>
                         <option value="12">1 Year subscription</option>
                         <option value="6">6 Months subscription</option>
                         <option value="3">3 Months subscription</option>

@@ -17,7 +17,7 @@ export const organizationRegister = async (credentials) => {
 
         return response;
     } catch (error) {
-        console.error('Error during organization register:', error);
+        console.error('Error during org register:', error);
         return error.response
     }
 }
@@ -28,7 +28,7 @@ export const orgFreeTrialRegister = async (credentials) => {
 
         return response;
     } catch (error) {
-        console.error('Error during organization register:', error);
+        console.error('Error during free register:', error);
         return error.response
     }
 }
@@ -39,7 +39,7 @@ export const activatePremiumSubscription = async (credentials) => {
 
         return response;
     } catch (error) {
-        console.error('Error during organization register:', error);
+        console.error('Error during activate register:', error);
         return error.response
     }
 }
@@ -50,14 +50,25 @@ export const cancelPremiumSubscription = async (credentials) => {
 
         return response;
     } catch (error) {
-        console.error('Error during organization register:', error);
+        console.error('Error during cancel register:', error);
         return error.response
     }
 }
 
-export const stripePayment = async (credentials) => {
+export const createPayment = async (credentials) => {
     try {
         const response = await organizationApi.post(`/checkout-payment`, credentials, { withCredentials: true })
+
+        return response;
+    } catch (error) {
+        console.error('Error during stripe payment:', error);
+        return error.response
+    }
+}
+
+export const verifyPayment = async (credentials) => {
+    try {
+        const response = await organizationApi.post(`/verify-payment`, credentials, { withCredentials: true })
 
         return response;
     } catch (error) {

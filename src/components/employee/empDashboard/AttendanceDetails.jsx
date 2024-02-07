@@ -44,7 +44,6 @@ const AttendanceDetails = ({ isEmployeeCheckedIn }) => {
 
         return new Intl.DateTimeFormat('en-US', options[option]).format(new Date(dateTime));
     };
-
     const transformDateFormat = (originalDate) => {
         const [month, day, year] = originalDate.split('/');
         return `${day}/${month}/${year}`;

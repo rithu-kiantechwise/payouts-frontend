@@ -3,7 +3,7 @@ import { Menu, Transition } from '@headlessui/react';
 import Attendance from '../../components/employee/empDashboard/Attendance';
 import Sidebar from '../../components/employee/empDashboard/Sidebar';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBell } from '@fortawesome/free-solid-svg-icons';
+import { faBell } from '@fortawesome/free-regular-svg-icons';
 import AttendanceDetails from '../../components/employee/empDashboard/AttendanceDetails';
 import { deleteNotification, getNotification, unreadNotification } from '../../api/EmployeeApi';
 
@@ -56,13 +56,11 @@ const EmployeeDashboard = () => {
     <div className='flex min-h-[100vh]'>
       <Sidebar />
       <div className="min-w-[80%] mx-auto p-6">
-        <div className=''>
-          <Menu as="div" className="relative inline-block text-left right-0">
-            <div>
-              <Menu.Button className="inline-flex w-full justify-center gap-x-1.5 bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm hover:bg-gray-50">
-                <FontAwesomeIcon icon={faBell} onClick={handleOpen} className='cursor-pointer text-gray-800 text-4xl' />
-              </Menu.Button>
-            </div>
+        <div className='flex justify-end'>
+          <Menu as="div" className="relative inline-block text-left">
+            <Menu.Button className="inline-flex w-full justify-center gap-x-1.5 bg-white px-3 py-2 text-sm font-semibold text-gray-900">
+              <FontAwesomeIcon icon={faBell} onClick={handleOpen} className='cursor-pointer text-gray-800 text-2xl' />
+            </Menu.Button>
             <Transition
               as={Fragment}
               enter="transition ease-out duration-100"
